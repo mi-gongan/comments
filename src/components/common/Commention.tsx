@@ -16,7 +16,8 @@ function Commention() {
       <textarea
         onChange={(e) => setText(e.target.value)}
         value={text}
-        placeholder="안녕하세요 코멘션입니다.\n**에게 코멘트를 작성해주세요"
+        autoFocus
+        placeholder="안녕하세요 코멘션입니다.&#13;&#10; **에게 코멘트를 작성해주세요"
       />
       <div className="button-area">
         <button>Upload</button>
@@ -37,11 +38,14 @@ const Wrap = styled.div`
   filter: drop-shadow(0px 0px 14.6379px rgba(0, 0, 0, 0.13));
   textarea {
     margin-top: 15px;
-    width: 100%;
+    width: 95%;
     height: 150px;
+
+    font-weight: 400;
+    line-height: 26px;
     border: none;
-    color: #adadad;
     resize: none;
+    padding: 10px;
   }
   .button-area {
     display: flex;
