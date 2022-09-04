@@ -79,7 +79,6 @@ const Wrap = styled.div``;
 const StyleSlider = styled(Slider)`
   .slick-dots {
     position: absolute;
-    bottom: -15px;
 
     display: block;
 
