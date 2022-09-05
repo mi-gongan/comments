@@ -21,8 +21,14 @@ export default mycommention;
 const Wrap = styled.div``;
 
 const GrobalStyle = createGlobalStyle`
+  html{
+    max-width: 800px;
+    min-width:280px;
+    height: 350px;
+  }
   body{
-    max-width: 700px;
+    max-width: 800px;
+    min-width:280px;
     height: 350px;
   }
 `;

@@ -64,7 +64,7 @@ const settings = {
       style={{
         width: "100%",
         position: "absolute",
-        bottom: "10px",
+        bottom: "20px",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -137,7 +137,7 @@ const StyleSlider = styled(Slider)`
   .slick-prev:before,
   .slick-next:before {
     font-family: "slick";
-    font-size: 25px;
+    font-size: 30px;
     line-height: 1;
 
     opacity: 0.75;
@@ -180,10 +180,14 @@ const StyleSlider = styled(Slider)`
   .dots_custom {
     display: inline-block;
     vertical-align: middle;
-    margin: auto 0;
+    justify-content: center;
+    margin: auto;
     padding: 0;
   }
 
+  .dots_custom ul {
+    padding-inline-start: 0px;
+  }
   .dots_custom li {
     list-style: none;
     cursor: pointer;
