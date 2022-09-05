@@ -8,11 +8,13 @@ function Form() {
   const { user } = router.query;
   return (
     <Wrap>
-      <Commention user={user}></Commention>
+      <Commention></Commention>
     </Wrap>
   );
 }
 
 export default Form;
 
-const Wrap = styled.div``;
+const Wrap = styled.div`
+  margin-top: 20px;
+`;
