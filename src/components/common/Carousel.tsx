@@ -47,6 +47,7 @@ export default Carousel;
 
 const Wrap = styled.div`
   width: 100%;
+  padding-top: 20px;
 `;
 
 const settings = {
@@ -63,7 +64,7 @@ const settings = {
       style={{
         width: "100%",
         position: "absolute",
-        bottom: "0px",
+        bottom: "10px",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -75,7 +76,7 @@ const settings = {
   dotsClass: "dots_custom",
   responsive: [
     {
-      breakpoint: 700,
+      breakpoint: 650,
       settings: {
         slidesToShow: 1,
         slidesToScroll: 1,
