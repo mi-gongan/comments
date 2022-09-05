@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Slider from "react-slick";
 import "../../../node_modules/slick-carousel/slick/slick.css";
 import "../../../node_modules/slick-carousel/slick/slick-theme.css";
@@ -10,13 +10,26 @@ import Card from "./Card";
 function Carousel() {
   const [render, setRender] = useState("");
   const [comments, setComments] = useState<dataType["comments"]>([]);
-  const [firstComment, setFirstComment] = useState({ name: "", text: "" });
+  const [firstComment, setFirstComment] = useState({
+    name: "",
+    text: "",
+    view: false,
+  });
+  const [firstIndex, setFirstIndex] = useState<number>(0);
 
   const commentFetch = async () => {
     const data = await axios.post("/api/commention");
     // @ts-ignore
     setComments(data.data.comments);
-    if (data.data.comments.length > 0) setFirstComment(data.data.comments[0]);
+    if (data.data.comments.length > 0) {
+      for (let i = 0; i < data.data.comments.length; i++) {
+        if (data.data.comments[i].view === true) {
+          setFirstIndex(i);
+          setFirstComment(data.data.comments[i]);
+          break;
+        }
+      }
+    }
   };
 
   useEffect(() => {
@@ -31,7 +44,7 @@ function Carousel() {
           <StyleSlider {...settings}>
             <Card name={firstComment.name} text={firstComment.text}></Card>
             {comments.map((comment, idx) => {
-              if (idx === 0) return;
+              if (idx === firstIndex || comment.view !== true) return;
               return (
                 <Card key={idx} name={comment.name} text={comment.text}></Card>
               );
