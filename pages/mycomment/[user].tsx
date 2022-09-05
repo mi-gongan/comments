@@ -22,13 +22,17 @@ const Wrap = styled.div``;
 
 const GrobalStyle = createGlobalStyle`
   html{
+    margin: auto;
     max-width: 800px;
     min-width:280px;
-    height: 350px;
+    height: 370px;
+    background-color: white;
+    
   }
   body{
+    overflow:hidden;
     max-width: 800px;
     min-width:280px;
-    height: 350px;
+    height: 370px;
   }
 `;

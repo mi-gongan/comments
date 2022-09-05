@@ -47,7 +47,7 @@ export default Carousel;
 
 const Wrap = styled.div`
   width: 100%;
-  padding-top: 20px;
+  padding-top: 40px;
 `;
 
 const settings = {
@@ -64,7 +64,7 @@ const settings = {
       style={{
         width: "100%",
         position: "absolute",
-        bottom: "20px",
+        bottom: "12px",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -90,6 +90,8 @@ const settings = {
 const StyleSlider = styled(Slider)`
   margin: auto;
   width: 90%;
+  position: relative;
+  bottom: 20px;
   /* Arrows */
   .slick-prev,
   .slick-next {
@@ -148,10 +150,10 @@ const StyleSlider = styled(Slider)`
   }
 
   .slick-prev {
-    left: -25px;
+    left: -30px;
   }
   [dir="rtl"] .slick-prev {
-    right: -25px;
+    right: -30px;
     left: auto;
   }
   .slick-prev:before {
@@ -162,11 +164,11 @@ const StyleSlider = styled(Slider)`
   }
 
   .slick-next {
-    right: -25px;
+    right: -30px;
   }
   [dir="rtl"] .slick-next {
     right: auto;
-    left: -25px;
+    left: -30px;
   }
   .slick-next:before {
     content: "→";
