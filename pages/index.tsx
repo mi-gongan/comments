@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import styles from "../styles/Home.module.css";
+import styled from "styled-components";
 import { useSession, signIn, signOut } from "next-auth/react";
 import Carousel from "../src/components/common/Carousel";
 import Image from "next/image";
@@ -9,7 +9,7 @@ const Home: NextPage = () => {
   const { data: session, status } = useSession();
   console.log(session, status);
   return (
-    <>
+    <Wrap>
       {session ? (
         <button onClick={() => signOut()}>Sign out</button>
       ) : (
@@ -24,8 +24,12 @@ const Home: NextPage = () => {
       )}
       <Commention />
       <Carousel></Carousel>
-    </>
+    </Wrap>
   );
 };
 
 export default Home;
+
+const Wrap = styled.div`
+  width: 100%;
+`;

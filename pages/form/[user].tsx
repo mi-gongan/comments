@@ -6,15 +6,9 @@ import Commention from "../../src/components/common/Commention";
 function Form() {
   const router = useRouter();
   const { user } = router.query;
-  return (
-    <Wrap>
-      <Commention></Commention>
-    </Wrap>
-  );
+  return <Commention></Commention>;
 }
 
 export default Form;
 
-const Wrap = styled.div`
-  margin-top: 20px;
-`;
+const Wrap = styled.div``;

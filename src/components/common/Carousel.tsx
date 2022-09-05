@@ -1,86 +1,94 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
-import Image from "next/image";
 import "../../../node_modules/slick-carousel/slick/slick.css";
 import "../../../node_modules/slick-carousel/slick/slick-theme.css";
 import styled from "styled-components";
+import axios from "axios";
+import { dataType } from "../../../pages/api/commention";
+import Card from "./Card";
 
 function Carousel() {
-  const settings = {
-    dots: true,
-    infinite: true,
-    adaptiveHeight: true,
-    speed: 600,
-    slidesToShow: 2,
-    slidesToScroll: 2,
-    initialSlide: 0,
-    centerMode: true,
-    useCSS: true,
-    responsive: [
-      {
-        breakpoint: 500,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          infinite: true,
-          arrows: false,
-          centerPadding: "70px",
-        },
-      },
-    ],
+  const [render, setRender] = useState("");
+  const [comments, setComments] = useState<dataType["comments"]>([]);
+  const [firstComment, setFirstComment] = useState({ name: "", text: "" });
+
+  const commentFetch = async () => {
+    const data = await axios.post("/api/commention");
+    // @ts-ignore
+    setComments(data.data.comments);
+    if (data.data.comments.length > 0) setFirstComment(data.data.comments[0]);
   };
+
+  useEffect(() => {
+    setRender("ok");
+    commentFetch();
+  }, []);
+
   return (
-    <Wrap>
-      <StyleSlider {...settings}>
-        <Image
-          alt="commention-card"
-          src="/assets/comment-card.svg"
-          width="300px"
-          height="300px"
-        ></Image>
-        <Image
-          alt="commention-card"
-          src="/assets/comment-card.svg"
-          width="300px"
-          height="300px"
-        ></Image>
-        <Image
-          alt="commention-card"
-          src="/assets/comment-card.svg"
-          width="300px"
-          height="300px"
-        ></Image>
-        <Image
-          alt="commention-card"
-          src="/assets/comment-card.svg"
-          width="300px"
-          height="300px"
-        ></Image>
-        <Image
-          alt="commention-card"
-          src="/assets/comment-card.svg"
-          width="300px"
-          height="300px"
-        ></Image>
-        <Image
-          alt="commention-card"
-          src="/assets/comment-card.svg"
-          width="300px"
-          height="300px"
-        ></Image>
-      </StyleSlider>
-    </Wrap>
+    <>
+      {render && (
+        <Wrap>
+          <StyleSlider {...settings}>
+            <Card name={firstComment.name} text={firstComment.text}></Card>
+            {comments.map((comment, idx) => {
+              if (idx === 0) return;
+              return (
+                <Card key={idx} name={comment.name} text={comment.text}></Card>
+              );
+            })}
+          </StyleSlider>
+        </Wrap>
+      )}
+    </>
   );
 }
 
 export default Carousel;
+
 const Wrap = styled.div`
   width: 100%;
 `;
 
+const settings = {
+  dots: true,
+  infinite: true,
+  adaptiveHeight: true,
+  speed: 600,
+  slidesToShow: 2,
+  slidesToScroll: 2,
+  initialSlide: 0,
+  useCSS: true,
+  appendDots: (dots: any) => (
+    <div
+      style={{
+        width: "100%",
+        position: "absolute",
+        bottom: "0px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <ul> {dots} </ul>
+    </div>
+  ),
+  dotsClass: "dots_custom",
+  responsive: [
+    {
+      breakpoint: 700,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        infinite: true,
+        arrows: false,
+      },
+    },
+  ],
+};
+
 const StyleSlider = styled(Slider)`
   margin: auto;
-  width: 80%;
+  width: 90%;
   /* Arrows */
   .slick-prev,
   .slick-next {
@@ -167,61 +175,35 @@ const StyleSlider = styled(Slider)`
   }
 
   /* Dots */
-  .slick-dots {
-    position: absolute;
 
-    display: block;
-
-    width: 100%;
-    padding: 0;
-    margin: 0;
-
-    list-style: none;
-
-    text-align: center;
-  }
-
-  .slick-dots li {
-    position: relative;
+  .dots_custom {
     display: inline-block;
+    vertical-align: middle;
+    margin: auto 0;
     padding: 0;
-    cursor: pointer;
   }
-  .slick-dots li button {
-    width: 24px;
-    height: 10px;
+
+  .dots_custom li {
+    list-style: none;
+    cursor: pointer;
+    display: inline-block;
+    margin: 0 6px;
+    padding: 0;
+  }
+
+  .dots_custom li button {
+    border: none;
+    background: #d1d1d1;
+    color: transparent;
+    cursor: pointer;
     display: block;
-    border-radius: 5px;
-    background-color: #d9d9d9;
-
-    cursor: pointer;
-    border: 0;
-    outline: none;
-  }
-  .slick-dots li button:hover,
-  .slick-dots li button:focus {
-    outline: none;
-  }
-  .slick-dots li button:hover:before,
-  .slick-dots li button:focus:before {
-  }
-  .slick-dots li button:before {
-    font-size: 0;
-    line-height: 0;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: 5px;
-
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  .slick-dots li.slick-active button:before {
-    background-color: blue;
+    height: 6px;
     width: 24px;
-    height: 10px;
     border-radius: 5px;
-    font-size: 0;
-    line-height: 0;
+    padding: 0;
+  }
+
+  .dots_custom li.slick-active button {
+    background-color: blue;
   }
 `;
