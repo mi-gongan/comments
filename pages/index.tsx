@@ -14,7 +14,6 @@ const Home: NextPage = () => {
       ) : (
         <button onClick={() => signIn()}>Sign in</button>
       )}
-      <Commention></Commention>
       <Carousel></Carousel>
     </>
   );

@@ -3,7 +3,7 @@ import React from "react";
 import styled from "styled-components";
 import Carousel from "../../src/components/common/Carousel";
 
-function User() {
+function Commention() {
   const router = useRouter();
   const { user } = router.query;
   return (
@@ -14,6 +14,6 @@ function User() {
   );
 }
 
-export default User;
+export default Commention;
 
 const Wrap = styled.div``;

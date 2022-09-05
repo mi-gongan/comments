@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Image from "next/image";
 
-function Commention() {
+interface commentionPropsType {
+  user: string | string[] | undefined;
+}
+
+function Commention({ user }: commentionPropsType) {
   const [text, setText] = useState("");
 
   return (
@@ -17,7 +21,7 @@ function Commention() {
         onChange={(e) => setText(e.target.value)}
         value={text}
         autoFocus
-        placeholder="안녕하세요 코멘션입니다.&#13;&#10; **에게 코멘트를 작성해주세요"
+        placeholder={`안녕하세요 코멘션입니다.&#13;&#10; ${user}에게 코멘트를 작성해주세요`}
       />
       <div className="button-area">
         <button>Upload</button>
