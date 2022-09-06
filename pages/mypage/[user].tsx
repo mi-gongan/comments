@@ -5,7 +5,6 @@ import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import Carousel from "../../src/components/common/Carousel";
 import { emailAtom } from "../../src/recoil/user";
-import { kakaoExit, kakaoLogout } from "../../src/services/kakao";
 
 function Mypage() {
   const router = useRouter();
@@ -27,7 +26,7 @@ function Mypage() {
 
   const handleLogout = () => {
     try {
-      kakaoLogout();
+      kakaoExit();
       setEmail("");
       router.push("/");
     } catch (err) {
@@ -51,17 +50,31 @@ function Mypage() {
       });
   };
 
+  const kakaoExit = () => {
+    window.Kakao.API.request({
+      url: "/v1/user/unlink",
+      success: function (response: any) {
+        console.log(response);
+      },
+      fail: function (error: any) {
+        console.log(error);
+      },
+    });
+  };
+
   return (
     <Wrap>
       <div className="profile">
-        <Image alt="profile-img" src={profile?.img} width="100" height="100" />
+        {profile.img && (
+          <Image alt="profile-img" src={profile.img} width="100" height="100" />
+        )}
         <div>이름 : {profile?.name}</div>
       </div>
       <Carousel></Carousel>
       <div className="logout" onClick={handleLogout}>
         Logout
       </div>
-      <div className="exit" onClick={kakaoExit}>
+      <div className="exit" onClick={handleLogout}>
         탈퇴하기
       </div>
     </Wrap>

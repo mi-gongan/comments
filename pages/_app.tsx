@@ -13,7 +13,6 @@ function MyApp({ Component, pageProps: { pageProps } }: AppProps) {
   useEffect(() => {
     try {
       if (!window.Kakao.isInitialized() && window.Kakao) {
-        console.log(process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT);
         window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT);
       }
     } catch (e) {

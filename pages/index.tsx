@@ -1,14 +1,13 @@
 import type { NextPage } from "next";
 import styled from "styled-components";
 import Image from "next/image";
-import { kakaoLogin } from "../src/services/kakao";
 import { useRouter } from "next/router";
-import { useRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 import { emailAtom } from "../src/recoil/user";
 import { useEffect, useState } from "react";
 
 const Home: NextPage = () => {
-  const [email, setEmail] = useRecoilState(emailAtom);
+  const email = useRecoilValue(emailAtom);
   const router = useRouter();
   const [render, setRender] = useState("");
 
@@ -23,18 +22,17 @@ const Home: NextPage = () => {
   const handleLogin = () => {
     try {
       kakaoLogin();
-      setUserData();
     } catch (err) {
       console.log(err);
     }
   };
 
-  const setUserData = () => {
-    window.Kakao.API.request({
-      url: "/v2/user/me",
+  const kakaoLogin = () => {
+    window.Kakao.Auth.login({
       success: function (response: any) {
-        setEmail(response.kakao_account.email);
+        window.Kakao.Auth.setAccessToken(response.access_token);
         console.log(response);
+        router.push("/login");
       },
       fail: function (error: any) {
         console.log(error);
