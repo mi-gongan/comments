@@ -8,3 +8,6 @@
 
 - createGlobalStyle
   => 특정페이지만 화면 너비를 조정하여야 해서 사용
+
+- Amplify
+  => 빠른 구축을 위한 서버리스 서비스인 amplify 사용
