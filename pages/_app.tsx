@@ -1,6 +1,7 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { useEffect } from "react";
+import { RecoilRoot } from "recoil";
 
 declare global {
   interface Window {
@@ -18,7 +19,11 @@ function MyApp({ Component, pageProps: { pageProps } }: AppProps) {
       console.log(e);
     }
   }, []);
-  return <Component {...pageProps} />;
+  return (
+    <RecoilRoot>
+      <Component {...pageProps} />
+    </RecoilRoot>
+  );
 }
 
 export default MyApp;
