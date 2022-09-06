@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import Carousel from "../../src/components/common/Carousel";
@@ -12,6 +12,7 @@ function Mypage() {
   const [email, setEmail] = useRecoilState(emailAtom);
   const [profile, setProfile] = useState({ name: "", img: "" });
   const [render, setRender] = useState("");
+  const Ref = useRef<any>();
 
   useEffect(() => {
     if (user && user !== email) {
@@ -68,22 +69,42 @@ function Mypage() {
     });
   };
 
+  const clickButton = () => {
+    Ref.current.click();
+  };
+
+  const linkCopy = (e: any) => {
+    e.preventDefault();
+    console.log(e);
+    window.navigator.clipboard.writeText(e.target.textContent);
+  };
+
   return (
-    <Wrap>
-      <div className="profile">
-        {profile.img && (
-          <Image alt="profile-img" src={profile.img} width="100" height="100" />
-        )}
-        <div>이름 : {profile?.name}</div>
-      </div>
-      <Carousel></Carousel>
-      <div className="logout" onClick={handleLogout}>
-        Logout
-      </div>
-      <div className="exit" onClick={handleLogout}>
-        탈퇴하기
-      </div>
-    </Wrap>
+    <>
+      {render && (
+        <Wrap>
+          <div className="profile">
+            {profile.img && (
+              <Image
+                alt="profile-img"
+                src={profile.img}
+                width="100"
+                height="100"
+              />
+            )}
+            <div>이름 : {profile?.name}</div>
+          </div>
+          <button onClick={clickButton}>코멘트 폼 링크 복사</button>
+          <div ref={Ref} style={{ display: "none" }} onClick={linkCopy}>
+            {process.env.NEXT_PUBLIC_BASEURL + `/form/${email}`}
+          </div>
+          <Carousel></Carousel>
+          <div className="logout" onClick={handleLogout}>
+            Logout
+          </div>
+        </Wrap>
+      )}
+    </>
   );
 }
 
