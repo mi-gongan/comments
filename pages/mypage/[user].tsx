@@ -15,18 +15,15 @@ function Mypage() {
 
   useEffect(() => {
     if (email) {
+      if (user && user !== email) {
+        alert("본인의 프로필이 아닙니다.");
+        router.push("/");
+      }
       fetchProfile();
     } else {
       router.push("/");
     }
   }, []);
-
-  useEffect(() => {
-    if (user && user !== email) {
-      alert("본인의 프로필이 아닙니다.");
-      router.push("/");
-    }
-  }, [user]);
 
   const handleLogout = () => {
     try {
