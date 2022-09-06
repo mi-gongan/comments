@@ -224,6 +224,6 @@ const StyleSlider = styled(Slider)`
   }
 
   .dots_custom li.slick-active button {
-    background-color: var(--primay-color);
+    background-color: var(--primary-color);
   }
 `;

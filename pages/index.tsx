@@ -64,7 +64,7 @@ const Wrap = styled.div`
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  background-color: var(--primay-color);
+  background-color: var(--primary-color);
   display: flex;
   flex-direction: column;
   justify-content: center;

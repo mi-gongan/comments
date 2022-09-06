@@ -74,7 +74,7 @@ const Search = styled.div`
       border-radius: 8px;
     }
     button {
-      background-color: var(--primay-color);
+      background-color: var(--primary-color);
       width: 79px;
       height: 48px;
       border-radius: 8px;

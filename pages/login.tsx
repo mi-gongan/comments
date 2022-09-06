@@ -21,7 +21,7 @@ function login() {
             response.nickname,
             response.properties.profile_thumbnail_image
           );
-          router.push(`/mypage/${response.kakao_account.email}`);
+          router.push(`/mypage`);
           console.log(response);
         },
         fail: function (error: any) {

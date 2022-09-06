@@ -18,6 +18,7 @@ function Mypage() {
   const [profile, setProfile] = useState({ name: "", img: "" });
   const [render, setRender] = useState("");
   const [comments, setComments] = useState<Array<commentDataType>>([]);
+  const [linkSave, setLinkSave] = useState("");
   const Ref = useRef<any>();
 
   useEffect(() => {
@@ -65,6 +66,7 @@ function Mypage() {
     e.preventDefault();
     console.log(e);
     window.navigator.clipboard.writeText(e.target.textContent);
+    setLinkSave("ok");
   };
 
   return (
@@ -76,7 +78,12 @@ function Mypage() {
             <div ref={Ref} onClick={linkCopy}>
               {process.env.NEXT_PUBLIC_BASEURL + `/form/${email}`}
             </div>
-            <button onClick={clickButton}>코멘트 폼 링크 복사</button>
+            <button
+              onClick={clickButton}
+              className={linkSave ? "link-save" : "link-not-save"}
+            >
+              코멘트 폼 링크 복사
+            </button>
           </div>
           <div className="profile">
             <div>다른 사람들이 써준</div>
@@ -106,4 +113,10 @@ export default Mypage;
 
 const Wrap = styled.div`
   text-align: center;
+  .link-save {
+    background-color: var(--primary-color);
+  }
+  .link-not-save {
+    background-color: gray;
+  }
 `;
