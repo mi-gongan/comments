@@ -9,9 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@aws-amplify/ui-react": "^3.5.0",
-    "aws-amplify": "^4.3.34",
     "axios": "^0.27.2",
+    "firebase": "^9.9.4",
     "next": "12.2.5",
     "pretendard": "^1.3.5",
     "react": "18.2.0",

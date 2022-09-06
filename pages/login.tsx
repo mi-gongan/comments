@@ -1,6 +1,8 @@
+import { async } from "@firebase/util";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useSetRecoilState } from "recoil";
+import { assignUser } from "../src/firebase/firebase";
 import { emailAtom } from "../src/recoil/user";
 
 function login() {
@@ -14,6 +16,11 @@ function login() {
         url: "/v2/user/me",
         success: function (response: any) {
           setEmail(response.kakao_account.email);
+          assignUser(
+            response.kakao_account.email,
+            response.nickname,
+            response.properties.profile_thumbnail_image
+          );
           router.push(`/mypage/${response.kakao_account.email}`);
           console.log(response);
         },

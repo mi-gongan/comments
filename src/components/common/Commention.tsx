@@ -65,7 +65,7 @@ const Wrap = styled.div`
   button {
     width: 70px;
     height: 30px;
-    background-color: blue;
+    background-color: var(--primay-color);
     color: white;
     border: none;
     border-radius: 7px;

@@ -74,7 +74,7 @@ const Search = styled.div`
       border-radius: 8px;
     }
     button {
-      background-color: blue;
+      background-color: var(--primay-color);
       width: 79px;
       height: 48px;
       border-radius: 8px;
@@ -105,7 +105,7 @@ const Logo = styled.div`
 
 const Mypage = styled.div`
   width: 70px;
-  color: blue;
+  color: var(--primay-color);
   line-height: 115px;
   text-align: center;
 `;

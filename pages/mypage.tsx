@@ -3,29 +3,25 @@ import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
-import Carousel from "../../src/components/common/Carousel";
-import { emailAtom } from "../../src/recoil/user";
+import Carousel from "../src/components/common/Carousel";
+import { fetchUserData } from "../src/firebase/firebase";
+import { emailAtom } from "../src/recoil/user";
 
 function Mypage() {
   const router = useRouter();
-  const { user } = router.query;
   const [email, setEmail] = useRecoilState(emailAtom);
   const [profile, setProfile] = useState({ name: "", img: "" });
   const [render, setRender] = useState("");
   const Ref = useRef<any>();
 
   useEffect(() => {
-    if (user && user !== email) {
-      alert("본인의 프로필이 아닙니다.");
-      router.push("/");
-    }
-  }, [render, user]);
-
-  useEffect(() => {
     if (email) {
-      console.log(user, email);
+      fetchUserData(email).then((res) =>
+        //@ts-ignore
+        setProfile({ name: res.name, img: res.img })
+      );
+
       setRender("ok");
-      fetchProfile();
     } else {
       router.push("/");
     }
@@ -34,27 +30,9 @@ function Mypage() {
   const handleLogout = () => {
     try {
       kakaoExit();
-      setEmail("");
-      router.push("/");
     } catch (err) {
       console.log(err);
     }
-  };
-
-  const fetchProfile = () => {
-    window.Kakao.API &&
-      window.Kakao.API.request({
-        url: "/v1/api/talk/profile",
-        success: function (response: any) {
-          setProfile({
-            name: response.nickName,
-            img: response.profileImageURL,
-          });
-        },
-        fail: function (error: any) {
-          console.log(error);
-        },
-      });
   };
 
   const kakaoExit = () => {
@@ -62,9 +40,13 @@ function Mypage() {
       url: "/v1/user/unlink",
       success: function (response: any) {
         console.log(response);
+        setEmail("");
+        router.push("/");
       },
       fail: function (error: any) {
         console.log(error);
+        setEmail("");
+        router.push("/");
       },
     });
   };
@@ -83,7 +65,16 @@ function Mypage() {
     <>
       {render && (
         <Wrap>
+          <div>코멘션을 받고 싶다면, 친구들에게 공유해보세요!</div>
+          <div>
+            <div ref={Ref} onClick={linkCopy}>
+              {process.env.NEXT_PUBLIC_BASEURL + `/form/${email}`}
+            </div>
+            <button onClick={clickButton}>코멘트 폼 링크 복사</button>
+          </div>
           <div className="profile">
+            <div>다른 사람들이 써준</div>
+            <div>{profile?.name}의 코멘션</div>
             {profile.img && (
               <Image
                 alt="profile-img"
@@ -92,13 +83,7 @@ function Mypage() {
                 height="100"
               />
             )}
-            <div>이름 : {profile?.name}</div>
           </div>
-          <button onClick={clickButton}>코멘트 폼 링크 복사</button>
-          <div ref={Ref} style={{ display: "none" }} onClick={linkCopy}>
-            {process.env.NEXT_PUBLIC_BASEURL + `/form/${email}`}
-          </div>
-          <Carousel></Carousel>
           <div className="logout" onClick={handleLogout}>
             Logout
           </div>

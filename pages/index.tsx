@@ -16,7 +16,7 @@ const Home: NextPage = () => {
   }, []);
 
   useEffect(() => {
-    email && router.push(`/mypage/${email}`);
+    email && router.push("/mypage");
   }, [email]);
 
   const handleLogin = () => {
@@ -64,7 +64,7 @@ const Wrap = styled.div`
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  background-color: #2d42ff;
+  background-color: var(--primay-color);
   display: flex;
   flex-direction: column;
   justify-content: center;
