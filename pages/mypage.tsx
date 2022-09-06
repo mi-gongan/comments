@@ -3,8 +3,13 @@ import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
+import Card from "../src/components/common/Card";
 import Carousel from "../src/components/common/Carousel";
-import { fetchUserData } from "../src/firebase/firebase";
+import {
+  commentDataType,
+  fetchCommentsData,
+  fetchUserData,
+} from "../src/firebase/firebase";
 import { emailAtom } from "../src/recoil/user";
 
 function Mypage() {
@@ -12,6 +17,7 @@ function Mypage() {
   const [email, setEmail] = useRecoilState(emailAtom);
   const [profile, setProfile] = useState({ name: "", img: "" });
   const [render, setRender] = useState("");
+  const [comments, setComments] = useState<Array<commentDataType>>([]);
   const Ref = useRef<any>();
 
   useEffect(() => {
@@ -20,8 +26,8 @@ function Mypage() {
         //@ts-ignore
         setProfile({ name: res.name, img: res.img })
       );
-
       setRender("ok");
+      fetchCommentsData(email).then((res: any) => setComments(res));
     } else {
       router.push("/");
     }
@@ -84,6 +90,9 @@ function Mypage() {
               />
             )}
           </div>
+          {comments.map((comment) => (
+            <Card text={comment.text} name={comment.name}></Card>
+          ))}
           <div className="logout" onClick={handleLogout}>
             Logout
           </div>

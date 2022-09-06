@@ -8,7 +8,11 @@ import {
   getDoc,
   getFirestore,
   setDoc,
+  collection,
   Timestamp,
+  getDocs,
+  query,
+  orderBy,
 } from "firebase/firestore";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -40,4 +44,22 @@ export const fetchUserData = async (email: string) => {
   const userDoc = doc(db, "users", email);
   const userSnap = await getDoc(userDoc);
   return userSnap.data();
+};
+
+export const fetchCommentsData = async (email: string) => {
+  let response: commentDataType[] = [];
+  console.log(email);
+  const commentCollection = collection(db, "users", email, "comments");
+  const commentQuery = query(commentCollection, orderBy("name"));
+  const querySnap = await getDocs(commentQuery);
+  querySnap.forEach((doc: any) => {
+    response.push(doc.data());
+  });
+  return response;
+};
+
+export type commentDataType = {
+  name: string;
+  text: string;
+  view: boolean;
 };
