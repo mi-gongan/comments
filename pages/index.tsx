@@ -14,8 +14,11 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     setRender("ok");
-    email && router.push(`/mypage/${email}`);
   }, []);
+
+  useEffect(() => {
+    email && router.push(`/mypage/${email}`);
+  }, [email]);
 
   const handleLogin = () => {
     try {
@@ -30,9 +33,8 @@ const Home: NextPage = () => {
     window.Kakao.API.request({
       url: "/v2/user/me",
       success: function (response: any) {
-        console.log(response);
         setEmail(response.kakao_account.email);
-        router.push(`/mypage/${response.kakao_account.email}`);
+        console.log(response);
       },
       fail: function (error: any) {
         console.log(error);
