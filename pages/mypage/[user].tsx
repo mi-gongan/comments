@@ -11,13 +11,19 @@ function Mypage() {
   const { user } = router.query;
   const [email, setEmail] = useRecoilState(emailAtom);
   const [profile, setProfile] = useState({ name: "", img: "" });
+  const [render, setRender] = useState("");
+
+  useEffect(() => {
+    if (user && user !== email) {
+      alert("본인의 프로필이 아닙니다.");
+      router.push("/");
+    }
+  }, [render, user]);
 
   useEffect(() => {
     if (email) {
-      if (user && user !== email) {
-        alert("본인의 프로필이 아닙니다.");
-        router.push("/");
-      }
+      console.log(user, email);
+      setRender("ok");
       fetchProfile();
     } else {
       router.push("/");
