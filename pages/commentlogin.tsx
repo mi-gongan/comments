@@ -61,7 +61,8 @@ function commentlogin() {
         text: "",
         view: false,
       });
-      router.push("/peercomment");
+      // router.push("/peercomment");
+      router.push("/");
     }
   }, [upload]);
 

@@ -4,6 +4,7 @@ import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import DescriptionBox from "../src/components/mypage/DescriptionBox";
 import Logout from "../src/components/mypage/Logout";
+import NotionEmbed from "../src/components/mypage/NotionEmbed";
 import ReceiveForm from "../src/components/mypage/ReceiveForm";
 import ShareForm from "../src/components/mypage/ShareForm";
 import { emailAtom } from "../src/recoil/user";
@@ -34,6 +35,7 @@ function Mypage() {
           <CommentionArea>
             <DescriptionBox />
             <ReceiveForm />
+            <NotionEmbed />
             <Logout />
           </CommentionArea>
         </Wrap>

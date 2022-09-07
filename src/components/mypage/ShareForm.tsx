@@ -19,7 +19,6 @@ function ShareForm() {
     window.navigator.clipboard.writeText(e.target.textContent);
     setLinkSave("ok");
   };
-  console.log(linkSave);
   return (
     <Wrap>
       <div className="text">
@@ -47,6 +46,8 @@ export default ShareForm;
 const Wrap = styled.div`
   padding-top: 10%;
   text-align: center;
+  background-color: white;
+  padding-bottom: 55px;
   .text {
     font-weight: 600;
     font-size: 22px;
@@ -73,18 +74,18 @@ const Wrap = styled.div`
     overflow: hidden;
     color: #8c8c8c;
   }
-  .link-save {
-    background-color: var(--primary-color);
-    color: white;
-    font-size: 17px;
-    font-weight: 500;
-  }
   button {
     width: 65px;
     height: 40px;
     margin-left: 10px;
     border-radius: 5px;
     border: none;
+  }
+  .link-save {
+    background-color: var(--primary-color);
+    color: white;
+    font-size: 17px;
+    font-weight: 500;
   }
   .link-not-save {
     background: #d3d3d3;

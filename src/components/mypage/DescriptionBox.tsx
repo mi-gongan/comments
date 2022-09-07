@@ -38,7 +38,7 @@ export default DescriptionBox;
 
 const Wrap = styled.div`
   display: flex;
-  padding: 20px 10%;
+  padding: 10px 10%;
   justify-content: space-between;
   .description {
     margin-top: 8px;

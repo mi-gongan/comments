@@ -39,6 +39,7 @@ function ReceiveForm() {
 export default ReceiveForm;
 
 const Wrap = styled.div`
+  padding-bottom: 20px;
   .number {
     margin-left: 10%;
     font-weight: 600;
