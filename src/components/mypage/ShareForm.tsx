@@ -8,7 +8,8 @@ function ShareForm() {
   const [linkSave, setLinkSave] = useState("");
   const Ref = useRef<any>();
 
-  const clickButton = () => {
+  const clickButton = (e: any) => {
+    console.log(e);
     Ref.current.click();
   };
 
@@ -18,6 +19,7 @@ function ShareForm() {
     window.navigator.clipboard.writeText(e.target.textContent);
     setLinkSave("ok");
   };
+  console.log(linkSave);
   return (
     <Wrap>
       <div className="text">
@@ -33,7 +35,7 @@ function ShareForm() {
           onClick={clickButton}
           className={linkSave ? "link-save" : "link-not-save"}
         >
-          copy
+          복사
         </button>
       </div>
     </Wrap>
@@ -70,18 +72,20 @@ const Wrap = styled.div`
     overflow: hidden;
     color: #8c8c8c;
   }
+  .link-save {
+    background-color: var(--primary-color);
+    color: white;
+    font-size: 17px;
+    font-weight: 500;
+  }
   button {
     width: 65px;
     height: 40px;
     margin-left: 10px;
-    background: #d3d3d3;
     border-radius: 5px;
     border: none;
-    .link-save {
-      background-color: var(--primary-color);
-    }
-    .link-not-save {
-      background-color: gray;
-    }
+  }
+  .link-not-save {
+    background: #d3d3d3;
   }
 `;

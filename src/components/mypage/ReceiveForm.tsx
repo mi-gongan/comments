@@ -12,6 +12,7 @@ function ReceiveForm({ comments }: ReceiveFormPropsType) {
   const onDragEnd = () => {};
   return (
     <Wrap>
+      <div className="number">코멘션 {comments.length}개</div>
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId="cards">
           {(provided) => (
@@ -48,6 +49,12 @@ function ReceiveForm({ comments }: ReceiveFormPropsType) {
 export default ReceiveForm;
 
 const Wrap = styled.div`
+  .number {
+    margin-left: 10%;
+    font-weight: 600;
+    font-size: 14px;
+    color: #828282;
+  }
   li {
     list-style: none;
   }

@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useSetRecoilState } from "recoil";
+import styled from "styled-components";
 import { assignUser } from "../src/firebase/firebase";
 import { emailAtom } from "../src/recoil/user";
 
@@ -35,7 +36,21 @@ function login() {
       });
   }, [render]);
 
-  return <div>login 중입니다...</div>;
+  return <Wrap>login 중입니다...</Wrap>;
 }
 
 export default login;
+
+const Wrap = styled.div`
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background-color: var(--primary-color);
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  color: white;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 700;
+`;

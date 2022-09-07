@@ -1,8 +1,8 @@
-import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
+import DescriptionBox from "../src/components/mypage/DescriptionBox";
 import ReceiveForm from "../src/components/mypage/ReceiveForm";
 import ShareForm from "../src/components/mypage/ShareForm";
 import {
@@ -12,10 +12,15 @@ import {
 } from "../src/firebase/firebase";
 import { emailAtom } from "../src/recoil/user";
 
+export type profileType = {
+  name: string;
+  img: string;
+};
+
 function Mypage() {
   const router = useRouter();
   const [email, setEmail] = useRecoilState(emailAtom);
-  const [profile, setProfile] = useState({ name: "", img: "" });
+  const [profile, setProfile] = useState<profileType>({ name: "", img: "" });
   const [render, setRender] = useState("");
   const [comments, setComments] = useState<Array<commentType>>([]);
 
@@ -61,22 +66,13 @@ function Mypage() {
       {render && (
         <Wrap>
           <ShareForm />
-          <div className="profile">
-            <div>다른 사람들이 써준</div>
-            <div>{profile?.name}의 코멘션</div>
-            {profile.img && (
-              <Image
-                alt="profile-img"
-                src={profile.img}
-                width="100"
-                height="100"
-              />
-            )}
-          </div>
-          <ReceiveForm comments={comments}></ReceiveForm>
-          <div className="logout" onClick={handleLogout}>
-            Logout
-          </div>
+          <CommentionArea>
+            <DescriptionBox name={profile.name} img={profile.img} />
+            <ReceiveForm comments={comments}></ReceiveForm>{" "}
+            <div className="logout" onClick={handleLogout}>
+              로그아웃
+            </div>
+          </CommentionArea>
         </Wrap>
       )}
     </>
@@ -86,5 +82,14 @@ function Mypage() {
 export default Mypage;
 
 const Wrap = styled.div`
-  text-align: center;
+  .logout {
+    text-align: center;
+    text-decoration: underline;
+    padding: 20px;
+  }
+`;
+
+const CommentionArea = styled.div`
+  margin-top: 30px;
+  background-color: #f3f3f3;
 `;
