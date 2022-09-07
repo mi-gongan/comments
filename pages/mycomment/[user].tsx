@@ -1,10 +1,8 @@
-import { useRouter } from "next/router";
 import React from "react";
 import styled, { createGlobalStyle } from "styled-components";
-import Carousel from "../../src/components/common/Carousel";
+import Carousel from "../../src/components/mycomment/Carousel";
 
 function mycommention() {
-  const router = useRouter();
   return (
     <>
       <GrobalStyle />

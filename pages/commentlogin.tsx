@@ -42,7 +42,7 @@ function commentlogin() {
             id: finalIndex + 1,
             name: res.name,
             text: form.text,
-            view: true,
+            view: false,
           });
           setUpload("ok");
         });
@@ -59,7 +59,7 @@ function commentlogin() {
         id: 0,
         name: "",
         text: "",
-        view: true,
+        view: false,
       });
       router.push("/peercomment");
     }

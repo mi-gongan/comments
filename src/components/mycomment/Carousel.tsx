@@ -3,50 +3,67 @@ import Slider from "react-slick";
 import "../../../node_modules/slick-carousel/slick/slick.css";
 import "../../../node_modules/slick-carousel/slick/slick-theme.css";
 import styled from "styled-components";
-import axios from "axios";
-import { dataType } from "../../../pages/api/commention";
-import Card from "./Card";
+import Card from "../common/Card";
+import { commentType, fetchReceiveCommentsData } from "../../firebase/firebase";
+import { useRouter } from "next/router";
 
 function Carousel() {
+  const router = useRouter();
+  const { user }: any = router.query;
   const [render, setRender] = useState("");
-  const [comments, setComments] = useState<dataType["comments"]>([]);
+  const [comments, setComments] = useState<Array<commentType>>([]);
   const [firstComment, setFirstComment] = useState({
     name: "",
     text: "",
+    id: 0,
     view: false,
   });
   const [firstIndex, setFirstIndex] = useState<number>(0);
 
   const commentFetch = async () => {
-    const data = await axios.post("/api/commention");
-    // @ts-ignore
-    setComments(data.data.comments);
-    if (data.data.comments.length > 0) {
-      for (let i = 0; i < data.data.comments.length; i++) {
-        if (data.data.comments[i].view === true) {
-          setFirstIndex(i);
-          setFirstComment(data.data.comments[i]);
-          break;
+    fetchReceiveCommentsData(user).then((comments) => {
+      setComments(comments);
+      if (comments.length > 0) {
+        for (let i = 0; i < comments.length; i++) {
+          if (comments[i].view === true) {
+            setFirstIndex(i);
+            setFirstComment(comments[i]);
+            break;
+          }
         }
       }
-    }
+    });
   };
 
   useEffect(() => {
     setRender("ok");
-    commentFetch();
   }, []);
+
+  useEffect(() => {
+    user && commentFetch();
+  }, [user]);
 
   return (
     <>
       {render && (
         <Wrap>
           <StyleSlider {...settings}>
-            <Card name={firstComment.name} text={firstComment.text}></Card>
+            <Card
+              name={firstComment.name}
+              text={firstComment.text}
+              id={firstComment.id}
+              view={firstComment.view}
+            ></Card>
             {comments.map((comment, idx) => {
               if (idx === firstIndex || comment.view !== true) return;
               return (
-                <Card key={idx} name={comment.name} text={comment.text}></Card>
+                <Card
+                  key={comment.id}
+                  name={comment.name}
+                  text={comment.text}
+                  id={comment.id}
+                  view={comment.view}
+                ></Card>
               );
             })}
           </StyleSlider>
@@ -77,7 +94,7 @@ const settings = {
       style={{
         width: "100%",
         position: "absolute",
-        bottom: "12px",
+        bottom: "-65px",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",

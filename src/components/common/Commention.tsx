@@ -44,7 +44,7 @@ function Commention() {
       id: 0,
       name: "",
       text: text,
-      view: true,
+      view: false,
     });
     router.push("/commentlogin");
   };
