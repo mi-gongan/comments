@@ -1,48 +1,26 @@
-import React from "react";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { commentType } from "../../firebase/firebase";
+import React, { useEffect, useState } from "react";
+import { commentType, fetchReceiveCommentsData } from "../../firebase/firebase";
 import styled from "styled-components";
 import Card from "../common/Card";
+import { useRecoilValue } from "recoil";
+import { emailAtom } from "../../recoil/user";
 
-interface ReceiveFormPropsType {
-  comments: commentType[];
-}
+function ReceiveForm() {
+  const [comments, setComments] = useState<Array<commentType>>([]);
+  const email = useRecoilValue(emailAtom);
 
-function ReceiveForm({ comments }: ReceiveFormPropsType) {
-  console.log(comments);
-  const onDragEnd = () => {};
+  useEffect(() => {
+    console.log(email);
+    email &&
+      fetchReceiveCommentsData(email).then((res: any) => setComments(res));
+  }, [email]);
+
   return (
     <Wrap>
       <div className="number">코멘션 {comments.length}개</div>
-      <DragDropContext onDragEnd={onDragEnd}>
-        <Droppable droppableId="cards">
-          {(provided) => (
-            <ul
-              className="cards"
-              {...provided.droppableProps}
-              ref={provided.innerRef}
-            >
-              {comments.map((comment, idx) => (
-                <Draggable
-                  key={comment.id}
-                  draggableId={comment.text}
-                  index={idx}
-                >
-                  {(provided) => (
-                    <li
-                      ref={provided.innerRef}
-                      {...provided.dragHandleProps}
-                      {...provided.draggableProps}
-                    >
-                      <Card text={comment.text} name={comment.name}></Card>
-                    </li>
-                  )}
-                </Draggable>
-              ))}
-            </ul>
-          )}
-        </Droppable>
-      </DragDropContext>
+      {comments.map((comment) => (
+        <Card key={comment.id} text={comment.text} name={comment.name}></Card>
+      ))}
     </Wrap>
   );
 }

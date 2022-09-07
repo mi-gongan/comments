@@ -1,19 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { profileType } from "../../../pages/mypage";
 import styled from "styled-components";
+import { fetchUserData } from "../../firebase/firebase";
+import { useRecoilValue } from "recoil";
+import { emailAtom } from "../../recoil/user";
 
-function DescriptionBox({ name, img }: profileType) {
+function DescriptionBox() {
+  const [profile, setProfile] = useState({ name: "", img: "" });
+  const email = useRecoilValue(emailAtom);
+
+  useEffect(() => {
+    if (email) {
+      fetchUserData(email).then((res) =>
+        //@ts-ignore
+        setProfile({ name: res.name, img: res.img })
+      );
+    }
+  }, [email]);
+
   return (
     <Wrap>
       <div className="description">
         <div className="text">다른 사람들이 써준</div>
         <div className="commention">
-          <span>{name}</span>의 코멘션
+          <span>{profile.name}</span>의 코멘션
         </div>
       </div>
       <div className="img">
-        <Image alt="profile-img" src={img} width="72" height="72" />
+        <Image alt="profile-img" src={profile.img} width="72" height="72" />
       </div>
     </Wrap>
   );
