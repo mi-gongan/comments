@@ -32,7 +32,7 @@ function NotionEmbed() {
         업로드할 수 있어요
       </div>
       <div ref={Ref} onClick={linkCopy} className="email-link">
-        {process.env.NEXT_PUBLIC_BASEURL + `/mycommention/${email}`}
+        {process.env.NEXT_PUBLIC_BASEURL + `/mycomment/${email}`}
       </div>
       <div className="copy-link" onClick={clickButton}>
         <div className={linkSave ? "link-save" : "link-not-save"}>
