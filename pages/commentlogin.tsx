@@ -21,6 +21,11 @@ function commentlogin() {
   useEffect(() => {
     if (email) {
       fetchUserData(email).then((res: any) => {
+        if (email === form._to) {
+          alert("본인에게는 코멘트를 작성할 수 없습니다");
+          router.push("/");
+          return;
+        }
         setForm({
           _from: email,
           _to: form._to,

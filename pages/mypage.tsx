@@ -4,10 +4,9 @@ import React, { useEffect, useRef, useState } from "react";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import Card from "../src/components/common/Card";
-import Carousel from "../src/components/common/Carousel";
 import {
   commentDataType,
-  fetchCommentsData,
+  fetchReceiveCommentsData,
   fetchUserData,
 } from "../src/firebase/firebase";
 import { emailAtom } from "../src/recoil/user";
@@ -28,7 +27,7 @@ function Mypage() {
         setProfile({ name: res.name, img: res.img })
       );
       setRender("ok");
-      fetchCommentsData(email).then((res: any) => setComments(res));
+      fetchReceiveCommentsData(email).then((res: any) => setComments(res));
     } else {
       router.push("/");
     }
@@ -98,8 +97,8 @@ function Mypage() {
             )}
           </div>
           <div>받은거</div>
-          {comments.map((comment) => (
-            <Card text={comment.text} name={comment.name}></Card>
+          {comments.map((comment, idx) => (
+            <Card key={idx} text={comment.text} name={comment.name}></Card>
           ))}
           <div className="logout" onClick={handleLogout}>
             Logout

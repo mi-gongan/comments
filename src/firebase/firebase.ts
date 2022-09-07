@@ -48,11 +48,23 @@ export const fetchUserData = async (email: string) => {
   return userSnap.data();
 };
 
-export const fetchCommentsData = async (email: string) => {
+export const fetchReceiveCommentsData = async (email: string) => {
   let response: commentDataType[] = [];
   console.log(email);
   const commentCollection = collection(db, "comments");
   const commentQuery = query(commentCollection, where("_to", "==", email));
+  const querySnap = await getDocs(commentQuery);
+  querySnap.forEach((doc: any) => {
+    response.push(doc.data());
+  });
+  return response;
+};
+
+export const fetchWriteCommentsData = async (email: string) => {
+  let response: commentDataType[] = [];
+  console.log(email);
+  const commentCollection = collection(db, "comments");
+  const commentQuery = query(commentCollection, where("_from", "==", email));
   const querySnap = await getDocs(commentQuery);
   querySnap.forEach((doc: any) => {
     response.push(doc.data());
