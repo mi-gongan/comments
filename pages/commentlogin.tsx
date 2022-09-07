@@ -9,7 +9,7 @@ import {
   assignUser,
   fetchUserData,
   getFinalIndex,
-  setComments,
+  setComment,
 } from "../src/firebase/firebase";
 
 function commentlogin() {
@@ -52,7 +52,7 @@ function commentlogin() {
 
   useEffect(() => {
     if (upload) {
-      setComments(form);
+      setComment(form);
       setForm({
         _from: "",
         _to: "",

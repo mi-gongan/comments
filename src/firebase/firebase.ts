@@ -16,6 +16,7 @@ import {
   where,
   addDoc,
   limit,
+  deleteDoc,
 } from "firebase/firestore";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -81,8 +82,20 @@ export const fetchWriteCommentsData = async (email: string) => {
   return array;
 };
 
-export const setComments = async (form: commentType) => {
+export const setComment = async (form: commentType) => {
   await addDoc(commentCollection, form);
+};
+
+export const deleteRecieveComment = async (id: number, email: string) => {
+  const commentQuery = query(
+    commentCollection,
+    where("_to", "==", email),
+    where("id", "==", id)
+  );
+  const querySnap = await getDocs(commentQuery);
+  querySnap.forEach(async (item: any) => {
+    await deleteDoc(doc(db, "comments", item.id));
+  });
 };
 
 export const getFinalIndex = async (email: string) => {
