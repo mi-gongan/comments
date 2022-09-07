@@ -35,7 +35,7 @@ const db = getFirestore(app);
 
 export const assignUser = async (email: string, name: string, img: string) => {
   const userDoc = doc(db, "users", email);
-  if (await getDoc(userDoc)) return;
+  if ((await getDoc(userDoc)).exists()) return;
   await setDoc(userDoc, {
     name,
     img,

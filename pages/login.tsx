@@ -8,7 +8,6 @@ import { emailAtom } from "../src/recoil/user";
 function login() {
   const setEmail = useSetRecoilState(emailAtom);
   const router = useRouter();
-  const [render, setRender] = useState("");
 
   useEffect(() => {
     window.Kakao.API &&
@@ -16,23 +15,21 @@ function login() {
         url: "/v2/user/me",
         success: function (response: any) {
           setEmail(response.kakao_account.email);
+          console.log(response);
           assignUser(
             response.kakao_account.email,
-            response.nickname,
-            response.properties.profile_thumbnail_image
-          );
-          router.push(`/mypage`);
+            response.properties.nickname,
+            response.properties.profile_image
+          ).then(() => {
+            router.push(`/mypage`);
+          });
           console.log(response);
         },
         fail: function (error: any) {
           console.log(error);
         },
       });
-  }, [render]);
-
-  useEffect(() => {
-    setRender("ok");
-  }, []);
+  }, [window]);
 
   return <div>login 중입니다...</div>;
 }
