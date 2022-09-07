@@ -1,9 +1,10 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import Card from "../src/components/common/Card";
+import ShareForm from "../src/components/mypage/ShareForm";
 import {
   commentDataType,
   fetchReceiveCommentsData,
@@ -17,8 +18,6 @@ function Mypage() {
   const [profile, setProfile] = useState({ name: "", img: "" });
   const [render, setRender] = useState("");
   const [comments, setComments] = useState<Array<commentDataType>>([]);
-  const [linkSave, setLinkSave] = useState("");
-  const Ref = useRef<any>();
 
   useEffect(() => {
     if (email) {
@@ -57,33 +56,11 @@ function Mypage() {
     });
   };
 
-  const clickButton = () => {
-    Ref.current.click();
-  };
-
-  const linkCopy = (e: any) => {
-    e.preventDefault();
-    console.log(e);
-    window.navigator.clipboard.writeText(e.target.textContent);
-    setLinkSave("ok");
-  };
-
   return (
     <>
       {render && (
         <Wrap>
-          <div>코멘션을 받고 싶다면, 친구들에게 공유해보세요!</div>
-          <div>
-            <div ref={Ref} onClick={linkCopy}>
-              {process.env.NEXT_PUBLIC_BASEURL + `/form/${email}`}
-            </div>
-            <button
-              onClick={clickButton}
-              className={linkSave ? "link-save" : "link-not-save"}
-            >
-              코멘트 폼 링크 복사
-            </button>
-          </div>
+          <ShareForm />
           <div className="profile">
             <div>다른 사람들이 써준</div>
             <div>{profile?.name}의 코멘션</div>

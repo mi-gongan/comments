@@ -1,4 +1,3 @@
-import { async } from "@firebase/util";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useSetRecoilState } from "recoil";
@@ -8,6 +7,11 @@ import { emailAtom } from "../src/recoil/user";
 function login() {
   const setEmail = useSetRecoilState(emailAtom);
   const router = useRouter();
+  const [render, setRender] = useState("");
+
+  useEffect(() => {
+    setRender("ok");
+  }, []);
 
   useEffect(() => {
     window.Kakao.API &&
@@ -29,7 +33,7 @@ function login() {
           console.log(error);
         },
       });
-  }, [window]);
+  }, [render]);
 
   return <div>login 중입니다...</div>;
 }
