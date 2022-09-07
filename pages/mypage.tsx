@@ -68,7 +68,7 @@ function Mypage() {
           <ShareForm />
           <CommentionArea>
             <DescriptionBox name={profile.name} img={profile.img} />
-            <ReceiveForm comments={comments}></ReceiveForm>{" "}
+            <ReceiveForm comments={comments}></ReceiveForm>
             <div className="logout" onClick={handleLogout}>
               로그아웃
             </div>

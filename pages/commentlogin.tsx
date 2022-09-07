@@ -6,20 +6,24 @@ import { emailAtom } from "../src/recoil/user";
 import Image from "next/image";
 import { formAtom } from "../src/recoil/form";
 import {
+  assignUser,
   fetchUserData,
   getFinalIndex,
   setComments,
 } from "../src/firebase/firebase";
 
 function commentlogin() {
-  const email = useRecoilValue(emailAtom);
+  const [email, setEmail] = useRecoilState(emailAtom);
   const router = useRouter();
   const [render, setRender] = useState("");
   const [form, setForm] = useRecoilState(formAtom);
   const [upload, setUpload] = useState("");
+
   useEffect(() => {
-    if (!form._to) router.push("/");
     setRender("ok");
+    if (!form._to) {
+      router.push("/");
+    }
   }, []);
 
   useEffect(() => {
@@ -30,11 +34,12 @@ function commentlogin() {
           router.push("/");
           return;
         }
-        getFinalIndex(email).then((finalIndex) => {
+        console.log(res);
+        getFinalIndex(form._to).then((finalIndex) => {
           setForm({
             _from: email,
             _to: form._to,
-            id: finalIndex,
+            id: finalIndex + 1,
             name: res.name,
             text: form.text,
             view: true,
@@ -71,9 +76,26 @@ function commentlogin() {
   const kakaoLogin = () => {
     window.Kakao.Auth.login({
       success: function (response: any) {
-        window.Kakao.Auth.setAccessToken(response.access_token);
+        window.Kakao.Auth.setAccessToken(response.access_token).then(() => {
+          window.Kakao.API &&
+            window.Kakao.API.request({
+              url: "/v2/user/me",
+              success: function (response: any) {
+                setEmail(response.kakao_account.email);
+                console.log(response);
+                assignUser(
+                  response.kakao_account.email,
+                  response.properties.nickname,
+                  response.properties.profile_image
+                );
+                console.log(response);
+              },
+              fail: function (error: any) {
+                console.log(error);
+              },
+            });
+        });
         console.log(response);
-        router.push("/login");
       },
       fail: function (error: any) {
         console.log(error);

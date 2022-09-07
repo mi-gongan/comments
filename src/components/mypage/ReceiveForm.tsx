@@ -9,6 +9,7 @@ interface ReceiveFormPropsType {
 }
 
 function ReceiveForm({ comments }: ReceiveFormPropsType) {
+  console.log(comments);
   const onDragEnd = () => {};
   return (
     <Wrap>
@@ -22,18 +23,18 @@ function ReceiveForm({ comments }: ReceiveFormPropsType) {
               ref={provided.innerRef}
             >
               {comments.map((comment, idx) => (
-                <Draggable key={idx} draggableId={comment.text} index={idx}>
+                <Draggable
+                  key={comment.id}
+                  draggableId={comment.text}
+                  index={idx}
+                >
                   {(provided) => (
                     <li
                       ref={provided.innerRef}
                       {...provided.dragHandleProps}
                       {...provided.draggableProps}
                     >
-                      <Card
-                        key={idx}
-                        text={comment.text}
-                        name={comment.name}
-                      ></Card>
+                      <Card text={comment.text} name={comment.name}></Card>
                     </li>
                   )}
                 </Draggable>

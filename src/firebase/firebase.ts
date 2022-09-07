@@ -49,38 +49,45 @@ export const fetchUserData = async (email: string) => {
   return userSnap.data();
 };
 
+const commentCollection = collection(db, "comments");
+
 export const fetchReceiveCommentsData = async (email: string) => {
-  let response: commentType[] = [];
+  let array: commentType[] = [];
   console.log(email);
-  const commentCollection = collection(db, "comments");
-  const commentQuery = query(commentCollection, where("_to", "==", email));
+  const commentQuery = query(
+    commentCollection,
+    where("_to", "==", email),
+    orderBy("id")
+  );
   const querySnap = await getDocs(commentQuery);
   querySnap.forEach((doc: any) => {
-    response.push(doc.data());
+    array.push(doc.data());
   });
-  return response;
+  return array;
 };
 
 export const fetchWriteCommentsData = async (email: string) => {
-  let response: commentType[] = [];
+  let array: commentType[] = [];
   console.log(email);
-  const commentCollection = collection(db, "comments");
-  const commentQuery = query(commentCollection, where("_from", "==", email));
+  const commentQuery = query(
+    commentCollection,
+    where("_from", "==", email),
+    orderBy("id")
+  );
   const querySnap = await getDocs(commentQuery);
   querySnap.forEach((doc: any) => {
-    response.push(doc.data());
+    array.push(doc.data());
   });
-  return response;
+  return array;
 };
 
 export const setComments = async (form: commentType) => {
-  const commentCollection = collection(db, "comments");
   await addDoc(commentCollection, form);
 };
 
-export const getFinalIndex = async (email: number) => {
-  let response: commentType[] = [];
-  const commentCollection = collection(db, "comments");
+export const getFinalIndex = async (email: string) => {
+  let array: commentType[] = [];
+  console.log(email);
   const commentQuery = query(
     commentCollection,
     where("_to", "==", email),
@@ -89,9 +96,14 @@ export const getFinalIndex = async (email: number) => {
   );
   const querySnap = await getDocs(commentQuery);
   querySnap.forEach((doc: any) => {
-    response.push(doc.data());
+    array.push(doc.data());
   });
-  return response[0].id;
+  console.log(array);
+  if (array[0]) {
+    return array[0].id;
+  } else {
+    return 0;
+  }
 };
 
 export type commentType = {

@@ -20,8 +20,15 @@ function Commention() {
   }, []);
 
   useEffect(() => {
-    //@ts-ignore
-    user && fetchUserData(user).then((res: any) => setUserName(res.name));
+    try {
+      //@ts-ignore
+      user &&
+        fetchUserData(user).then((res: any) =>
+          res ? setUserName(res.name) : setUserName(user.split("@")[0])
+        );
+    } catch (err) {
+      console.log(err);
+    }
   }, [router]);
 
   const handleResizeHeight = useCallback(() => {
