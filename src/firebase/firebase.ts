@@ -13,6 +13,8 @@ import {
   getDocs,
   query,
   orderBy,
+  where,
+  addDoc,
 } from "firebase/firestore";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -49,8 +51,8 @@ export const fetchUserData = async (email: string) => {
 export const fetchCommentsData = async (email: string) => {
   let response: commentDataType[] = [];
   console.log(email);
-  const commentCollection = collection(db, "users", email, "comments");
-  const commentQuery = query(commentCollection, orderBy("name"));
+  const commentCollection = collection(db, "comments");
+  const commentQuery = query(commentCollection, where("_to", "==", email));
   const querySnap = await getDocs(commentQuery);
   querySnap.forEach((doc: any) => {
     response.push(doc.data());
@@ -58,7 +60,20 @@ export const fetchCommentsData = async (email: string) => {
   return response;
 };
 
+export const setComments = async (form: formType) => {
+  const commentCollection = collection(db, "comments");
+  await addDoc(commentCollection, form);
+};
+
 export type commentDataType = {
+  name: string;
+  text: string;
+  view: boolean;
+};
+
+export type formType = {
+  _from: string;
+  _to: string;
   name: string;
   text: string;
   view: boolean;

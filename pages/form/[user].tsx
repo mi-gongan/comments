@@ -4,11 +4,15 @@ import styled from "styled-components";
 import Commention from "../../src/components/common/Commention";
 
 function Form() {
-  const router = useRouter();
-  const { user } = router.query;
-  return <Commention></Commention>;
+  return (
+    <Wrap>
+      <Commention></Commention>
+    </Wrap>
+  );
 }
 
 export default Form;
 
-const Wrap = styled.div``;
+const Wrap = styled.div`
+  padding-top: 50px;
+`;

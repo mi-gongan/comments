@@ -97,6 +97,7 @@ function Mypage() {
               />
             )}
           </div>
+          <div>받은거</div>
           {comments.map((comment) => (
             <Card text={comment.text} name={comment.name}></Card>
           ))}
