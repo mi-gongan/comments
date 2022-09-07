@@ -1,0 +1,54 @@
+import React from "react";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { commentType } from "../../firebase/firebase";
+import styled from "styled-components";
+import Card from "../common/Card";
+
+interface ReceiveFormPropsType {
+  comments: commentType[];
+}
+
+function ReceiveForm({ comments }: ReceiveFormPropsType) {
+  const onDragEnd = () => {};
+  return (
+    <Wrap>
+      <DragDropContext onDragEnd={onDragEnd}>
+        <Droppable droppableId="cards">
+          {(provided) => (
+            <ul
+              className="cards"
+              {...provided.droppableProps}
+              ref={provided.innerRef}
+            >
+              {comments.map((comment, idx) => (
+                <Draggable key={idx} draggableId={comment.text} index={idx}>
+                  {(provided) => (
+                    <li
+                      ref={provided.innerRef}
+                      {...provided.dragHandleProps}
+                      {...provided.draggableProps}
+                    >
+                      <Card
+                        key={idx}
+                        text={comment.text}
+                        name={comment.name}
+                      ></Card>
+                    </li>
+                  )}
+                </Draggable>
+              ))}
+            </ul>
+          )}
+        </Droppable>
+      </DragDropContext>
+    </Wrap>
+  );
+}
+
+export default ReceiveForm;
+
+const Wrap = styled.div`
+  li {
+    list-style: none;
+  }
+`;

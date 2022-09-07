@@ -5,7 +5,11 @@ import styled from "styled-components";
 import { emailAtom } from "../src/recoil/user";
 import Image from "next/image";
 import { formAtom } from "../src/recoil/form";
-import { fetchUserData, setComments } from "../src/firebase/firebase";
+import {
+  fetchUserData,
+  getFinalIndex,
+  setComments,
+} from "../src/firebase/firebase";
 
 function commentlogin() {
   const email = useRecoilValue(emailAtom);
@@ -26,14 +30,17 @@ function commentlogin() {
           router.push("/");
           return;
         }
-        setForm({
-          _from: email,
-          _to: form._to,
-          name: res.name,
-          text: form.text,
-          view: true,
+        getFinalIndex(email).then((finalIndex) => {
+          setForm({
+            _from: email,
+            _to: form._to,
+            id: finalIndex,
+            name: res.name,
+            text: form.text,
+            view: true,
+          });
+          setUpload("ok");
         });
-        setUpload("ok");
       });
     }
   }, [email]);
@@ -44,6 +51,7 @@ function commentlogin() {
       setForm({
         _from: "",
         _to: "",
+        id: 0,
         name: "",
         text: "",
         view: true,

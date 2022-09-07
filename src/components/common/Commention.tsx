@@ -8,7 +8,7 @@ import { formAtom } from "../../recoil/form";
 
 function Commention() {
   const router = useRouter();
-  const { user } = router.query;
+  const { user }: any = router.query;
   const [text, setText] = useState("");
   const [render, setRender] = useState("");
   const [userName, setUserName] = useState<any>("");
@@ -31,7 +31,14 @@ function Commention() {
 
   const sendComment = () => {
     //@ts-ignore
-    setForm({ _from: "", _to: user, name: "", text: text, view: "true" });
+    setForm({
+      _from: "",
+      _to: user,
+      id: 0,
+      name: "",
+      text: text,
+      view: true,
+    });
     router.push("/commentlogin");
   };
 

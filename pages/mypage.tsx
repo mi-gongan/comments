@@ -3,10 +3,10 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
-import Card from "../src/components/common/Card";
+import ReceiveForm from "../src/components/mypage/ReceiveForm";
 import ShareForm from "../src/components/mypage/ShareForm";
 import {
-  commentDataType,
+  commentType,
   fetchReceiveCommentsData,
   fetchUserData,
 } from "../src/firebase/firebase";
@@ -17,7 +17,7 @@ function Mypage() {
   const [email, setEmail] = useRecoilState(emailAtom);
   const [profile, setProfile] = useState({ name: "", img: "" });
   const [render, setRender] = useState("");
-  const [comments, setComments] = useState<Array<commentDataType>>([]);
+  const [comments, setComments] = useState<Array<commentType>>([]);
 
   useEffect(() => {
     if (email) {
@@ -73,10 +73,7 @@ function Mypage() {
               />
             )}
           </div>
-          <div>받은거</div>
-          {comments.map((comment, idx) => (
-            <Card key={idx} text={comment.text} name={comment.name}></Card>
-          ))}
+          <ReceiveForm comments={comments}></ReceiveForm>
           <div className="logout" onClick={handleLogout}>
             Logout
           </div>
@@ -90,10 +87,4 @@ export default Mypage;
 
 const Wrap = styled.div`
   text-align: center;
-  .link-save {
-    background-color: var(--primary-color);
-  }
-  .link-not-save {
-    background-color: gray;
-  }
 `;

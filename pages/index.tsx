@@ -44,6 +44,12 @@ const Home: NextPage = () => {
     <>
       {render && (
         <Wrap>
+          <div className="title">
+            나를 소개하는 새로운 방법,
+            <br />
+            코멘션
+          </div>
+          <div className="text">지금 바로 받아보세요!</div>
           <div className="login" onClick={handleLogin}>
             <Image
               alt="kakao-login"
@@ -67,8 +73,20 @@ const Wrap = styled.div`
   background-color: var(--primary-color);
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  text-align: center;
+  color: white;
+  .title {
+    font-size: 24px;
+    line-height: 34.87px;
+    font-weight: 700;
+    margin-top: 28%;
+  }
+  .text {
+    margin-top: 60%;
+    font-size: 18px;
+    font-weight: 600;
+  }
   .login {
-    text-align: center;
+    margin-top: 15px;
   }
 `;

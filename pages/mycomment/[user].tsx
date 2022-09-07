@@ -5,7 +5,6 @@ import Carousel from "../../src/components/common/Carousel";
 
 function mycommention() {
   const router = useRouter();
-  const { user } = router.query;
   return (
     <>
       <GrobalStyle />

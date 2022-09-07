@@ -15,6 +15,7 @@ import {
   orderBy,
   where,
   addDoc,
+  limit,
 } from "firebase/firestore";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -49,7 +50,7 @@ export const fetchUserData = async (email: string) => {
 };
 
 export const fetchReceiveCommentsData = async (email: string) => {
-  let response: commentDataType[] = [];
+  let response: commentType[] = [];
   console.log(email);
   const commentCollection = collection(db, "comments");
   const commentQuery = query(commentCollection, where("_to", "==", email));
@@ -61,7 +62,7 @@ export const fetchReceiveCommentsData = async (email: string) => {
 };
 
 export const fetchWriteCommentsData = async (email: string) => {
-  let response: commentDataType[] = [];
+  let response: commentType[] = [];
   console.log(email);
   const commentCollection = collection(db, "comments");
   const commentQuery = query(commentCollection, where("_from", "==", email));
@@ -72,20 +73,31 @@ export const fetchWriteCommentsData = async (email: string) => {
   return response;
 };
 
-export const setComments = async (form: formType) => {
+export const setComments = async (form: commentType) => {
   const commentCollection = collection(db, "comments");
   await addDoc(commentCollection, form);
 };
 
-export type commentDataType = {
-  name: string;
-  text: string;
-  view: boolean;
+export const getFinalIndex = async (email: number) => {
+  let response: commentType[] = [];
+  const commentCollection = collection(db, "comments");
+  const commentQuery = query(
+    commentCollection,
+    where("_to", "==", email),
+    orderBy("id", "desc"),
+    limit(1)
+  );
+  const querySnap = await getDocs(commentQuery);
+  querySnap.forEach((doc: any) => {
+    response.push(doc.data());
+  });
+  return response[0].id;
 };
 
-export type formType = {
+export type commentType = {
   _from: string;
   _to: string;
+  id: number;
   name: string;
   text: string;
   view: boolean;
