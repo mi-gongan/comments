@@ -64,6 +64,7 @@ const Wrap = styled.div`
     border-radius: 7px;
     padding: 10px;
     display: flex;
+    white-space: nowrap;
   }
   .email-link {
     margin-left: 8px;

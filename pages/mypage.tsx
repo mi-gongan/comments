@@ -86,6 +86,7 @@ const Wrap = styled.div`
     text-align: center;
     text-decoration: underline;
     padding: 20px;
+    cursor: pointer;
   }
 `;
 

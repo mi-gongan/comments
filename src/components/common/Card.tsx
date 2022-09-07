@@ -22,8 +22,8 @@ function Card({ name, text }: CardPropsType) {
 export default Card;
 
 const Wrap = styled.div`
-  max-width: 360px;
-  height: 340px;
+  max-width: 420px;
+  height: 270px;
   margin: 0 auto;
   .card {
     height: 200px;

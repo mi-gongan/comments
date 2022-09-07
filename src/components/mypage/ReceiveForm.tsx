@@ -54,6 +54,11 @@ const Wrap = styled.div`
     font-weight: 600;
     font-size: 14px;
     color: #828282;
+    margin-bottom: 20px;
+  }
+  ul {
+    list-style: none;
+    padding: 0px 20px;
   }
   li {
     list-style: none;
