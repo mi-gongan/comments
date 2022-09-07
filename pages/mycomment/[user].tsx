@@ -31,5 +31,6 @@ const GrobalStyle = createGlobalStyle`
     max-width: 800px;
     min-width:280px;
     height: 370px;
+    background-color: white;
   }
 `;

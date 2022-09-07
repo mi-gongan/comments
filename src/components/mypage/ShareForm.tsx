@@ -28,7 +28,8 @@ function ShareForm() {
       </div>
       <div className="copy-box">
         <div ref={Ref} onClick={linkCopy} className="email-link">
-          {process.env.NEXT_PUBLIC_BASEURL + `/form/${email}`}
+          {process.env.NEXT_PUBLIC_BASEURL +
+            `/form/${encodeURIComponent(email)}`}
         </div>
         <button
           onClick={clickButton}

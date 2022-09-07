@@ -9,7 +9,6 @@ import {
   getFirestore,
   setDoc,
   collection,
-  Timestamp,
   getDocs,
   query,
   orderBy,
@@ -117,7 +116,6 @@ export const setCommentView = async (
 
 export const getFinalIndex = async (email: string) => {
   let array: commentType[] = [];
-  console.log(email);
   const commentQuery = query(
     commentCollection,
     where("_to", "==", email),

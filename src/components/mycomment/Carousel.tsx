@@ -21,7 +21,7 @@ function Carousel() {
   const [firstIndex, setFirstIndex] = useState<number>(0);
 
   const commentFetch = async () => {
-    fetchReceiveCommentsData(user).then((comments) => {
+    fetchReceiveCommentsData(decodeURIComponent(user)).then((comments) => {
       setComments(comments);
       if (comments.length > 0) {
         for (let i = 0; i < comments.length; i++) {

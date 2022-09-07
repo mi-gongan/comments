@@ -40,7 +40,7 @@ function Commention() {
     //@ts-ignore
     setForm({
       _from: "",
-      _to: user,
+      _to: decodeURIComponent(user),
       id: 0,
       name: "",
       text: text,
