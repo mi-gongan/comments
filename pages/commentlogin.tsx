@@ -99,7 +99,7 @@ function commentlogin() {
       {render && (
         <Wrap>
           <div className="comment-text">
-            <span>조수민</span>에게
+            <span>{form._to}</span>에게
             <br />
             코멘션을 보내기 위해
             <br />

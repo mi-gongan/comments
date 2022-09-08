@@ -114,12 +114,16 @@ const Wrap = styled.div`
     min-height: 200px;
     margin: 15px auto;
     width: 90%;
+    font-size: 18px;
     font-weight: 400;
     line-height: 22px;
     border: none;
     resize: none;
     padding: 25px;
     border-radius: 6px;
+    ::placeholder {
+      font-size: 15px;
+    }
   }
   .button-area {
     text-align: center;

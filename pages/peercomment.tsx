@@ -8,6 +8,7 @@ import ReceiveForm from "../src/components/mypage/ReceiveForm";
 import {
   commentType,
   fetchReceiveCommentsData,
+  fetchUserData,
 } from "../src/firebase/firebase";
 import { formAtom } from "../src/recoil/form";
 
@@ -15,7 +16,7 @@ function peercomment() {
   const router = useRouter();
   const form = useRecoilValue(formAtom);
   const [render, setRender] = useState("");
-  const peerName = form._to.split("@")[0];
+  const [peerName, setPeerName] = useState(form._to.split("@")[0]);
   const [comments, setComments] = useState<Array<commentType>>([]);
 
   useEffect(() => {
@@ -23,6 +24,11 @@ function peercomment() {
     if (!form._to) {
       router.push("/");
     }
+    fetchUserData(form._to).then((res: any) => {
+      if (res.name) {
+        setPeerName(res.name);
+      }
+    });
     fetchReceiveCommentsData(form._to).then((res) => {
       setComments(res);
     });
