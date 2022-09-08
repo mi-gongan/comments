@@ -17,6 +17,14 @@ function Commention() {
 
   useEffect(() => {
     setRender("ok");
+    setForm({
+      _from: "",
+      _to: "",
+      id: 0,
+      name: "",
+      text: "",
+      view: false,
+    });
   }, []);
 
   useEffect(() => {

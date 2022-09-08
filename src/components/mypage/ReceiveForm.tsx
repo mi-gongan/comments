@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { commentType, fetchReceiveCommentsData } from "../../firebase/firebase";
 import styled from "styled-components";
 import Card from "../common/Card";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { emailAtom } from "../../recoil/user";
 import { commentCountAtom } from "../../recoil/comment";
 

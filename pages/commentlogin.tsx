@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { emailAtom } from "../src/recoil/user";
 import Image from "next/image";
@@ -34,7 +34,6 @@ function commentlogin() {
           router.push("/");
           return;
         }
-        console.log(res);
         getFinalIndex(form._to).then((finalIndex) => {
           setForm({
             _from: email,
@@ -53,14 +52,6 @@ function commentlogin() {
   useEffect(() => {
     if (upload) {
       setComment(form);
-      setForm({
-        _from: "",
-        _to: "",
-        id: 0,
-        name: "",
-        text: "",
-        view: false,
-      });
       router.push("/peercomment");
     }
   }, [upload]);

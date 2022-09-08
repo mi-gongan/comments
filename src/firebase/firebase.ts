@@ -46,9 +46,13 @@ export const assignUser = async (email: string, name: string, img: string) => {
 
 export const notionLinkSave = async (email: string, link: string) => {
   const userDoc = doc(db, "users", email);
-  await setDoc(userDoc, {
-    link,
-  });
+  await setDoc(
+    userDoc,
+    {
+      link,
+    },
+    { merge: true }
+  );
 };
 
 export const fetchUserData = async (email: string) => {
