@@ -12,7 +12,6 @@ function ReceiveForm() {
   const email = useRecoilValue(emailAtom);
 
   useEffect(() => {
-    console.log(email);
     email &&
       fetchReceiveCommentsData(email).then((res: any) => setComments(res));
   }, [email]);

@@ -18,17 +18,15 @@ function login() {
     window.Kakao.API &&
       window.Kakao.API.request({
         url: "/v2/user/me",
-        success: function (response: any) {
-          setEmail(response.kakao_account.email);
-          console.log(response);
+        success: function (res: any) {
+          setEmail(res.kakao_account.email);
           assignUser(
-            response.kakao_account.email,
-            response.properties.nickname,
-            response.properties.profile_image
+            res.kakao_account.email,
+            res.properties.nickname,
+            res.properties.profile_image
           ).then(() => {
             router.push(`/mypage`);
           });
-          console.log(response);
         },
         fail: function (error: any) {
           console.log(error);

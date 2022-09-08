@@ -1,21 +1,49 @@
-import React, { useRef, useState } from "react";
+import Image from "next/image";
+import React, { useEffect, useRef, useState } from "react";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
+import { notionLinkSave } from "../../firebase/firebase";
 import { emailAtom } from "../../recoil/user";
 
 function NotionEmbed() {
   const Ref = useRef<any>();
   const email = useRecoilValue(emailAtom);
   const [linkSave, setLinkSave] = useState("");
+  const [notionLink, setNotionLink] = useState("");
+  const [checkNotion, setCheckNotion] = useState("");
+  const [saveCheck, setSaveCheck] = useState("");
+
+  useEffect(() => {
+    if (notionLink.includes("fourth-nail-d25.notion.site")) {
+      setCheckNotion("ok");
+    } else {
+      setCheckNotion("");
+    }
+  }, [notionLink]);
+
+  const handleNotionLink = (e: any) => {
+    e.preventDefault();
+    setNotionLink(e.target.value);
+  };
+
+  const saveNotionLink = (e: any) => {
+    e.preventDefault();
+    notionLinkSave(email, notionLink);
+    setSaveCheck("ok");
+    alert("저장되었습니다");
+  };
 
   const clickButton = (e: any) => {
-    console.log(e);
+    if (!saveCheck) {
+      alert("노션 링크를 저장해야 복사할 수 있습니다");
+      return;
+    }
+    e.preventDefault();
     Ref.current.click();
   };
 
   const linkCopy = (e: any) => {
     e.preventDefault();
-    console.log(e);
     window.navigator.clipboard.writeText(e.target.textContent);
     setLinkSave("ok");
   };
@@ -23,9 +51,29 @@ function NotionEmbed() {
     <Wrap>
       <div className="notion-text">노션 프로필 페이지가 있으신가요?</div>
       <div className="notion-box">
-        <div className="notion-link"></div>
-        <button>복사</button>
+        <input
+          className="notion-link"
+          onChange={handleNotionLink}
+          value={notionLink}
+        ></input>
+        {checkNotion ? (
+          <button onClick={saveNotionLink} className="link-save">
+            저장
+          </button>
+        ) : (
+          <button>저장</button>
+        )}
       </div>
+      {!checkNotion && (
+        <div className="alert-must-notion">
+          <Image
+            alt="notion-alert"
+            src="/assets/notion-alert.svg"
+            height="21px"
+            width="193px"
+          ></Image>
+        </div>
+      )}
       <div className="copy-text">
         코멘션을 노션프로필 페이지에
         <br />
@@ -67,7 +115,18 @@ const Wrap = styled.div`
     display: flex;
     .notion-link {
       flex: 1;
+      border: none;
     }
+    button {
+      width: 65px;
+      height: 40px;
+      margin-left: 10px;
+      border-radius: 5px;
+      border: none;
+    }
+  }
+  .alert-must-notion {
+    margin-top: 8px;
   }
   .copy-text {
     margin-top: 44px;
@@ -81,24 +140,17 @@ const Wrap = styled.div`
     width: 50%;
     height: 55px;
     line-height: 55px;
-    .link-save {
-      background-color: var(--primary-color);
-      border-radius: 7px;
-      color: white;
-    }
     .link-not-save {
       background: #d3d3d3;
       border-radius: 7px;
     }
   }
+  .link-save {
+    background-color: var(--primary-color);
+    border-radius: 7px;
+    color: white;
+  }
   .email-link {
     display: none;
-  }
-  button {
-    width: 65px;
-    height: 40px;
-    margin-left: 10px;
-    border-radius: 5px;
-    border: none;
   }
 `;

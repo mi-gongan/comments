@@ -18,8 +18,8 @@ function Logout() {
   const kakaoExit = () => {
     window.Kakao.API.request({
       url: "/v1/user/unlink",
-      success: function (response: any) {
-        console.log(response);
+      success: function (res: any) {
+        console.log(res);
         setEmail("");
         router.push("/");
       },

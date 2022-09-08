@@ -44,6 +44,13 @@ export const assignUser = async (email: string, name: string, img: string) => {
   });
 };
 
+export const notionLinkSave = async (email: string, link: string) => {
+  const userDoc = doc(db, "users", email);
+  await setDoc(userDoc, {
+    link,
+  });
+};
+
 export const fetchUserData = async (email: string) => {
   const userDoc = doc(db, "users", email);
   const userSnap = await getDoc(userDoc);
@@ -54,7 +61,6 @@ const commentCollection = collection(db, "comments");
 
 export const fetchReceiveCommentsData = async (email: string) => {
   let array: commentType[] = [];
-  console.log(email);
   const commentQuery = query(
     commentCollection,
     where("_to", "==", email),
@@ -69,7 +75,6 @@ export const fetchReceiveCommentsData = async (email: string) => {
 
 export const fetchWriteCommentsData = async (email: string) => {
   let array: commentType[] = [];
-  console.log(email);
   const commentQuery = query(
     commentCollection,
     where("_from", "==", email),
