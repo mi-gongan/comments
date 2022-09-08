@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import React from "react";
 import { useSetRecoilState } from "recoil";
+import styled from "styled-components";
 import { emailAtom } from "../../recoil/user";
 
 function Logout() {
@@ -31,10 +32,14 @@ function Logout() {
     });
   };
   return (
-    <div className="logout" onClick={handleLogout}>
+    <Wrap className="logout" onClick={handleLogout}>
       로그아웃
-    </div>
+    </Wrap>
   );
 }
 
 export default Logout;
+
+const Wrap = styled.div`
+  background-color: white;
+`;

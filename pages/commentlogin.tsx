@@ -21,40 +21,40 @@ function commentlogin() {
 
   useEffect(() => {
     setRender("ok");
-    if (!form._to) {
-      router.push("/");
-    }
+    // if (!form._to) {
+    //   router.push("/");
+    // }
   }, []);
 
-  useEffect(() => {
-    if (email) {
-      fetchUserData(email).then((res: any) => {
-        if (email === form._to) {
-          alert("본인에게는 코멘트를 작성할 수 없습니다");
-          router.push("/");
-          return;
-        }
-        getFinalIndex(form._to).then((finalIndex) => {
-          setForm({
-            _from: email,
-            _to: form._to,
-            id: finalIndex + 1,
-            name: res.name,
-            text: form.text,
-            view: false,
-          });
-          setUpload("ok");
-        });
-      });
-    }
-  }, [email]);
+  // useEffect(() => {
+  //   if (email) {
+  //     fetchUserData(email).then((res: any) => {
+  //       if (email === form._to) {
+  //         alert("본인에게는 코멘트를 작성할 수 없습니다");
+  //         router.push("/");
+  //         return;
+  //       }
+  //       getFinalIndex(form._to).then((finalIndex) => {
+  //         setForm({
+  //           _from: email,
+  //           _to: form._to,
+  //           id: finalIndex + 1,
+  //           name: res.name,
+  //           text: form.text,
+  //           view: false,
+  //         });
+  //         setUpload("ok");
+  //       });
+  //     });
+  //   }
+  // }, [email]);
 
-  useEffect(() => {
-    if (upload) {
-      setComment(form);
-      router.push("/peercomment");
-    }
-  }, [upload]);
+  // useEffect(() => {
+  //   if (upload) {
+  //     setComment(form);
+  //     router.push("/peercomment");
+  //   }
+  // }, [upload]);
 
   const handleLogin = () => {
     try {
@@ -98,6 +98,13 @@ function commentlogin() {
     <>
       {render && (
         <Wrap>
+          <div className="comment-text">
+            <span>조수민</span>에게
+            <br />
+            코멘션을 보내기 위해
+            <br />
+            카카오톡 로그인을 해주세요!
+          </div>
           <div className="login" onClick={handleLogin}>
             <Image
               alt="kakao-login"
@@ -121,8 +128,23 @@ const Wrap = styled.div`
   background-color: var(--primary-color);
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  color: white;
+  .comment-text {
+    text-align: center;
+    font-weight: 500;
+    line-height: 34.87px;
+    font-size: 22px;
+    margin-top: 75%;
+    span {
+      font-weight: 600;
+      text-emphasis-style: dot;
+      text-emphasis-position: over left;
+      -webkit-text-emphasis-style: dot;
+      -webkit-text-emphasis-position: over;
+    }
+  }
   .login {
+    margin-top: 30%;
     text-align: center;
   }
 `;
