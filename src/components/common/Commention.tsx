@@ -41,7 +41,7 @@ function Commention() {
 
   const handleResizeHeight = useCallback(() => {
     console.log(textRef.current.style.height, textRef.current.scrollHeight);
-    textRef.current.style.height = textRef.current.scrollHeight - 20 + "px";
+    textRef.current.style.height = textRef.current.scrollHeight - 50 + "px";
   }, []);
 
   const sendComment = () => {
@@ -61,22 +61,27 @@ function Commention() {
     <>
       {render && (
         <Wrap>
-          <Image
-            alt="commention-logo"
-            src="/assets/commention-logo.svg"
-            width="160"
-            height="40"
-          />
+          <div className="header">
+            <div className="user-name">
+              <span>{userName}</span>님
+            </div>
+            <Image
+              alt="commention-logo"
+              src="/assets/commention-logo.svg"
+              width="45"
+              height="30"
+            />
+          </div>
           <textarea
             onChange={(e) => setText(e.target.value)}
             value={text}
             autoFocus
             ref={textRef}
             onInput={handleResizeHeight}
-            placeholder={`안녕하세요 코멘션입니다.\n${userName}에게 코멘트를 작성해주세요`}
+            placeholder={`안녕하세요 코멘션입니다.\n이 노션에 남길 메세지를 작성해주세요\n업로드 버튼을 클릭하기 전에는\n노션주인이 볼 수 없습니다\n이 텍스트를 클릭하면 작성 가능합니다`}
           />
           <div className="button-area" onClick={sendComment}>
-            <button>Upload</button>
+            보내기
           </div>
         </Wrap>
       )}
@@ -92,26 +97,39 @@ const Wrap = styled.div`
   padding: 30px;
   background-color: white;
   border-radius: 27px;
-  filter: drop-shadow(0px 0px 14.6379px rgba(0, 0, 0, 0.13));
+  .header {
+    display: flex;
+    justify-content: space-between;
+    .user-name {
+      font-size: 22px;
+      font-weight: 600;
+      line-height: 34px;
+      span {
+        color: var(--primary-color);
+      }
+    }
+  }
   textarea {
-    margin-top: 15px;
-    width: 95%;
+    background-color: #f6f6f6;
+    min-height: 200px;
+    margin: 15px auto;
+    width: 90%;
     font-weight: 400;
-    line-height: 26px;
+    line-height: 22px;
     border: none;
     resize: none;
-    padding: 10px;
+    padding: 25px;
+    border-radius: 6px;
   }
   .button-area {
-    display: flex;
-    justify-content: right;
-  }
-  button {
-    width: 70px;
-    height: 30px;
+    text-align: center;
+    margin-top: 26px;
+    margin-left: 20%;
+    width: 60%;
+    height: 55px;
+    line-height: 55px;
     background-color: var(--primary-color);
     color: white;
-    border: none;
     border-radius: 7px;
   }
 `;

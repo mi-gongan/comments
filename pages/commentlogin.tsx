@@ -21,40 +21,40 @@ function commentlogin() {
 
   useEffect(() => {
     setRender("ok");
-    // if (!form._to) {
-    //   router.push("/");
-    // }
+    if (!form._to) {
+      router.push("/");
+    }
   }, []);
 
-  // useEffect(() => {
-  //   if (email) {
-  //     fetchUserData(email).then((res: any) => {
-  //       if (email === form._to) {
-  //         alert("본인에게는 코멘트를 작성할 수 없습니다");
-  //         router.push("/");
-  //         return;
-  //       }
-  //       getFinalIndex(form._to).then((finalIndex) => {
-  //         setForm({
-  //           _from: email,
-  //           _to: form._to,
-  //           id: finalIndex + 1,
-  //           name: res.name,
-  //           text: form.text,
-  //           view: false,
-  //         });
-  //         setUpload("ok");
-  //       });
-  //     });
-  //   }
-  // }, [email]);
+  useEffect(() => {
+    if (email) {
+      fetchUserData(email).then((res: any) => {
+        if (email === form._to) {
+          alert("본인에게는 코멘트를 작성할 수 없습니다");
+          router.push("/");
+          return;
+        }
+        getFinalIndex(form._to).then((finalIndex) => {
+          setForm({
+            _from: email,
+            _to: form._to,
+            id: finalIndex + 1,
+            name: res.name,
+            text: form.text,
+            view: false,
+          });
+          setUpload("ok");
+        });
+      });
+    }
+  }, [email]);
 
-  // useEffect(() => {
-  //   if (upload) {
-  //     setComment(form);
-  //     router.push("/peercomment");
-  //   }
-  // }, [upload]);
+  useEffect(() => {
+    if (upload) {
+      setComment(form);
+      router.push("/peercomment");
+    }
+  }, [upload]);
 
   const handleLogin = () => {
     try {
