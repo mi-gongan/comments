@@ -18,12 +18,19 @@ function commentlogin() {
   const [render, setRender] = useState("");
   const [form, setForm] = useRecoilState(formAtom);
   const [upload, setUpload] = useState("");
+  const [peerName, setPeerName] = useState(form._to.split("@")[0]);
 
   useEffect(() => {
-    setRender("ok");
     if (!form._to) {
       router.push("/");
+      return;
     }
+    setRender("ok");
+    fetchUserData(form._to).then((res: any) => {
+      if (res.name) {
+        setPeerName(res.name);
+      }
+    });
   }, []);
 
   useEffect(() => {
@@ -99,7 +106,7 @@ function commentlogin() {
       {render && (
         <Wrap>
           <div className="comment-text">
-            <span>{form._to}</span>에게
+            <span>{peerName}</span>에게
             <br />
             코멘션을 보내기 위해
             <br />

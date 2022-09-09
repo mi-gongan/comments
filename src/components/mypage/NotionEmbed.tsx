@@ -10,16 +10,8 @@ function NotionEmbed() {
   const email = useRecoilValue(emailAtom);
   const [linkSave, setLinkSave] = useState("");
   const [notionLink, setNotionLink] = useState("");
-  const [checkNotion, setCheckNotion] = useState("");
+  const [checkNotion, setCheckNotion] = useState("ok");
   const [saveCheck, setSaveCheck] = useState("");
-
-  useEffect(() => {
-    if (notionLink.includes("fourth-nail-d25.notion.site")) {
-      setCheckNotion("ok");
-    } else {
-      setCheckNotion("");
-    }
-  }, [notionLink]);
 
   const handleNotionLink = (e: any) => {
     e.preventDefault();
@@ -28,9 +20,14 @@ function NotionEmbed() {
 
   const saveNotionLink = (e: any) => {
     e.preventDefault();
-    notionLinkSave(email, notionLink);
-    setSaveCheck("ok");
-    alert("저장되었습니다");
+    if (notionLink.includes("notion")) {
+      setCheckNotion("ok");
+      notionLinkSave(email, notionLink);
+      setSaveCheck("ok");
+      alert("저장되었습니다");
+    } else {
+      setCheckNotion("");
+    }
   };
 
   const clickButton = (e: any) => {
@@ -56,13 +53,9 @@ function NotionEmbed() {
           onChange={handleNotionLink}
           value={notionLink}
         ></input>
-        {checkNotion ? (
-          <button onClick={saveNotionLink} className="link-save">
-            저장
-          </button>
-        ) : (
-          <button>저장</button>
-        )}
+        <button onClick={saveNotionLink} className="link-save">
+          저장
+        </button>
       </div>
       {!checkNotion && (
         <div className="alert-must-notion">

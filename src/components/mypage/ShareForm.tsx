@@ -81,6 +81,7 @@ const Wrap = styled.div`
     margin-left: 10px;
     border-radius: 5px;
     border: none;
+    color: black;
   }
   .link-save {
     background-color: var(--primary-color);
