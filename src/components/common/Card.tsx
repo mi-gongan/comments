@@ -66,16 +66,26 @@ function Card({ _from, name, text, id, view }: CardPropsType) {
                 <>
                   {show ? (
                     <div className="hide" onClick={hideComment}>
-                      숨기기
+                      <Image
+                        alt="search"
+                        src="/assets/hide.svg"
+                        width="30"
+                        height="30"
+                      />
                     </div>
                   ) : (
                     <div onClick={showComment} className="show">
-                      보이기
+                      <Image
+                        alt="search"
+                        src="/assets/hide.svg"
+                        width="30"
+                        height="30"
+                      />
                     </div>
                   )}
-                  <div className="delete" onClick={deleteComment}>
+                  {/* <div className="delete" onClick={deleteComment}>
                     지우기
-                  </div>
+                  </div> */}
                 </>
               )}
             </div>
@@ -130,22 +140,22 @@ const Wrap = styled.div`
     .hide {
       position: absolute;
       top: 20px;
-      right: 30px;
+      right: 20px;
     }
     .show {
       position: absolute;
       top: 20px;
-      right: 30px;
+      right: 20px;
     }
     .delete {
       position: absolute;
       top: 50px;
-      right: 30px;
+      right: 20px;
     }
     .mypage-logo {
       position: absolute;
       bottom: 20px;
-      left: 30px;
+      left: 20px;
     }
   }
   .card ::-webkit-scrollbar {
