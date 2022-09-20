@@ -13,6 +13,7 @@ function Carousel() {
   const [render, setRender] = useState("");
   const [comments, setComments] = useState<Array<commentType>>([]);
   const [firstComment, setFirstComment] = useState({
+    _from: "",
     name: "",
     text: "",
     id: 0,
@@ -49,6 +50,7 @@ function Carousel() {
         <Wrap>
           <StyleSlider {...settings}>
             <Card
+              _from={firstComment._from}
               name={firstComment.name}
               text={firstComment.text}
               id={firstComment.id}
@@ -58,6 +60,7 @@ function Carousel() {
               if (idx === firstIndex || comment.view !== true) return;
               return (
                 <Card
+                  _from={firstComment._from}
                   key={comment.id}
                   name={comment.name}
                   text={comment.text}

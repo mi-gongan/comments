@@ -3,36 +3,36 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
-import Card from "../src/components/common/Card";
-import ReceiveForm from "../src/components/mypage/ReceiveForm";
+import Card from "../../src/components/common/Card";
 import {
   commentType,
   fetchReceiveCommentsData,
-  fetchUserData,
-} from "../src/firebase/firebase";
-import { formAtom } from "../src/recoil/form";
+  fetchRecentCommentsData,
+} from "../../src/firebase/firebase";
+import { emailAtom } from "../../src/recoil/user";
 
 function peercomment() {
   const router = useRouter();
-  const form = useRecoilValue(formAtom);
+  const { user }: any = router.query;
+  const email = useRecoilValue(emailAtom);
   const [render, setRender] = useState("");
-  const [peerName, setPeerName] = useState(form._to.split("@")[0]);
+  const name = user && user.split("@")[0];
   const [comments, setComments] = useState<Array<commentType>>([]);
+  const [recentComment, setRecentComment] = useState<Array<commentType>>([]);
 
   useEffect(() => {
     setRender("ok");
-    if (!form._to) {
-      router.push("/");
-    }
-    fetchUserData(form._to).then((res: any) => {
-      if (res.name) {
-        setPeerName(res.name);
-      }
-    });
-    fetchReceiveCommentsData(form._to).then((res) => {
-      setComments(res);
-    });
   }, []);
+  useEffect(() => {
+    if (user) {
+      fetchReceiveCommentsData(user).then((res) => {
+        setComments(res);
+      });
+      fetchRecentCommentsData(email, user).then((res) => {
+        setRecentComment(res);
+      });
+    }
+  }, [user]);
 
   const goMypage = () => {
     router.push("/mypage");
@@ -41,30 +41,33 @@ function peercomment() {
     <>
       {render && (
         <Wrap>
-          <MyCommention>
-            <div className="send-image">
-              <Image
-                alt="send-image"
-                src="/assets/send-img.svg"
-                width="48"
-                height="48"
-              />
-            </div>
-            <div className="send-text">
-              <span>{peerName}</span>에게 발송을 완료했어요
-            </div>
-            <Card
-              name={form.name}
-              view={true}
-              text={form.text}
-              id={form.id}
-            ></Card>
-          </MyCommention>
+          {recentComment[0] && (
+            <MyCommention>
+              <div className="send-image">
+                <Image
+                  alt="send-image"
+                  src="/assets/send-img.svg"
+                  width="48"
+                  height="48"
+                />
+              </div>
+              <div className="send-text">
+                <span>{name}</span>에게 발송을 완료했어요
+              </div>
+              <Card
+                _from={recentComment[0]._from}
+                name={recentComment[0]?.name}
+                view={true}
+                text={recentComment[0]?.text}
+                id={recentComment[0]?.id}
+              ></Card>
+            </MyCommention>
+          )}
           <PeerCommention>
             <div className="peer-text">
               <div>다른 사람들이 써준</div>
               <div>
-                <span>{peerName}</span>의 코멘션
+                <span>{name}</span>의 코멘션
               </div>
             </div>
           </PeerCommention>
@@ -72,6 +75,7 @@ function peercomment() {
             if (!comment.view) return;
             return (
               <Card
+                _from={comment._from}
                 key={comment.id}
                 id={comment.id}
                 text={comment.text}
@@ -94,7 +98,7 @@ const Wrap = styled.div``;
 const MyCommention = styled.div`
   background-color: white;
   padding-top: 20px;
-  padding-bottom: 20px;
+  padding-bottom: 10px;
   .send-image {
     text-align: center;
     margin-top: 31px;
@@ -114,6 +118,7 @@ const MyCommention = styled.div`
 `;
 
 const PeerCommention = styled.div`
+  padding-top: 10px;
   .peer-text {
     margin-top: 18px;
     margin-left: 10%;

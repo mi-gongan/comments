@@ -91,6 +91,22 @@ export const fetchWriteCommentsData = async (email: string) => {
   return array;
 };
 
+export const fetchRecentCommentsData = async (from: string, to: string) => {
+  let array: commentType[] = [];
+  const commentQuery = query(
+    commentCollection,
+    where("_to", "==", to),
+    where("_from", "==", from),
+    orderBy("id"),
+    limit(1)
+  );
+  const querySnap = await getDocs(commentQuery);
+  querySnap.forEach((doc: any) => {
+    array.push(doc.data());
+  });
+  return array;
+};
+
 export const setComment = async (form: commentType) => {
   await addDoc(commentCollection, form);
 };

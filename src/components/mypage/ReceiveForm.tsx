@@ -25,6 +25,7 @@ function ReceiveForm() {
       {comments.map((comment) => (
         <Card
           key={comment.id}
+          _from={comment._from}
           id={comment.id}
           text={comment.text}
           name={comment.name}

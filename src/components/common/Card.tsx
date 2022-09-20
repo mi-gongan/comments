@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
@@ -7,13 +8,14 @@ import { commentCountAtom } from "../../recoil/comment";
 import { emailAtom } from "../../recoil/user";
 
 interface CardPropsType {
+  _from: string;
   name: string;
   text: string;
   id: number;
   view: boolean;
 }
 
-function Card({ name, text, id, view }: CardPropsType) {
+function Card({ _from, name, text, id, view }: CardPropsType) {
   const [commentCount, setCommentCount] = useRecoilState(commentCountAtom);
   const email = useRecoilValue(emailAtom);
   const [show, setShow] = useState(false);
@@ -47,6 +49,9 @@ function Card({ name, text, id, view }: CardPropsType) {
       setCommentCount(commentCount - 1);
     });
   };
+  const goPeerPage = () => {
+    router.push(`/peercomment/${encodeURIComponent(_from)}`);
+  };
   return (
     <>
       {!erase && (
@@ -56,22 +61,32 @@ function Card({ name, text, id, view }: CardPropsType) {
             <div className="introduce">
               <div className="name">{name}</div>
             </div>
-            {canEdit && (
-              <>
-                {show ? (
-                  <div className="hide" onClick={hideComment}>
-                    숨기기
+            <div>
+              {canEdit && (
+                <>
+                  {show ? (
+                    <div className="hide" onClick={hideComment}>
+                      숨기기
+                    </div>
+                  ) : (
+                    <div onClick={showComment} className="show">
+                      보이기
+                    </div>
+                  )}
+                  <div className="delete" onClick={deleteComment}>
+                    지우기
                   </div>
-                ) : (
-                  <div onClick={showComment} className="show">
-                    보이기
-                  </div>
-                )}
-                <div className="delete" onClick={deleteComment}>
-                  지우기
-                </div>
-              </>
-            )}
+                </>
+              )}
+            </div>
+            <div className="mypage-logo" onClick={goPeerPage}>
+              <Image
+                alt="search"
+                src="/assets/mypage.svg"
+                width="25"
+                height="25"
+              />
+            </div>
           </div>
         </Wrap>
       )}
@@ -82,7 +97,7 @@ function Card({ name, text, id, view }: CardPropsType) {
 export default Card;
 
 const Wrap = styled.div`
-  max-width: 420px;
+  max-width: 450px;
   height: 270px;
   margin: 0 auto;
   #true {
@@ -93,10 +108,11 @@ const Wrap = styled.div`
     box-shadow: 0px 0px 7.60246px rgba(0, 0, 0, 0.11);
     border-radius: 19.3559px;
     padding: 30px;
-    margin: 10px;
+    margin: 23px;
     position: relative;
+    background-color: white;
     .text {
-      height: 180px;
+      height: 170px;
       font-size: 14px;
       font-weight: 400;
       line-height: 24px;
@@ -125,6 +141,11 @@ const Wrap = styled.div`
       position: absolute;
       top: 50px;
       right: 30px;
+    }
+    .mypage-logo {
+      position: absolute;
+      bottom: 20px;
+      left: 30px;
     }
   }
   .card ::-webkit-scrollbar {

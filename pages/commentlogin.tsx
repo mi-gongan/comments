@@ -27,7 +27,7 @@ function commentlogin() {
     }
     setRender("ok");
     fetchUserData(form._to).then((res: any) => {
-      if (res.name) {
+      if (res) {
         setPeerName(res.name);
       }
     });
@@ -59,7 +59,15 @@ function commentlogin() {
   useEffect(() => {
     if (upload) {
       setComment(form);
-      router.push("/peercomment");
+      router.push(`/peercomment/${encodeURIComponent(form._to)}`);
+      setForm({
+        _from: "",
+        _to: "",
+        id: 0,
+        name: "",
+        text: "",
+        view: false,
+      });
     }
   }, [upload]);
 

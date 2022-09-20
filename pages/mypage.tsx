@@ -18,7 +18,6 @@ function Mypage() {
   const router = useRouter();
   const email = useRecoilValue(emailAtom);
   const [render, setRender] = useState("");
-  console.log(email);
   useEffect(() => {
     if (email) {
       setRender("ok");
