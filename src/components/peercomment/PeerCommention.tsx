@@ -47,6 +47,7 @@ export default PeerCommention;
 
 const Wrap = styled.div`
   padding-top: 10px;
+  padding-bottom: 100px;
   .peer-text {
     margin-top: 18px;
     margin-left: 10%;
