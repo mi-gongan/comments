@@ -154,8 +154,9 @@ const Wrap = styled.div`
     }
     .mypage-logo {
       position: absolute;
-      bottom: 20px;
-      left: 20px;
+      bottom: 24px;
+      left: 24px;
+      opacity: 0.7;
     }
   }
   .card ::-webkit-scrollbar {
