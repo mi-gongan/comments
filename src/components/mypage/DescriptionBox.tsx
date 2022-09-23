@@ -11,7 +11,6 @@ function DescriptionBox() {
 
   useEffect(() => {
     if (email) {
-      console.log(email);
       fetchUserData(email).then((res) =>
         //@ts-ignore
         setProfile({ name: res.name, img: res.img })
