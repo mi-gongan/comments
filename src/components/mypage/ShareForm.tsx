@@ -52,12 +52,14 @@ function ShareForm() {
         </button>
       </div>
       <div onClick={shareKakao} className="kakao_share">
-        <Image
-          alt="kakao-share"
-          src="/assets/kakao-share.svg"
-          width="277px"
-          height="59px"
-        ></Image>
+        <div className="kakao-share-text">
+          <Image
+            alt="kakao-share-text"
+            src="/assets/kakao-share-text.svg"
+            width="183px"
+            height="27px"
+          ></Image>
+        </div>
       </div>
     </Wrap>
   );
@@ -69,7 +71,7 @@ const Wrap = styled.div`
   padding-top: 10%;
   text-align: center;
   background-color: white;
-  padding-bottom: 55px;
+  padding-bottom: 30px;
   .text {
     font-weight: 600;
     font-size: 22px;
@@ -112,5 +114,14 @@ const Wrap = styled.div`
   }
   .link-not-save {
     background: #d3d3d3;
+  }
+  .kakao_share {
+    background-color: #ffd600;
+    border-radius: 7px;
+    height: 60px;
+    margin: 30px 10% 0px 10%;
+    .kakao-share-text {
+      padding-top: 16.5px;
+    }
   }
 `;
