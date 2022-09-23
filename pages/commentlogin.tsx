@@ -4,7 +4,7 @@ import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { emailAtom } from "../src/recoil/user";
 import Image from "next/image";
-import { formAtom } from "../src/recoil/form";
+import { formAtom, formState } from "../src/recoil/form";
 import {
   assignUser,
   fetchUserData,
@@ -17,6 +17,7 @@ function commentlogin() {
   const router = useRouter();
   const [render, setRender] = useState("");
   const [form, setForm] = useRecoilState(formAtom);
+  const [stateForm, setStateForm] = useRecoilState(formState);
   const [upload, setUpload] = useState("");
   const [peerName, setPeerName] = useState(form._to.split("@")[0]);
 
@@ -51,6 +52,7 @@ function commentlogin() {
             view: false,
           });
           setUpload("ok");
+          setStateForm(true);
         });
       });
     }
@@ -88,20 +90,17 @@ function commentlogin() {
               url: "/v2/user/me",
               success: function (response: any) {
                 setEmail(response.kakao_account.email);
-                console.log(response);
                 assignUser(
                   response.kakao_account.email,
                   response.properties.nickname,
                   response.properties.profile_image
                 );
-                console.log(response);
               },
               fail: function (error: any) {
                 console.log(error);
               },
             });
         });
-        console.log(response);
       },
       fail: function (error: any) {
         console.log(error);

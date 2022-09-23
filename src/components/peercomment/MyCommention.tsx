@@ -1,9 +1,10 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import { commentType, fetchRecentCommentsData } from "../../firebase/firebase";
+import { formState } from "../../recoil/form";
 import { emailAtom } from "../../recoil/user";
 import Card from "../common/Card";
 
@@ -13,38 +14,44 @@ function MyCommention() {
   const name = user && user.split("@")[0];
   const [recentComment, setRecentComment] = useState<Array<commentType>>([]);
   const email = useRecoilValue(emailAtom);
+  const [stateForm, setStateForm] = useRecoilState(formState);
 
   useEffect(() => {
     if (user) {
       fetchRecentCommentsData(email, user).then((res) => {
         setRecentComment(res);
+        setStateForm(false);
       });
     }
   }, [user]);
 
   return (
     <>
-      {recentComment[0] && (
-        <Wrap>
-          <div className="send-image">
-            <Image
-              alt="send-image"
-              src="/assets/send-img.svg"
-              width="48"
-              height="48"
-            />
-          </div>
-          <div className="send-text">
-            <span>{name}</span>에게 발송을 완료했어요
-          </div>
-          <Card
-            _from={recentComment[0]._from}
-            name={recentComment[0]?.name}
-            view={true}
-            text={recentComment[0]?.text}
-            id={recentComment[0]?.id}
-          ></Card>
-        </Wrap>
+      {stateForm && (
+        <>
+          {recentComment[0] && (
+            <Wrap>
+              <div className="send-image">
+                <Image
+                  alt="send-image"
+                  src="/assets/send-img.svg"
+                  width="48"
+                  height="48"
+                />
+              </div>
+              <div className="send-text">
+                <span>{name}</span>에게 발송을 완료했어요
+              </div>
+              <Card
+                _from={recentComment[0]._from}
+                name={recentComment[0]?.name}
+                view={true}
+                text={recentComment[0]?.text}
+                id={recentComment[0]?.id}
+              ></Card>
+            </Wrap>
+          )}
+        </>
       )}
     </>
   );

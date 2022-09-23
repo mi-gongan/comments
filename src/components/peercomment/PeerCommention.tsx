@@ -18,6 +18,10 @@ function PeerCommention() {
     }
   }, [user]);
 
+  const goCommetion = () => {
+    router.push(`/form/${user}`);
+  };
+
   return (
     <Wrap>
       <div className="peer-text">
@@ -25,20 +29,25 @@ function PeerCommention() {
         <div>
           <span>{name}</span>의 코멘션
         </div>
+        <div className="go-write-commetion" onClick={goCommetion}>
+          코멘션 쓰러가기
+        </div>
       </div>
-      {comments.map((comment) => {
-        if (!comment.view) return;
-        return (
-          <Card
-            _from={comment._from}
-            key={comment.id}
-            id={comment.id}
-            text={comment.text}
-            name={comment.name}
-            view={comment.view}
-          ></Card>
-        );
-      })}
+      <div className="commention">
+        {comments.map((comment) => {
+          if (!comment.view) return;
+          return (
+            <Card
+              _from={comment._from}
+              key={comment.id}
+              id={comment.id}
+              text={comment.text}
+              name={comment.name}
+              view={comment.view}
+            ></Card>
+          );
+        })}
+      </div>
     </Wrap>
   );
 }
@@ -62,6 +71,20 @@ const Wrap = styled.div`
       font-weight: 600;
       line-height: 33.5px;
       span {
+        color: var(--primary-color);
+      }
+    }
+    .go-write-commetion {
+      display: flex;
+      font-size: 15px;
+      font-weight: 500;
+      justify-content: flex-end;
+      margin-right: 8%;
+      position: relative;
+      bottom: 25px;
+      text-decoration: underline;
+      cursor: pointer;
+      :hover {
         color: var(--primary-color);
       }
     }
