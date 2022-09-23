@@ -1,7 +1,8 @@
 import Image from "next/image";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
+import { fetchUserData } from "../../firebase/firebase";
 import { emailAtom } from "../../recoil/user";
 import { sendShare } from "../../utils/kakao";
 
@@ -11,6 +12,16 @@ function ShareForm() {
   const Ref = useRef<any>();
   const linkFormat =
     process.env.NEXT_PUBLIC_BASEURL + `/form/${encodeURIComponent(email)}`;
+  const [profile, setProfile] = useState({ name: "", img: "" });
+
+  useEffect(() => {
+    if (email) {
+      fetchUserData(email).then((res) =>
+        //@ts-ignore
+        setProfile({ name: res.name, img: res.img })
+      );
+    }
+  }, [email]);
 
   const clickButton = (e: any) => {
     console.log(e);
@@ -26,7 +37,7 @@ function ShareForm() {
   const shareKakao = (e: any) => {
     e.preventDefault();
     sendShare(
-      "코맨션 적으러 가기",
+      `${profile.name}님의 코맨션 적으러 가기`,
       "일을 하는 곳에서의 나는 어떤 사람인가요? 나의 모습을 소개해주세요!",
       "https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F02e1788c-9f9b-4d21-a660-632f3bf3e018%2FGroup_199.png?table=block&id=21ca1beb-4e50-42b9-8da6-98fbddb9cf52&spaceId=8205b724-2467-4e7d-872e-5d97f05e8fdb&width=250&userId=01067604-9d7f-4ed1-b550-69611cb5ddba&cache=v2",
       linkFormat,
