@@ -80,7 +80,7 @@ export default Carousel;
 
 const Wrap = styled.div`
   width: 100%;
-  padding-top: 40px;
+  padding-top: 10px;
 `;
 
 const settings = {
