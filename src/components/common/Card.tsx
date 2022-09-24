@@ -21,11 +21,15 @@ function Card({ _from, name, text, id, view }: CardPropsType) {
   const [show, setShow] = useState(false);
   const [erase, setErase] = useState("");
   const [canEdit, setCanEdit] = useState("");
+  const [iconShow, setIconShow] = useState("");
   const router = useRouter();
 
   useEffect(() => {
     if (router.pathname.split("/")[1] === "mypage") {
       setCanEdit("show");
+    }
+    if (router.pathname.split("/")[1].includes("mycomment")) {
+      setIconShow("show");
     }
   }, [router]);
 
@@ -89,14 +93,16 @@ function Card({ _from, name, text, id, view }: CardPropsType) {
                 </>
               )}
             </div>
-            <div className="mypage-logo" onClick={goPeerPage}>
-              <Image
-                alt="search"
-                src="/assets/mypage.svg"
-                width="25"
-                height="25"
-              />
-            </div>
+            {!iconShow && (
+              <div className="mypage-logo" onClick={goPeerPage}>
+                <Image
+                  alt="search"
+                  src="/assets/mypage.svg"
+                  width="25"
+                  height="25"
+                />
+              </div>
+            )}
           </div>
         </Wrap>
       )}
