@@ -65,7 +65,7 @@ function Card({ _from, name, text, id, view }: CardPropsType) {
               {canEdit && (
                 <>
                   {show ? (
-                    <div className="hide" onClick={hideComment}>
+                    <div className="show" onClick={hideComment}>
                       <Image
                         alt="search"
                         src="/assets/hide.svg"
@@ -74,7 +74,7 @@ function Card({ _from, name, text, id, view }: CardPropsType) {
                       />
                     </div>
                   ) : (
-                    <div onClick={showComment} className="show">
+                    <div onClick={showComment} className="hide">
                       <Image
                         alt="search"
                         src="/assets/hide.svg"
@@ -112,6 +112,12 @@ const Wrap = styled.div`
   margin: 0 auto;
   #true {
     opacity: 0.2;
+    .hide {
+      opacity: 0.2;
+    }
+    .mypage-logo {
+      opacity: 0.2;
+    }
   }
   .card {
     height: 200px;
