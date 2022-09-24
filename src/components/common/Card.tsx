@@ -111,6 +111,7 @@ const Wrap = styled.div`
   height: 270px;
   margin: 0 auto;
   #true {
+    background-color: white;
     opacity: 0.2;
     .hide {
       opacity: 0.2;

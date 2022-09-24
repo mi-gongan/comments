@@ -9,10 +9,11 @@ import { sendShare } from "../../utils/kakao";
 function ShareForm() {
   const email = useRecoilValue(emailAtom);
   const [linkSave, setLinkSave] = useState("");
+  const [profile, setProfile] = useState({ name: "", img: "" });
+  const [relation, setRelation] = useState("");
   const Ref = useRef<any>();
   const linkFormat =
     process.env.NEXT_PUBLIC_BASEURL + `/form/${encodeURIComponent(email)}`;
-  const [profile, setProfile] = useState({ name: "", img: "" });
 
   useEffect(() => {
     if (email) {
@@ -36,19 +37,50 @@ function ShareForm() {
   const shareKakao = (e: any) => {
     e.preventDefault();
     sendShare(
-      `${profile.name}님의 코맨션 적으러 가기`,
-      "일을 하는 곳에서의 나는 어떤 사람인가요? 나의 모습을 소개해주세요!",
+      profile.name,
+      relation,
       "https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F02e1788c-9f9b-4d21-a660-632f3bf3e018%2FGroup_199.png?table=block&id=21ca1beb-4e50-42b9-8da6-98fbddb9cf52&spaceId=8205b724-2467-4e7d-872e-5d97f05e8fdb&width=250&userId=01067604-9d7f-4ed1-b550-69611cb5ddba&cache=v2",
       linkFormat,
       "코멘션 적으러 가기"
     );
   };
+
+  const assginRelation = (e: any) => {
+    setRelation(e.target.textContent);
+  };
+
   return (
     <Wrap>
       <div className="text">
         <span>코멘션</span>을 받고 싶다면,
         <br />
         친구들에게 공유해보세요!
+      </div>
+      <div className="relation-box">
+        <div
+          className={relation === "동료" ? "relation-check" : "relation-type"}
+          onClick={assginRelation}
+        >
+          동료
+        </div>
+        <div
+          className={relation === "가족" ? "relation-check" : "relation-type"}
+          onClick={assginRelation}
+        >
+          가족
+        </div>
+        <div
+          className={relation === "친구" ? "relation-check" : "relation-type"}
+          onClick={assginRelation}
+        >
+          친구
+        </div>
+        <div
+          className={relation === "기타" ? "relation-check" : "relation-type"}
+          onClick={assginRelation}
+        >
+          기타
+        </div>
       </div>
       <div className="copy-box">
         <div ref={Ref} onClick={linkCopy} className="email-link">
@@ -86,9 +118,38 @@ const Wrap = styled.div`
     font-weight: 600;
     font-size: 22px;
     line-height: 34px;
-    margin-bottom: 25px;
+    margin-bottom: 14px;
     span {
       color: var(--primary-color);
+    }
+  }
+  .relation-box {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 19px;
+    .relation-type {
+      width: 74px;
+      font-size: 14px;
+      font-weight: 500;
+      height: 29px;
+      text-align: center;
+      line-height: 29px;
+      border: 1px solid #d3d3d3;
+      border-radius: 5px;
+      margin-right: 5px;
+    }
+    .relation-check {
+      width: 74px;
+      font-size: 14px;
+      font-weight: 500;
+      height: 29px;
+      text-align: center;
+      line-height: 29px;
+      border: none;
+      border-radius: 5px;
+      margin-right: 5px;
+      color: white;
+      background-color: var(--primary-color);
     }
   }
   .copy-box {

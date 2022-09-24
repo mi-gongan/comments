@@ -45,43 +45,53 @@ function ReceiveForm() {
 
   return (
     <Wrap>
-      <div className="number">코멘션 {commentCount}개</div>
-      <DragDropContext onDragEnd={handleChange}>
-        <Droppable droppableId="comments">
-          {(provided) => (
-            <div
-              className="comments"
-              {...provided.droppableProps}
-              ref={provided.innerRef}
-            >
-              {comments.map((comment, index) => (
-                <Draggable
-                  key={comment.id}
-                  draggableId={String(comment.id)}
-                  index={index}
+      {comments.length === 0 ? (
+        <>
+          <div className="number">코멘션 {commentCount}개</div>
+          <DragDropContext onDragEnd={handleChange}>
+            <Droppable droppableId="comments">
+              {(provided) => (
+                <div
+                  className="comments"
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
                 >
-                  {(provided) => (
-                    <div
-                      ref={provided.innerRef}
-                      {...provided.dragHandleProps}
-                      {...provided.draggableProps}
+                  {comments.map((comment, index) => (
+                    <Draggable
+                      key={comment.id}
+                      draggableId={String(comment.id)}
+                      index={index}
                     >
-                      <Card
-                        _from={comment._from}
-                        id={comment.id}
-                        text={comment.text}
-                        name={comment.name}
-                        view={comment.view}
-                      ></Card>
-                    </div>
-                  )}
-                </Draggable>
-              ))}
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
-      </DragDropContext>
+                      {(provided) => (
+                        <div
+                          ref={provided.innerRef}
+                          {...provided.dragHandleProps}
+                          {...provided.draggableProps}
+                        >
+                          <Card
+                            _from={comment._from}
+                            id={comment.id}
+                            text={comment.text}
+                            name={comment.name}
+                            view={comment.view}
+                          ></Card>
+                        </div>
+                      )}
+                    </Draggable>
+                  ))}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          </DragDropContext>
+        </>
+      ) : (
+        <div className="not-commention">
+          아직 받은 코멘션이 없어요
+          <br />
+          링크를 친구에게 공유해볼까요?
+        </div>
+      )}
     </Wrap>
   );
 }
@@ -103,5 +113,12 @@ const Wrap = styled.div`
   }
   li {
     list-style: none;
+  }
+  .not-commention {
+    padding: 90px 0px 100px 0px;
+    font-weight: 500;
+    line-height: 26px;
+    text-align: center;
+    color: #868686;
   }
 `;
