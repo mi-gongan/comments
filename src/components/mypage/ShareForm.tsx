@@ -10,7 +10,7 @@ function ShareForm() {
   const email = useRecoilValue(emailAtom);
   const [linkSave, setLinkSave] = useState("");
   const [profile, setProfile] = useState({ name: "", img: "" });
-  const [relation, setRelation] = useState("");
+  const [relation, setRelation] = useState("동료");
   const Ref = useRef<any>();
   const linkFormat =
     process.env.NEXT_PUBLIC_BASEURL + `/form/${encodeURIComponent(email)}`;
