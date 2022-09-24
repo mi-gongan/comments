@@ -149,6 +149,7 @@ const Wrap = styled.div`
       border-radius: 5px;
       margin-right: 5px;
       color: white;
+      border: 1px solid var(--primary-color);
       background-color: var(--primary-color);
     }
   }
