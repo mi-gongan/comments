@@ -29,7 +29,6 @@ function Commention() {
 
   useEffect(() => {
     try {
-      //@ts-ignore
       user &&
         fetchUserData(user).then((res: any) =>
           res ? setUserName(res.name) : setUserName(user.split("@")[0])
@@ -45,7 +44,6 @@ function Commention() {
   }, []);
 
   const sendComment = () => {
-    //@ts-ignore
     setForm({
       _from: "",
       _to: decodeURIComponent(user),

@@ -16,8 +16,7 @@ function ShareForm() {
 
   useEffect(() => {
     if (email) {
-      fetchUserData(email).then((res) =>
-        //@ts-ignore
+      fetchUserData(email).then((res: any) =>
         setProfile({ name: res.name, img: res.img })
       );
     }
