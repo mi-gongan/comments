@@ -11,8 +11,7 @@ function DescriptionBox() {
 
   useEffect(() => {
     if (email) {
-      fetchUserData(email).then((res) =>
-        //@ts-ignore
+      fetchUserData(email).then((res: any) =>
         setProfile({ name: res.name, img: res.img })
       );
     }
@@ -27,7 +26,9 @@ function DescriptionBox() {
         </div>
       </div>
       <div className="img">
-        <Image alt="profile-img" src={profile.img} width="72" height="72" />
+        {profile.img && (
+          <Image alt="profile-img" src={profile.img} width="72" height="72" />
+        )}
       </div>
     </Wrap>
   );

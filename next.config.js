@@ -3,7 +3,7 @@ const nextConfig = {
   images: {
     domains: ["p.kakaocdn.net", "k.kakaocdn.net"],
   },
-  reactStrictMode: false,
+  reactStrictMode: true,
   swcMinify: true,
   compiler: {
     styledComponents: true,

@@ -79,20 +79,24 @@ export const fetchReceiveCommentsData = async (email: string) => {
 
 export const fetchUpdateCommentsData = async (
   email: string,
-  id1: number,
-  id2: number
+  comments1: commentType,
+  comments2: commentType
 ) => {
-  // let array: commentType[] = [];
-  // const commentQuery = query(
-  //   commentCollection,
-  //   where("_to", "==", email),
-  //   orderBy("id")
-  // );
-  // const querySnap = await getDocs(commentQuery);
-  // querySnap.forEach((doc: any) => {
-  //   array.push(doc.data());
-  // });
-  // return array.reverse();
+  const id1Ref = doc(db, "comments", email + "&" + String(comments1.id));
+  const id2Ref = doc(db, "comments", email + "&" + String(comments2.id));
+
+  updateDoc(id1Ref, {
+    _from: comments2._from,
+    name: comments2.name,
+    text: comments2.text,
+    view: comments2.view,
+  });
+  updateDoc(id2Ref, {
+    _from: comments1._from,
+    name: comments1.name,
+    text: comments1.text,
+    view: comments1.view,
+  });
 };
 
 export const fetchWriteCommentsData = async (email: string) => {
@@ -126,7 +130,7 @@ export const fetchRecentCommentsData = async (from: string, to: string) => {
 };
 
 export const setComment = async (form: commentType) => {
-  await addDoc(commentCollection, form);
+  await setDoc(doc(db, "comments", form._to + "&" + String(form.id)), form);
 };
 
 export const deleteRecieveComment = async (id: number, email: string) => {

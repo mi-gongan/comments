@@ -25,23 +25,21 @@ function ReceiveForm() {
     email &&
       fetchReceiveCommentsData(email).then((res: any) => setComments(res));
   }, [email]);
+
   useEffect(() => {
     comments && setCommentCount(comments.length);
   }, [comments]);
 
   const handleChange = (result: DropResult) => {
     if (!result.destination) return;
-    console.log(result);
     const items = [...comments];
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
-    items[result.source.index].id = result.destination.index;
-    items[result.destination.index].id = result.source.index;
-    // fetchUpdateCommentsData(
-    //   email,
-    //   items[result.source.index].id,
-    //   items[result.destination.index].id
-    // );
+    fetchUpdateCommentsData(
+      email,
+      comments[result.destination.index],
+      comments[result.source.index]
+    );
     setComments(items);
   };
 
