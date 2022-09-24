@@ -12,4 +12,5 @@ export const formAtom = atom({
 export const formState = atom({
   key: "formState",
   default: false,
+  effects_UNSTABLE: [persistAtom],
 });

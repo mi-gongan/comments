@@ -1,6 +1,6 @@
 import React from "react";
 import styled, { createGlobalStyle } from "styled-components";
-import Commention from "../../src/components/common/Commention";
+import Commention from "../../src/components/form/Commention";
 
 function Form() {
   return (

@@ -4,7 +4,7 @@ import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { emailAtom } from "../src/recoil/user";
 import Image from "next/image";
-import { formAtom, formState } from "../src/recoil/form";
+import { formAtom } from "../src/recoil/form";
 import {
   assignUser,
   fetchUserData,
@@ -17,7 +17,6 @@ function commentlogin() {
   const router = useRouter();
   const [render, setRender] = useState("");
   const [form, setForm] = useRecoilState(formAtom);
-  const [stateForm, setStateForm] = useRecoilState(formState);
   const [upload, setUpload] = useState("");
   const [peerName, setPeerName] = useState(form._to.split("@")[0]);
 
@@ -52,7 +51,6 @@ function commentlogin() {
             view: false,
           });
           setUpload("ok");
-          setStateForm(true);
         });
       });
     }
@@ -61,7 +59,9 @@ function commentlogin() {
   useEffect(() => {
     if (upload) {
       setComment(form);
-      router.push(`/peercomment/${encodeURIComponent(form._to)}`);
+      router.push(
+        `/peercomment/${encodeURIComponent(form._to)}?formState=true`
+      );
       setForm({
         _from: "",
         _to: "",

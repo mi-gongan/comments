@@ -6,13 +6,14 @@ import PeerCommention from "../../src/components/peercomment/PeerCommention";
 
 function peercomment() {
   const router = useRouter();
+  const { user, formState } = router.query;
 
   const goMypage = () => {
     router.push("/mypage");
   };
   return (
     <Wrap>
-      <MyCommention />
+      {formState && <MyCommention />}
       <PeerCommention />
       <Button onClick={goMypage}>나도 코멘션 받기</Button>
     </Wrap>
