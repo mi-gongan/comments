@@ -45,7 +45,7 @@ function ReceiveForm() {
 
   return (
     <Wrap>
-      {comments.length === 0 ? (
+      {comments.length !== 0 ? (
         <>
           <div className="number">코멘션 {commentCount}개</div>
           <DragDropContext onDragEnd={handleChange}>
