@@ -1,10 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { commentType, fetchReceiveCommentsData } from "../../firebase/firebase";
+import {
+  commentType,
+  fetchReceiveCommentsData,
+  fetchUpdateCommentsData,
+} from "../../firebase/firebase";
 import styled from "styled-components";
 import Card from "../common/Card";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { emailAtom } from "../../recoil/user";
 import { commentCountAtom } from "../../recoil/comment";
+import {
+  DragDropContext,
+  Draggable,
+  Droppable,
+  DropResult,
+} from "react-beautiful-dnd";
 
 function ReceiveForm() {
   const [comments, setComments] = useState<Array<commentType>>([]);
@@ -19,19 +29,61 @@ function ReceiveForm() {
     comments && setCommentCount(comments.length);
   }, [comments]);
 
+  const handleChange = (result: DropResult) => {
+    if (!result.destination) return;
+    console.log(result);
+    const items = [...comments];
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
+    items[result.source.index].id = result.destination.index;
+    items[result.destination.index].id = result.source.index;
+    // fetchUpdateCommentsData(
+    //   email,
+    //   items[result.source.index].id,
+    //   items[result.destination.index].id
+    // );
+    setComments(items);
+  };
+
   return (
     <Wrap>
       <div className="number">코멘션 {commentCount}개</div>
-      {comments.map((comment) => (
-        <Card
-          key={comment.id}
-          _from={comment._from}
-          id={comment.id}
-          text={comment.text}
-          name={comment.name}
-          view={comment.view}
-        ></Card>
-      ))}
+      <DragDropContext onDragEnd={handleChange}>
+        <Droppable droppableId="comments">
+          {(provided) => (
+            <div
+              className="comments"
+              {...provided.droppableProps}
+              ref={provided.innerRef}
+            >
+              {comments.map((comment, index) => (
+                <Draggable
+                  key={comment.id}
+                  draggableId={String(comment.id)}
+                  index={index}
+                >
+                  {(provided) => (
+                    <div
+                      ref={provided.innerRef}
+                      {...provided.dragHandleProps}
+                      {...provided.draggableProps}
+                    >
+                      <Card
+                        _from={comment._from}
+                        id={comment.id}
+                        text={comment.text}
+                        name={comment.name}
+                        view={comment.view}
+                      ></Card>
+                    </div>
+                  )}
+                </Draggable>
+              ))}
+              {provided.placeholder}
+            </div>
+          )}
+        </Droppable>
+      </DragDropContext>
     </Wrap>
   );
 }

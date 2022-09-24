@@ -8,9 +8,3 @@ export const formAtom = atom({
   default: { _from: "", _to: "", id: 0, name: "", text: "", view: false },
   effects_UNSTABLE: [persistAtom],
 });
-
-export const formState = atom({
-  key: "formState",
-  default: false,
-  effects_UNSTABLE: [persistAtom],
-});

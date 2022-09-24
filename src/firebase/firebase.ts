@@ -74,7 +74,25 @@ export const fetchReceiveCommentsData = async (email: string) => {
   querySnap.forEach((doc: any) => {
     array.push(doc.data());
   });
-  return array;
+  return array.reverse();
+};
+
+export const fetchUpdateCommentsData = async (
+  email: string,
+  id1: number,
+  id2: number
+) => {
+  // let array: commentType[] = [];
+  // const commentQuery = query(
+  //   commentCollection,
+  //   where("_to", "==", email),
+  //   orderBy("id")
+  // );
+  // const querySnap = await getDocs(commentQuery);
+  // querySnap.forEach((doc: any) => {
+  //   array.push(doc.data());
+  // });
+  // return array.reverse();
 };
 
 export const fetchWriteCommentsData = async (email: string) => {
@@ -88,7 +106,7 @@ export const fetchWriteCommentsData = async (email: string) => {
   querySnap.forEach((doc: any) => {
     array.push(doc.data());
   });
-  return array;
+  return array.reverse();
 };
 
 export const fetchRecentCommentsData = async (from: string, to: string) => {
@@ -97,7 +115,7 @@ export const fetchRecentCommentsData = async (from: string, to: string) => {
     commentCollection,
     where("_to", "==", to),
     where("_from", "==", from),
-    orderBy("id"),
+    orderBy("id", "desc"),
     limit(1)
   );
   const querySnap = await getDocs(commentQuery);
