@@ -3,6 +3,7 @@ import type { AppProps } from "next/app";
 import { useEffect } from "react";
 import { RecoilRoot } from "recoil";
 import Head from "next/head";
+import TagManager from "react-gtm-module";
 
 declare global {
   interface Window {
@@ -19,6 +20,11 @@ function MyApp({ Component, pageProps: { pageProps } }: AppProps) {
     } catch (e) {
       console.log(e);
     }
+    const tagManagerArgs = {
+      gtmId: "GTM-W83RM4V",
+    };
+
+    TagManager.initialize(tagManagerArgs);
   }, []);
 
   return (
