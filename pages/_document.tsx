@@ -26,7 +26,6 @@ class MyDocument extends Document {
             style="display:none;visibility:hidden"
           ></iframe>
         </noscript>
-        \
       </Html>
     );
   }
