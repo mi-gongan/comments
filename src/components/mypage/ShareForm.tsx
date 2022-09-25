@@ -1,27 +1,20 @@
 import Image from "next/image";
-import React, { useEffect, useRef, useState } from "react";
-import { useRecoilValue } from "recoil";
+import React, { useRef, useState } from "react";
 import styled from "styled-components";
-import { fetchUserData } from "../../firebase/firebase";
-import { emailAtom } from "../../recoil/user";
+import { profileType } from "../../../pages/mypage";
 import { sendShare } from "../../utils/kakao";
 
-function ShareForm() {
-  const email = useRecoilValue(emailAtom);
+interface ShareFormPropsType {
+  profile: profileType;
+  email: string;
+}
+
+function ShareForm({ profile, email }: ShareFormPropsType) {
   const [linkSave, setLinkSave] = useState("");
-  const [profile, setProfile] = useState({ name: "", img: "" });
   const [relation, setRelation] = useState("동료");
   const Ref = useRef<any>();
   const linkFormat =
     process.env.NEXT_PUBLIC_BASEURL + `/form/${encodeURIComponent(email)}`;
-
-  useEffect(() => {
-    if (email) {
-      fetchUserData(email).then((res: any) =>
-        setProfile({ name: res.name, img: res.img })
-      );
-    }
-  }, [email]);
 
   const clickButton = (e: any) => {
     console.log(e);
@@ -181,11 +174,13 @@ const Wrap = styled.div`
   .link-save {
     background-color: var(--primary-color);
     color: white;
-    font-size: 17px;
+    font-size: 15px;
     font-weight: 500;
   }
   .link-not-save {
     background: #d3d3d3;
+    font-size: 15px;
+    font-weight: 500;
   }
   .kakao_share {
     background-color: #ffd600;

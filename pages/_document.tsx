@@ -17,6 +17,12 @@ class MyDocument extends Document {
             defer
             src="https://developers.kakao.com/sdk/js/kakao.min.js"
           ></script>
+          <link
+            rel="stylesheet"
+            as="style"
+            crossOrigin="true"
+            href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.5/dist/web/static/pretendard.css"
+          />
           <meta
             name="viewport"
             content="initial-scale=1.0, width=device-width, maximum-scale=1.0, user-scalable=0 "

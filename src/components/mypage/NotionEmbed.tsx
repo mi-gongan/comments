@@ -1,17 +1,26 @@
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
-import { useRecoilValue } from "recoil";
 import styled from "styled-components";
+import { profileType } from "../../../pages/mypage";
 import { notionLinkSave } from "../../firebase/firebase";
-import { emailAtom } from "../../recoil/user";
 
-function NotionEmbed() {
+interface NotionEmbedPropsType {
+  profile: profileType;
+  email: string;
+}
+
+function NotionEmbed({ profile, email }: NotionEmbedPropsType) {
   const Ref = useRef<any>();
-  const email = useRecoilValue(emailAtom);
   const [linkSave, setLinkSave] = useState("");
   const [notionLink, setNotionLink] = useState("");
   const [checkNotion, setCheckNotion] = useState("ok");
   const [saveCheck, setSaveCheck] = useState("");
+
+  useEffect(() => {
+    if (profile.link) {
+      setSaveCheck("ok");
+    }
+  }, [profile.link]);
 
   const handleNotionLink = (e: any) => {
     e.preventDefault();

@@ -7,16 +7,23 @@ import Logout from "../src/components/mypage/Logout";
 import NotionEmbed from "../src/components/mypage/NotionEmbed";
 import ReceiveForm from "../src/components/mypage/ReceiveForm";
 import ShareForm from "../src/components/mypage/ShareForm";
+import { fetchUserData } from "../src/firebase/firebase";
 import { emailAtom } from "../src/recoil/user";
 
 export type profileType = {
   name: string;
   img: string;
+  link: string;
 };
 
 function Mypage() {
   const router = useRouter();
   const email = useRecoilValue(emailAtom);
+  const [profile, setProfile] = useState<profileType>({
+    name: "",
+    img: "",
+    link: "",
+  });
   const [render, setRender] = useState("");
 
   useEffect(() => {
@@ -27,15 +34,21 @@ function Mypage() {
     }
   }, []);
 
+  useEffect(() => {
+    if (email) {
+      fetchUserData(email).then((res: any) => setProfile(res));
+    }
+  }, [email]);
+
   return (
     <>
       {render && (
         <Wrap>
-          <ShareForm />
+          <ShareForm profile={profile} email={email} />
           <CommentionArea>
-            <DescriptionBox />
-            <ReceiveForm />
-            <NotionEmbed />
+            <DescriptionBox profile={profile} />
+            <ReceiveForm email={email} />
+            <NotionEmbed profile={profile} email={email} />
             <Logout />
           </CommentionArea>
         </Wrap>

@@ -6,8 +6,7 @@ import {
 } from "../../firebase/firebase";
 import styled from "styled-components";
 import Card from "../common/Card";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { emailAtom } from "../../recoil/user";
+import { useRecoilState } from "recoil";
 import { commentCountAtom } from "../../recoil/comment";
 import {
   DragDropContext,
@@ -16,10 +15,13 @@ import {
   DropResult,
 } from "react-beautiful-dnd";
 
-function ReceiveForm() {
+interface ReceiveFormPropsType {
+  email: string;
+}
+
+function ReceiveForm({ email }: ReceiveFormPropsType) {
   const [comments, setComments] = useState<Array<commentType>>([]);
   const [commentCount, setCommentCount] = useRecoilState(commentCountAtom);
-  const email = useRecoilValue(emailAtom);
 
   useEffect(() => {
     email &&

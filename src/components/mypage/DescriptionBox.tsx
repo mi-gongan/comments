@@ -1,22 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Image from "next/image";
 import styled from "styled-components";
-import { fetchUserData } from "../../firebase/firebase";
-import { useRecoilValue } from "recoil";
-import { emailAtom } from "../../recoil/user";
+import { profileType } from "../../../pages/mypage";
 
-function DescriptionBox() {
-  const [profile, setProfile] = useState({ name: "", img: "" });
-  const email = useRecoilValue(emailAtom);
+interface DescriptionBoxPropsType {
+  profile: profileType;
+}
 
-  useEffect(() => {
-    if (email) {
-      fetchUserData(email).then((res: any) =>
-        setProfile({ name: res.name, img: res.img })
-      );
-    }
-  }, [email]);
-
+function DescriptionBox({ profile }: DescriptionBoxPropsType) {
   return (
     <Wrap>
       <div className="description">
