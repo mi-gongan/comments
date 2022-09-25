@@ -1,3 +1,31 @@
+export const kakaoLogin = () => {
+  return new Promise((resolve, reject) => {
+    window.Kakao.API &&
+      window.Kakao.API.request({
+        url: "/v2/user/me",
+        success: function (res: any) {
+          resolve(res);
+        },
+        fail: function (error: any) {
+          reject(error);
+        },
+      });
+  });
+};
+
+export const setKaKaoToken = () => {
+  return new Promise((resolve, reject) => {
+    window.Kakao.Auth.login({
+      success: function (response: any) {
+        window.Kakao.Auth.setAccessToken(response.access_token);
+      },
+      fail: function (error: any) {
+        console.log(error);
+      },
+    });
+  });
+};
+
 export const sendShare = (
   name: string,
   relation: string,
@@ -41,19 +69,4 @@ const getMessage = (relation: string) => {
     default:
       return "나는 어떤 사람인가요? 당신이 알고있는 나의 모습을 소개해주세요!";
   }
-};
-
-export const kakaoLogin = () => {
-  return new Promise((resolve, reject) => {
-    window.Kakao.API &&
-      window.Kakao.API.request({
-        url: "/v2/user/me",
-        success: function (res: any) {
-          resolve(res);
-        },
-        fail: function (error: any) {
-          reject(error);
-        },
-      });
-  });
 };

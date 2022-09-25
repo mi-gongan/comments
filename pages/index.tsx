@@ -5,6 +5,7 @@ import { useRecoilValue } from "recoil";
 import { emailAtom } from "../src/recoil/user";
 import { useEffect } from "react";
 import LoginBox from "../src/components/index/LoginBox";
+import { setKaKaoToken } from "../src/services/kakao";
 
 const Home: NextPage = () => {
   const email = useRecoilValue(emailAtom);
@@ -14,9 +15,19 @@ const Home: NextPage = () => {
     email && router.push("/mypage");
   }, [email]);
 
+  const handleLogin = () => {
+    try {
+      setKaKaoToken().then(() => {
+        router.push("/login");
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <Wrap>
-      <LoginBox />
+      <LoginBox handleLogin={handleLogin} />
     </Wrap>
   );
 };

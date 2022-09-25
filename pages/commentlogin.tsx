@@ -10,7 +10,7 @@ import {
   setComment,
 } from "../src/firebase/firebase";
 import { emailAtom } from "../src/recoil/user";
-import { kakaoLogin } from "../src/services/kakao";
+import { kakaoLogin, setKaKaoToken } from "../src/services/kakao";
 import LoginBox from "../src/components/commentionlogin/LoginBox";
 
 function commentlogin() {
@@ -35,14 +35,8 @@ function commentlogin() {
   }, []);
 
   const handleLogin = () => {
-    window.Kakao.Auth.login({
-      success: function (response: any) {
-        window.Kakao.Auth.setAccessToken(response.access_token);
-        setLogin("ok");
-      },
-      fail: function (error: any) {
-        console.log(error);
-      },
+    setKaKaoToken().then(() => {
+      setLogin("ok");
     });
   };
 

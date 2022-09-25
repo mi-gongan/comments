@@ -3,28 +3,13 @@ import { useRouter } from "next/router";
 import React from "react";
 import styled from "styled-components";
 
-function LoginBox() {
+interface LoginBoxPropsType {
+  handleLogin: () => void;
+}
+
+function LoginBox({ handleLogin }: LoginBoxPropsType) {
   const router = useRouter();
 
-  const handleLogin = () => {
-    try {
-      kakaoLogin();
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const kakaoLogin = () => {
-    window.Kakao.Auth.login({
-      success: function (response: any) {
-        window.Kakao.Auth.setAccessToken(response.access_token);
-        router.push("/login");
-      },
-      fail: function (error: any) {
-        console.log(error);
-      },
-    });
-  };
   return (
     <Wrap>
       <div className="title">
