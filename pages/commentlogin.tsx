@@ -1,9 +1,7 @@
 import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import styled from "styled-components";
-import { emailAtom } from "../src/recoil/user";
-import Image from "next/image";
 import { formAtom } from "../src/recoil/form";
 import {
   assignUser,
@@ -11,27 +9,57 @@ import {
   getFinalIndex,
   setComment,
 } from "../src/firebase/firebase";
+import { emailAtom } from "../src/recoil/user";
+import { kakaoLogin } from "../src/services/kakao";
+import LoginBox from "../src/components/commentionlogin/LoginBox";
 
 function commentlogin() {
-  const [email, setEmail] = useRecoilState(emailAtom);
   const router = useRouter();
-  const [render, setRender] = useState("");
   const [form, setForm] = useRecoilState(formAtom);
+  const setRecoilEmail = useSetRecoilState(emailAtom);
+  const [email, setEmail] = useState("");
   const [upload, setUpload] = useState("");
-  const [peerName, setPeerName] = useState(form._to.split("@")[0]);
+  const [peerName, setPeerName] = useState<string>(form._to.split("@")[0]);
+  const [login, setLogin] = useState("");
 
   useEffect(() => {
     if (!form._to) {
       router.push("/");
       return;
     }
-    setRender("ok");
     fetchUserData(form._to).then((res: any) => {
       if (res) {
         setPeerName(res.name);
       }
     });
   }, []);
+
+  const handleLogin = () => {
+    window.Kakao.Auth.login({
+      success: function (response: any) {
+        window.Kakao.Auth.setAccessToken(response.access_token);
+        setLogin("ok");
+      },
+      fail: function (error: any) {
+        console.log(error);
+      },
+    });
+  };
+
+  useEffect(() => {
+    if (login === "ok") {
+      kakaoLogin().then((res: any) => {
+        assignUser(
+          res.kakao_account.email,
+          res.properties.nickname,
+          res.properties.profile_image
+        ).then(() => {
+          setEmail(res.kakao_account.email);
+          setRecoilEmail(res.kakao_account.email);
+        });
+      });
+    }
+  }, [login]);
 
   useEffect(() => {
     if (email) {
@@ -73,63 +101,10 @@ function commentlogin() {
     }
   }, [upload]);
 
-  const handleLogin = () => {
-    try {
-      kakaoLogin();
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const kakaoLogin = () => {
-    window.Kakao.Auth.login({
-      success: function (response: any) {
-        window.Kakao.Auth.setAccessToken(response.access_token).then(() => {
-          window.Kakao.API &&
-            window.Kakao.API.request({
-              url: "/v2/user/me",
-              success: function (response: any) {
-                setEmail(response.kakao_account.email);
-                assignUser(
-                  response.kakao_account.email,
-                  response.properties.nickname,
-                  response.properties.profile_image
-                );
-              },
-              fail: function (error: any) {
-                console.log(error);
-              },
-            });
-        });
-      },
-      fail: function (error: any) {
-        console.log(error);
-      },
-    });
-  };
-
   return (
-    <>
-      {render && (
-        <Wrap>
-          <div className="comment-text">
-            <span>{peerName}</span>에게
-            <br />
-            코멘션을 보내기 위해
-            <br />
-            카카오톡 로그인을 해주세요!
-          </div>
-          <div className="login" onClick={handleLogin}>
-            <Image
-              alt="kakao-login"
-              src="/assets/kakao-login.png"
-              width="300px"
-              height="45px"
-            ></Image>
-          </div>
-        </Wrap>
-      )}
-    </>
+    <Wrap>
+      <LoginBox peerName={peerName} handleLogin={handleLogin} />
+    </Wrap>
   );
 }
 
@@ -143,12 +118,12 @@ const Wrap = styled.div`
   display: flex;
   flex-direction: column;
   color: white;
+  justify-content: center;
   .comment-text {
     text-align: center;
     font-weight: 500;
     line-height: 34.87px;
     font-size: 22px;
-    margin-top: 75%;
     span {
       font-weight: 600;
       text-emphasis-style: dot;

@@ -2,7 +2,7 @@ import Image from "next/image";
 import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import { profileType } from "../../../pages/mypage";
-import { sendShare } from "../../utils/kakao";
+import { sendShare } from "../../services/kakao";
 
 interface ShareFormPropsType {
   profile: profileType;

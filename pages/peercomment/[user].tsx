@@ -1,12 +1,12 @@
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import MyCommention from "../../src/components/peercomment/MyCommention";
 import PeerCommention from "../../src/components/peercomment/PeerCommention";
 
 function peercomment() {
   const router = useRouter();
-  const { user, formState } = router.query;
+  const { formState } = router.query;
 
   const goMypage = () => {
     router.push("/mypage");

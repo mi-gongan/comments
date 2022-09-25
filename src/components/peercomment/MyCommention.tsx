@@ -16,8 +16,10 @@ function MyCommention() {
 
   useEffect(() => {
     if (user) {
+      console.log(email);
       fetchRecentCommentsData(email, user).then((res) => {
         setRecentComment(res);
+        // console.log(res);
       });
     }
   }, [user]);

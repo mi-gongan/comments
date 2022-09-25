@@ -42,3 +42,18 @@ const getMessage = (relation: string) => {
       return "나는 어떤 사람인가요? 당신이 알고있는 나의 모습을 소개해주세요!";
   }
 };
+
+export const kakaoLogin = () => {
+  return new Promise((resolve, reject) => {
+    window.Kakao.API &&
+      window.Kakao.API.request({
+        url: "/v2/user/me",
+        success: function (res: any) {
+          resolve(res);
+        },
+        fail: function (error: any) {
+          reject(error);
+        },
+      });
+  });
+};

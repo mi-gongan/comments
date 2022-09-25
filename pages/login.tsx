@@ -4,6 +4,7 @@ import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import { assignUser } from "../src/firebase/firebase";
 import { emailAtom } from "../src/recoil/user";
+import { kakaoLogin } from "../src/services/kakao";
 
 function login() {
   const setEmail = useSetRecoilState(emailAtom);
@@ -15,26 +16,19 @@ function login() {
   }, []);
 
   useEffect(() => {
-    window.Kakao.API &&
-      window.Kakao.API.request({
-        url: "/v2/user/me",
-        success: function (res: any) {
-          setEmail(res.kakao_account.email);
-          assignUser(
-            res.kakao_account.email,
-            res.properties.nickname,
-            res.properties.profile_image
-          ).then(() => {
-            router.push(`/mypage`);
-          });
-        },
-        fail: function (error: any) {
-          console.log(error);
-        },
+    kakaoLogin().then((res: any) => {
+      setEmail(res.kakao_account.email);
+      assignUser(
+        res.kakao_account.email,
+        res.properties.nickname,
+        res.properties.profile_image
+      ).then(() => {
+        router.push(`/mypage`);
       });
+    });
   }, [render]);
 
-  return <Wrap>login 중입니다...</Wrap>;
+  return <Wrap></Wrap>;
 }
 
 export default login;

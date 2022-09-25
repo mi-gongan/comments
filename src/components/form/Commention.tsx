@@ -39,7 +39,6 @@ function Commention() {
   }, [router]);
 
   const handleResizeHeight = useCallback(() => {
-    console.log(textRef.current.style.height, textRef.current.scrollHeight);
     textRef.current.style.height = textRef.current.scrollHeight - 50 + "px";
   }, []);
 
