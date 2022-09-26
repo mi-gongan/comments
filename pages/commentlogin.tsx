@@ -21,6 +21,7 @@ function commentlogin() {
   const [upload, setUpload] = useState("");
   const [peerName, setPeerName] = useState<string>(form._to.split("@")[0]);
   const [login, setLogin] = useState("");
+  const [render, setRender] = useState("");
 
   useEffect(() => {
     if (!form._to) {
@@ -32,10 +33,12 @@ function commentlogin() {
         setPeerName(res.name);
       }
     });
+    setRender("ok");
   }, []);
 
   const handleLogin = () => {
-    setKaKaoToken().then(() => {
+    setKaKaoToken().then((res) => {
+      console.log(res);
       setLogin("ok");
     });
   };
@@ -97,7 +100,7 @@ function commentlogin() {
 
   return (
     <Wrap>
-      <LoginBox peerName={peerName} handleLogin={handleLogin} />
+      {render && <LoginBox peerName={peerName} handleLogin={handleLogin} />}
     </Wrap>
   );
 }

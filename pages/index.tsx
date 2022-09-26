@@ -17,7 +17,8 @@ const Home: NextPage = () => {
 
   const handleLogin = () => {
     try {
-      setKaKaoToken().then(() => {
+      setKaKaoToken().then((res) => {
+        console.log(res);
         router.push("/login");
       });
     } catch (err) {

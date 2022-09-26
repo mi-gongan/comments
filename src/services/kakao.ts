@@ -18,9 +18,11 @@ export const setKaKaoToken = () => {
     window.Kakao.Auth.login({
       success: function (response: any) {
         window.Kakao.Auth.setAccessToken(response.access_token);
+        resolve(response);
       },
       fail: function (error: any) {
         console.log(error);
+        reject(error);
       },
     });
   });
