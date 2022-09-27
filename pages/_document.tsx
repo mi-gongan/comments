@@ -14,6 +14,19 @@ class MyDocument extends Document {
             }}
           />
           <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=G-Q6Z73J87JQ"
+          ></script>
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `window.dataLayer = window.dataLayer || [];
+                      function gtag(){dataLayer.push(arguments);}
+                      gtag('js', new Date());
+
+                      gtag('config', 'G-Q6Z73J87JQ');`,
+            }}
+          />
+          <script
             defer
             src="https://developers.kakao.com/sdk/js/kakao.min.js"
           ></script>
