@@ -111,6 +111,7 @@ const Wrap = styled.div`
     min-height: 200px;
     margin: 15px auto;
     width: 90%;
+    font-family: inherit;
     font-size: 18px;
     font-weight: 400;
     line-height: 22px;
