@@ -2,7 +2,6 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
-import DescriptionBox from "../src/components/mypage/DescriptionBox";
 import Logout from "../src/components/mypage/Logout";
 import NotionEmbed from "../src/components/mypage/NotionEmbed";
 import ReceiveForm from "../src/components/mypage/ReceiveForm";
@@ -46,8 +45,7 @@ function Mypage() {
         <Wrap>
           <ShareForm profile={profile} email={email} />
           <CommentionArea>
-            <DescriptionBox profile={profile} />
-            <ReceiveForm email={email} />
+            <ReceiveForm email={email} profile={profile} />
             <NotionEmbed profile={profile} email={email} />
             <Logout />
           </CommentionArea>
@@ -69,6 +67,7 @@ const Wrap = styled.div`
 `;
 
 const CommentionArea = styled.div`
-  margin-top: 30px;
-  background-color: #f3f3f3;
+  padding-top: 10px;
+  background-color: #f0f0f0;
+  padding-bottom: 20px;
 `;

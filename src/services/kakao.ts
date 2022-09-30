@@ -58,7 +58,7 @@ export const sendShare = (
   });
 };
 
-const getMessage = (relation: string) => {
+export const getMessage = (relation: string) => {
   switch (relation) {
     case "동료":
       return "일을 하는 곳에서의 나는 어떤 사람인가요? 나의 모습을 소개해주세요!";

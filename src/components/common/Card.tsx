@@ -21,15 +21,12 @@ function Card({ _from, name, text, id, view }: CardPropsType) {
   const [show, setShow] = useState(false);
   const [erase, setErase] = useState("");
   const [canEdit, setCanEdit] = useState("");
-  const [iconShow, setIconShow] = useState("");
+  const [iconShow, setIconShow] = useState({ mypage: "show", notion: "" });
   const router = useRouter();
 
   useEffect(() => {
     if (router.pathname.split("/")[1] === "mypage") {
       setCanEdit("show");
-    }
-    if (router.pathname.split("/")[1].includes("mycomment")) {
-      setIconShow("show");
     }
   }, [router]);
 
@@ -54,7 +51,18 @@ function Card({ _from, name, text, id, view }: CardPropsType) {
     });
   };
   const goPeerPage = () => {
-    router.push(`/peercomment/${encodeURIComponent(_from)}`);
+    window.open(
+      `${process.env.NEXT_PUBLIC_BASEURL}/peercomment/${encodeURIComponent(
+        _from
+      )}`
+    );
+  };
+  const goNotionPage = () => {
+    window.open(
+      `${process.env.NEXT_PUBLIC_BASEURL}/peercomment/${encodeURIComponent(
+        _from
+      )}`
+    );
   };
   return (
     <>
@@ -93,7 +101,7 @@ function Card({ _from, name, text, id, view }: CardPropsType) {
                 </>
               )}
             </div>
-            {!iconShow && (
+            <div className="logo">
               <div className="mypage-logo" onClick={goPeerPage}>
                 <Image
                   alt="search"
@@ -102,7 +110,17 @@ function Card({ _from, name, text, id, view }: CardPropsType) {
                   height="25"
                 />
               </div>
-            )}
+              {iconShow.notion && (
+                <div className="mypage-logo" onClick={goNotionPage}>
+                  <Image
+                    alt="search"
+                    src="/assets/notinon.svg"
+                    width="25"
+                    height="25"
+                  />
+                </div>
+              )}
+            </div>
           </div>
         </Wrap>
       )}
