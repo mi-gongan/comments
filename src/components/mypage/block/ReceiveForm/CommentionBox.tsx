@@ -4,9 +4,10 @@ import Card from "../../../common/Card";
 
 interface CommentionBoxPropsType {
   comments: Array<commentType>;
+  canEdit: boolean;
 }
 
-function CommentionBox({ comments }: CommentionBoxPropsType) {
+function CommentionBox({ comments, canEdit }: CommentionBoxPropsType) {
   return (
     <>
       {comments.map((comment) => (
@@ -17,6 +18,7 @@ function CommentionBox({ comments }: CommentionBoxPropsType) {
           text={comment.text}
           name={comment.name}
           view={comment.view}
+          canEdit={canEdit}
         ></Card>
       ))}
     </>

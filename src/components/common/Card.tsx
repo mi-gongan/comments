@@ -3,7 +3,11 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import styled from "styled-components";
-import { deleteRecieveComment, setCommentView } from "../../firebase/firebase";
+import {
+  deleteRecieveComment,
+  fetchUserData,
+  setCommentView,
+} from "../../firebase/firebase";
 import { commentCountAtom } from "../../recoil/comment";
 import { emailAtom } from "../../recoil/user";
 
@@ -13,26 +17,28 @@ interface CardPropsType {
   text: string;
   id: number;
   view: boolean;
+  canEdit?: boolean;
 }
 
-function Card({ _from, name, text, id, view }: CardPropsType) {
+function Card({ _from, name, text, id, view, canEdit }: CardPropsType) {
   const [commentCount, setCommentCount] = useRecoilState(commentCountAtom);
   const email = useRecoilValue(emailAtom);
   const [show, setShow] = useState(false);
   const [erase, setErase] = useState("");
-  const [canEdit, setCanEdit] = useState("");
   const [iconShow, setIconShow] = useState({ mypage: "show", notion: "" });
   const router = useRouter();
 
   useEffect(() => {
-    if (router.pathname.split("/")[1] === "mypage") {
-      setCanEdit("show");
-    }
-  }, [router]);
-
-  useEffect(() => {
     name && setShow(view);
   }, [name]);
+
+  useEffect(() => {
+    if (email) {
+      fetchUserData(email).then((res: any) => {
+        res.notion && setIconShow({ ...iconShow, notion: res.notion });
+      });
+    }
+  }, [email]);
 
   const showComment = () => {
     setCommentView(id, email, true);

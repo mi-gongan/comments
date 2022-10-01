@@ -5,6 +5,7 @@ import styled from "styled-components";
 import Logout from "../src/components/mypage/Logout";
 import NotionEmbed from "../src/components/mypage/NotionEmbed";
 import ReceiveForm from "../src/components/mypage/ReceiveForm";
+import ScrollFloatingButton from "../src/components/mypage/ScrollFloatingButton";
 import ShareForm from "../src/components/mypage/ShareForm";
 import { fetchUserData } from "../src/firebase/firebase";
 import { emailAtom } from "../src/recoil/user";
@@ -49,6 +50,7 @@ function Mypage() {
             <NotionEmbed profile={profile} email={email} />
             <Logout />
           </CommentionArea>
+          <ScrollFloatingButton />
         </Wrap>
       )}
     </>
@@ -58,16 +60,10 @@ function Mypage() {
 export default Mypage;
 
 const Wrap = styled.div`
-  .logout {
-    text-align: center;
-    text-decoration: underline;
-    padding: 20px;
-    cursor: pointer;
-  }
+  position: relative;
 `;
 
 const CommentionArea = styled.div`
   padding-top: 10px;
   background-color: #f0f0f0;
-  padding-bottom: 20px;
 `;

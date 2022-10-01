@@ -32,8 +32,8 @@ function Logout() {
     });
   };
   return (
-    <Wrap className="logout" onClick={handleLogout}>
-      로그아웃
+    <Wrap>
+      <div onClick={handleLogout}>로그아웃</div>
     </Wrap>
   );
 }
@@ -42,4 +42,10 @@ export default Logout;
 
 const Wrap = styled.div`
   background-color: white;
+  display: flex;
+  justify-content: center;
+  div {
+    padding: 10px;
+    margin: 10px;
+  }
 `;

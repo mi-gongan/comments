@@ -49,7 +49,7 @@ export const notionLinkSave = async (email: string, link: string) => {
   await setDoc(
     userDoc,
     {
-      link,
+      notion: link,
     },
     { merge: true }
   );

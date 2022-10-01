@@ -9,6 +9,8 @@ import NotCommention from "./block/ReceiveForm/NotCommention";
 import ReceiveTitle from "./block/ReceiveForm/ReceiveTitle";
 import CommentionBox from "./block/ReceiveForm/CommentionBox";
 import TabBar from "./block/ReceiveForm/TabBar";
+import Description from "./block/ReceiveForm/Description";
+import FloatingButton from "../common/FloatingButton";
 
 interface ReceiveFormPropsType {
   email: string;
@@ -18,6 +20,7 @@ interface ReceiveFormPropsType {
 function ReceiveForm({ email, profile }: ReceiveFormPropsType) {
   const [comments, setComments] = useState<Array<commentType>>([]);
   const [commentCount, setCommentCount] = useRecoilState(commentCountAtom);
+  const [canEdit, setCanEdit] = useState(false);
 
   useEffect(() => {
     email &&
@@ -27,6 +30,10 @@ function ReceiveForm({ email, profile }: ReceiveFormPropsType) {
   useEffect(() => {
     comments && setCommentCount(comments.length);
   }, [comments]);
+
+  const setEdit = () => {
+    setCanEdit(false);
+  };
 
   return (
     <Wrap>
@@ -38,11 +45,19 @@ function ReceiveForm({ email, profile }: ReceiveFormPropsType) {
         />
       </BackgrounImg>
       <ReceiveTitle name={profile.name} />
-      <TabBar img={profile.img} commentCount={commentCount} />
+      {canEdit && <Description />}
+      <TabBar
+        img={profile.img}
+        commentCount={commentCount}
+        setEdit={setCanEdit}
+      />
       {comments.length !== 0 ? (
-        <CommentionBox comments={comments} />
+        <CommentionBox comments={comments} canEdit={canEdit} />
       ) : (
         <NotCommention />
+      )}
+      {canEdit && (
+        <FloatingButton handleClick={setEdit}>편집 저장하기</FloatingButton>
       )}
     </Wrap>
   );
