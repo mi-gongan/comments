@@ -74,7 +74,7 @@ function Card({ _from, name, text, id, view, canEdit }: CardPropsType) {
     <>
       {!erase && (
         <Wrap>
-          <div className="card" id={show ? "" : "true"}>
+          <CardBox className="card" id={show ? "" : "true"}>
             <div className="text">{text}</div>
             <div className="introduce">
               <div className="name">{name}</div>
@@ -83,19 +83,19 @@ function Card({ _from, name, text, id, view, canEdit }: CardPropsType) {
               {canEdit && (
                 <>
                   {show ? (
-                    <div className="show" onClick={hideComment}>
+                    <div className="show-icon edit" onClick={hideComment}>
                       <Image
                         alt="search"
-                        src="/assets/hide.svg"
+                        src="/assets/hide-off.svg"
                         width="30"
                         height="30"
                       />
                     </div>
                   ) : (
-                    <div onClick={showComment} className="hide">
+                    <div onClick={showComment} className="hide-icon edit">
                       <Image
                         alt="search"
-                        src="/assets/hide.svg"
+                        src="/assets/hide-on.svg"
                         width="30"
                         height="30"
                       />
@@ -117,7 +117,7 @@ function Card({ _from, name, text, id, view, canEdit }: CardPropsType) {
                 />
               </div>
               {iconShow.notion && (
-                <div className="mypage-logo" onClick={goNotionPage}>
+                <div className="notion-logo" onClick={goNotionPage}>
                   <Image
                     alt="search"
                     src="/assets/notinon.svg"
@@ -127,7 +127,7 @@ function Card({ _from, name, text, id, view, canEdit }: CardPropsType) {
                 </div>
               )}
             </div>
-          </div>
+          </CardBox>
         </Wrap>
       )}
     </>
@@ -143,60 +143,56 @@ const Wrap = styled.div`
   #true {
     background-color: white;
     opacity: 0.2;
-    .hide {
-      opacity: 0.2;
+    .hide-icon {
+      opacity: 1;
     }
     .mypage-logo {
       opacity: 0.2;
     }
   }
-  .card {
-    height: 200px;
-    box-shadow: 0px 0px 7.60246px rgba(0, 0, 0, 0.11);
-    border-radius: 19.3559px;
-    padding: 30px;
-    margin: 23px;
-    position: relative;
-    background-color: white;
-    .text {
-      height: 170px;
-      font-size: 14px;
-      font-weight: 400;
-      line-height: 24px;
-      overflow: scroll;
-    }
-    .introduce {
-      margin-top: 10px;
-      display: flex;
-      justify-content: flex-end;
-      .name {
-        font-size: 18px;
-        font-weight: 600;
-      }
-    }
-    .hide {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-    }
-    .show {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-    }
-    .delete {
-      position: absolute;
-      top: 50px;
-      right: 20px;
-    }
-    .mypage-logo {
-      position: absolute;
-      bottom: 24px;
-      left: 24px;
-      opacity: 0.7;
+`;
+
+const CardBox = styled.div`
+  height: 200px;
+  box-shadow: 0px 0px 7.60246px rgba(0, 0, 0, 0.11);
+  border-radius: 19.3559px;
+  padding: 30px;
+  margin: 23px;
+  position: relative;
+  background-color: white;
+  .text {
+    height: 170px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 24px;
+    overflow: scroll;
+  }
+  .introduce {
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+    .name {
+      font-size: 18px;
+      font-weight: 600;
     }
   }
-  .card ::-webkit-scrollbar {
+  .edit {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+  .delete {
+    position: absolute;
+    top: 50px;
+    right: 20px;
+  }
+  .mypage-logo {
+    position: absolute;
+    bottom: 24px;
+    left: 24px;
+    opacity: 0.7;
+  }
+  ::-webkit-scrollbar {
     display: none;
   }
 `;
