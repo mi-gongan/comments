@@ -57,18 +57,34 @@ function Card({ _from, name, text, id, view, canEdit }: CardPropsType) {
     });
   };
   const goPeerPage = () => {
-    window.open(
-      `${process.env.NEXT_PUBLIC_BASEURL}/peercomment/${encodeURIComponent(
-        _from
-      )}`
-    );
+    if (router.pathname.includes("/mycomment")) {
+      window.open(
+        `${process.env.NEXT_PUBLIC_BASEURL}/peercomment/${encodeURIComponent(
+          _from
+        )}`
+      );
+    } else {
+      router.push(
+        `${process.env.NEXT_PUBLIC_BASEURL}/peercomment/${encodeURIComponent(
+          _from
+        )}`
+      );
+    }
   };
   const goNotionPage = () => {
-    window.open(
-      `${process.env.NEXT_PUBLIC_BASEURL}/peercomment/${encodeURIComponent(
-        _from
-      )}`
-    );
+    // if (router.pathname === "/mycomment") {
+    //   window.open(
+    //     `${process.env.NEXT_PUBLIC_BASEURL}/peercomment/${encodeURIComponent(
+    //       _from
+    //     )}`
+    //   );
+    // } else {
+    //   router.push(
+    //     `${process.env.NEXT_PUBLIC_BASEURL}/peercomment/${encodeURIComponent(
+    //       _from
+    //     )}`
+    //   );
+    // }
   };
   return (
     <>
@@ -116,7 +132,7 @@ function Card({ _from, name, text, id, view, canEdit }: CardPropsType) {
                   height="25"
                 />
               </div>
-              {iconShow.notion && (
+              {/* {iconShow.notion && (
                 <div className="notion-logo" onClick={goNotionPage}>
                   <Image
                     alt="search"
@@ -125,7 +141,7 @@ function Card({ _from, name, text, id, view, canEdit }: CardPropsType) {
                     height="25"
                   />
                 </div>
-              )}
+              )} */}
             </div>
           </CardBox>
         </Wrap>
