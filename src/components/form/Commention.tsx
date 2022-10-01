@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { fetchUserData } from "../../firebase/firebase";
 import { useSetRecoilState } from "recoil";
 import { formAtom } from "../../recoil/form";
+import { matchType } from "../../services/translate";
 
 function Commention() {
   const router = useRouter();

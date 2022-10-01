@@ -24,7 +24,8 @@ function ShareForm({ profile, email }: ShareFormPropsType) {
   const [fold, setFold] = useState("");
   const shareImg = `/assets/share_img/share_img_${matchType(relation)}.svg`;
   const linkFormat =
-    process.env.NEXT_PUBLIC_BASEURL + `/form/${encodeURIComponent(email)}`;
+    process.env.NEXT_PUBLIC_BASEURL +
+    `/form/${encodeURIComponent(email)}?relation=${relation}`;
 
   const linkCopy = (e: any) => {
     e.preventDefault();
@@ -45,6 +46,7 @@ function ShareForm({ profile, email }: ShareFormPropsType) {
   const assginRelation = (e: any) => {
     setRelation(e.target.textContent);
   };
+
   const handleFold = () => {
     if (fold) {
       setFold("");
@@ -66,9 +68,6 @@ function ShareForm({ profile, email }: ShareFormPropsType) {
         linkCopy={linkCopy}
         linkFormat={linkFormat}
         linkSave={linkSave}
-        name={profile.name}
-        relation={relation}
-        shareImg={shareImg}
       />
       <ShareKakao shareKakao={shareKakao} />
       <FoldingBar handleFold={handleFold} />

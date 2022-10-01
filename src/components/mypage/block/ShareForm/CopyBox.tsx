@@ -4,34 +4,18 @@ import styled from "styled-components";
 import { getMessage } from "../../../../services/kakao";
 
 interface CopyBoxPropsType {
-  name: string;
-  relation: string;
-  shareImg: string;
   linkFormat: string;
   linkSave: string;
   linkCopy: (e: any) => void;
 }
 
-function CopyBox({
-  name,
-  relation,
-  linkFormat,
-  shareImg,
-  linkCopy,
-  linkSave,
-}: CopyBoxPropsType) {
+function CopyBox({ linkFormat, linkCopy, linkSave }: CopyBoxPropsType) {
   const Ref = useRef<any>();
   const clickButton = (e: any) => {
     Ref.current.click();
   };
   return (
     <Wrap>
-      <Head>
-        <meta property="og:title" content={`${name}님의 코맨션 적으러 가기`} />
-        <meta property="og:description" content={getMessage(relation)} />
-        <meta property="og:url" content={linkFormat} />
-        <meta property="og:image" content={shareImg} />
-      </Head>
       <div ref={Ref} onClick={linkCopy} className="email-link">
         {linkFormat}
       </div>
