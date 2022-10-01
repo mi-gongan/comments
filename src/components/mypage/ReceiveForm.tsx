@@ -39,7 +39,7 @@ function ReceiveForm({ email, profile }: ReceiveFormPropsType) {
     <Wrap>
       <BackgrounImg>
         <Image
-          src="/assets/receive_form_background.svg"
+          src="/assets/receive_form_background.png"
           width={278}
           height={158}
         />

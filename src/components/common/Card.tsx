@@ -10,6 +10,9 @@ import {
 } from "../../firebase/firebase";
 import { commentCountAtom } from "../../recoil/comment";
 import { emailAtom } from "../../recoil/user";
+import CardIcon from "./block/CardIcon";
+import CardText from "./block/CardText";
+import Introduce from "./block/Introduce";
 
 interface CardPropsType {
   _from: string;
@@ -26,7 +29,6 @@ function Card({ _from, name, text, id, view, canEdit }: CardPropsType) {
   const [show, setShow] = useState(false);
   const [erase, setErase] = useState("");
   const [iconShow, setIconShow] = useState({ mypage: "show", notion: "" });
-  const router = useRouter();
 
   useEffect(() => {
     name && setShow(view);
@@ -40,113 +42,36 @@ function Card({ _from, name, text, id, view, canEdit }: CardPropsType) {
     }
   }, [email]);
 
-  const showComment = () => {
-    setCommentView(id, email, true);
-    setShow(true);
+  const handleHideComment = () => {
+    if (show === true) {
+      setCommentView(id, email, false);
+      setShow(false);
+    } else {
+      setCommentView(id, email, true);
+      setShow(true);
+    }
   };
-
-  const hideComment = () => {
-    setCommentView(id, email, false);
-    setShow(false);
-  };
-
   const deleteComment = () => {
     deleteRecieveComment(id, email).then(() => {
       setErase("ok");
       setCommentCount(commentCount - 1);
     });
   };
-  const goPeerPage = () => {
-    if (router.pathname.includes("/mycomment")) {
-      window.open(
-        `${process.env.NEXT_PUBLIC_BASEURL}/peercomment/${encodeURIComponent(
-          _from
-        )}`
-      );
-    } else {
-      router.push(
-        `${process.env.NEXT_PUBLIC_BASEURL}/peercomment/${encodeURIComponent(
-          _from
-        )}`
-      );
-    }
-  };
-  const goNotionPage = () => {
-    // if (router.pathname === "/mycomment") {
-    //   window.open(
-    //     `${process.env.NEXT_PUBLIC_BASEURL}/peercomment/${encodeURIComponent(
-    //       _from
-    //     )}`
-    //   );
-    // } else {
-    //   router.push(
-    //     `${process.env.NEXT_PUBLIC_BASEURL}/peercomment/${encodeURIComponent(
-    //       _from
-    //     )}`
-    //   );
-    // }
-  };
+
   return (
-    <>
+    <Wrap>
       {!erase && (
-        <Wrap>
-          <CardBox className="card" id={show ? "" : "true"}>
-            <div className="text">{text}</div>
-            <div className="introduce">
-              <div className="name">{name}</div>
-            </div>
-            <div>
-              {canEdit && (
-                <>
-                  {show ? (
-                    <div className="show-icon edit" onClick={hideComment}>
-                      <Image
-                        alt="search"
-                        src="/assets/hide-off.svg"
-                        width="30"
-                        height="30"
-                      />
-                    </div>
-                  ) : (
-                    <div onClick={showComment} className="hide-icon edit">
-                      <Image
-                        alt="search"
-                        src="/assets/hide-on.svg"
-                        width="30"
-                        height="30"
-                      />
-                    </div>
-                  )}
-                  {/* <div className="delete" onClick={deleteComment}>
-                    지우기
-                  </div> */}
-                </>
-              )}
-            </div>
-            <div className="logo">
-              <div className="mypage-logo" onClick={goPeerPage}>
-                <Image
-                  alt="search"
-                  src="/assets/mypage.svg"
-                  width="25"
-                  height="25"
-                />
-              </div>
-              {/* {iconShow.notion && (
-                <div className="notion-logo" onClick={goNotionPage}>
-                  <Image
-                    alt="search"
-                    src="/assets/notinon.svg"
-                    width="25"
-                    height="25"
-                  />
-                </div>
-              )} */}
-            </div>
-          </CardBox>
-        </Wrap>
+        <CardBox className="card" id={show ? "" : "true"}>
+          <CardText>{text}</CardText>
+          <Introduce from={_from} name={name} />
+          <CardIcon
+            canEdit={canEdit}
+            show={show}
+            handleHideComment={handleHideComment}
+          />
+        </CardBox>
       )}
-    </>
+    </Wrap>
   );
 }
 
@@ -159,12 +84,6 @@ const Wrap = styled.div`
   #true {
     background-color: white;
     opacity: 0.2;
-    .hide-icon {
-      opacity: 1;
-    }
-    .mypage-logo {
-      opacity: 0.2;
-    }
   }
 `;
 
@@ -176,38 +95,6 @@ const CardBox = styled.div`
   margin: 23px;
   position: relative;
   background-color: white;
-  .text {
-    height: 170px;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 24px;
-    overflow: scroll;
-  }
-  .introduce {
-    margin-top: 10px;
-    display: flex;
-    justify-content: flex-end;
-    .name {
-      font-size: 18px;
-      font-weight: 600;
-    }
-  }
-  .edit {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-  }
-  .delete {
-    position: absolute;
-    top: 50px;
-    right: 20px;
-  }
-  .mypage-logo {
-    position: absolute;
-    bottom: 24px;
-    left: 24px;
-    opacity: 0.7;
-  }
   ::-webkit-scrollbar {
     display: none;
   }
