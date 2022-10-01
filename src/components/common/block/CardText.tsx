@@ -17,4 +17,5 @@ const Wrap = styled.div`
   font-weight: 400;
   line-height: 24px;
   overflow: scroll;
+  background-color: white;
 `;

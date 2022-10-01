@@ -41,4 +41,5 @@ const Wrap = styled.div`
   position: absolute;
   top: 20px;
   right: 20px;
+  background-color: white;
 `;
