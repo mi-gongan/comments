@@ -95,7 +95,4 @@ const CardBox = styled.div`
   margin: 23px;
   position: relative;
   background-color: white;
-  ::-webkit-scrollbar {
-    display: none;
-  }
 `;

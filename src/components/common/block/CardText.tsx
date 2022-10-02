@@ -18,4 +18,7 @@ const Wrap = styled.div`
   line-height: 24px;
   overflow: scroll;
   background-color: white;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
