@@ -7,16 +7,29 @@ interface CopyBoxPropsType {
   linkFormat: string;
   linkSave: string;
   linkCopy: (e: any) => void;
+  handleToast: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function CopyBox({ linkFormat, linkCopy, linkSave }: CopyBoxPropsType) {
+function CopyBox({
+  linkFormat,
+  linkCopy,
+  linkSave,
+  handleToast,
+}: CopyBoxPropsType) {
   const Ref = useRef<any>();
   const clickButton = (e: any) => {
     Ref.current.click();
   };
+  const handleCopy = () => {
+    linkCopy;
+    handleToast(true);
+    setTimeout(() => {
+      handleToast(false);
+    }, 1500);
+  };
   return (
     <Wrap>
-      <div ref={Ref} onClick={linkCopy} className="email-link">
+      <div ref={Ref} onClick={handleCopy} className="email-link">
         {linkFormat}
       </div>
       <button
@@ -48,13 +61,10 @@ const Wrap = styled.div`
     color: #8c8c8c;
   }
   .link-save {
-    background-color: var(--primary-color);
-    color: white;
     font-size: 15px;
     font-weight: 500;
   }
   .link-not-save {
-    background: #d3d3d3;
     font-size: 15px;
     font-weight: 500;
   }
@@ -64,6 +74,7 @@ const Wrap = styled.div`
     margin-left: 10px;
     border-radius: 5px;
     border: none;
-    color: black;
+    color: white;
+    background-color: var(--primary-color);
   }
 `;

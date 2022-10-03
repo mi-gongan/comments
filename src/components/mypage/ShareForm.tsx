@@ -16,9 +16,10 @@ import ShareTextBox from "./block/ShareForm/ShareTextBox";
 interface ShareFormPropsType {
   profile: profileType;
   email: string;
+  handleToast: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function ShareForm({ profile, email }: ShareFormPropsType) {
+function ShareForm({ profile, email, handleToast }: ShareFormPropsType) {
   const [linkSave, setLinkSave] = useState("");
   const [relation, setRelation] = useState("동료");
   const [fold, setFold] = useState("");
@@ -68,6 +69,7 @@ function ShareForm({ profile, email }: ShareFormPropsType) {
         linkCopy={linkCopy}
         linkFormat={linkFormat}
         linkSave={linkSave}
+        handleToast={handleToast}
       />
       <ShareKakao shareKakao={shareKakao} />
       <FoldingBar handleFold={handleFold} />

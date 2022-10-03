@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
+import Toast from "../src/components/common/Toast";
 import Logout from "../src/components/mypage/Logout";
 import NotionEmbed from "../src/components/mypage/NotionEmbed";
 import ReceiveForm from "../src/components/mypage/ReceiveForm";
@@ -19,12 +20,13 @@ export type profileType = {
 function Mypage() {
   const router = useRouter();
   const email = useRecoilValue(emailAtom);
+  const [render, setRender] = useState("");
+  const [toastOpen, setToastOpen] = useState(false);
   const [profile, setProfile] = useState<profileType>({
     name: "",
     img: "",
     link: "",
   });
-  const [render, setRender] = useState("");
 
   useEffect(() => {
     if (email) {
@@ -44,7 +46,12 @@ function Mypage() {
     <>
       {render && (
         <Wrap>
-          <ShareForm profile={profile} email={email} />
+          {toastOpen && <Toast>Copy complete!</Toast>}
+          <ShareForm
+            profile={profile}
+            email={email}
+            handleToast={setToastOpen}
+          />
           <CommentionArea>
             <ReceiveForm email={email} profile={profile} />
             <NotionEmbed profile={profile} email={email} />
