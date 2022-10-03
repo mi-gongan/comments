@@ -25,7 +25,7 @@ function ShareForm({ profile, email }: ShareFormPropsType) {
   const shareImg = `/assets/share_img/share_img_${matchType(relation)}.svg`;
   const linkFormat =
     process.env.NEXT_PUBLIC_BASEURL +
-    `/form/${encodeURIComponent(email)}?relation=${relation}`;
+    `/form/${encodeURIComponent(email)}?relation=${matchType(relation)}`;
 
   const linkCopy = (e: any) => {
     e.preventDefault();
