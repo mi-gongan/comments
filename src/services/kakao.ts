@@ -1,3 +1,5 @@
+import { getImg } from "./translate";
+
 export const kakaoLogin = () => {
   return new Promise((resolve, reject) => {
     window.Kakao.API &&
@@ -31,7 +33,6 @@ export const setKaKaoToken = () => {
 export const sendShare = (
   name: string,
   relation: string,
-  imageUrl: string,
   link: string,
   buttonTitle: string
 ) => {
@@ -40,7 +41,7 @@ export const sendShare = (
     content: {
       title: `${name}님의 코맨션 적으러 가기`,
       description: getMessage(relation),
-      imageUrl,
+      imageUrl: getImg(relation),
       link: {
         mobileWebUrl: link,
         webUrl: link,

@@ -1,5 +1,3 @@
-import Head from "next/head";
-import Image from "next/image";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { profileType } from "../../../pages/mypage";
@@ -23,7 +21,6 @@ function ShareForm({ profile, email, handleToast }: ShareFormPropsType) {
   const [linkSave, setLinkSave] = useState("");
   const [relation, setRelation] = useState("동료");
   const [fold, setFold] = useState("");
-  const shareImg = `/assets/share_img/share_img_${matchType(relation)}.svg`;
   const linkFormat =
     process.env.NEXT_PUBLIC_BASEURL +
     `/form/${encodeURIComponent(email)}?relation=${matchType(relation)}`;
@@ -32,16 +29,14 @@ function ShareForm({ profile, email, handleToast }: ShareFormPropsType) {
     e.preventDefault();
     window.navigator.clipboard.writeText(e.target.textContent);
     setLinkSave("ok");
+    handleToast(true);
+    setTimeout(() => {
+      handleToast(false);
+    }, 1500);
   };
   const shareKakao = (e: any) => {
     e.preventDefault();
-    sendShare(
-      profile.name,
-      relation,
-      shareImg,
-      linkFormat,
-      "코멘션 적으러 가기"
-    );
+    sendShare(profile.name, relation, linkFormat, "코멘션 적으러 가기");
   };
 
   const assginRelation = (e: any) => {
@@ -64,12 +59,11 @@ function ShareForm({ profile, email, handleToast }: ShareFormPropsType) {
     <Wrap>
       <ShareTextBox />
       <CheckBox relation={relation} assginRelation={assginRelation} />
-      <ShareImg type={relation} />
+      <ShareImg relation={relation} />
       <CopyBox
         linkCopy={linkCopy}
         linkFormat={linkFormat}
         linkSave={linkSave}
-        handleToast={handleToast}
       />
       <ShareKakao shareKakao={shareKakao} />
       <FoldingBar handleFold={handleFold} />

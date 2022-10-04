@@ -1,35 +1,22 @@
 import Head from "next/head";
 import React, { useRef } from "react";
 import styled from "styled-components";
-import { getMessage } from "../../../../services/kakao";
 
 interface CopyBoxPropsType {
   linkFormat: string;
   linkSave: string;
   linkCopy: (e: any) => void;
-  handleToast: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function CopyBox({
-  linkFormat,
-  linkCopy,
-  linkSave,
-  handleToast,
-}: CopyBoxPropsType) {
+function CopyBox({ linkFormat, linkCopy, linkSave }: CopyBoxPropsType) {
   const Ref = useRef<any>();
   const clickButton = (e: any) => {
     Ref.current.click();
   };
-  const handleCopy = () => {
-    linkCopy;
-    handleToast(true);
-    setTimeout(() => {
-      handleToast(false);
-    }, 1500);
-  };
+
   return (
     <Wrap>
-      <div ref={Ref} onClick={handleCopy} className="email-link">
+      <div ref={Ref} onClick={linkCopy} className="email-link">
         {linkFormat}
       </div>
       <button
