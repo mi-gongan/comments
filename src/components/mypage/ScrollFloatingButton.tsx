@@ -1,6 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import styled, { createGlobalStyle } from "styled-components";
+import floatingDown from "../../../public/assets/floating_down.svg";
 
 function ScrollFloatingButton() {
   const goScrollDown = () => {
@@ -8,7 +9,7 @@ function ScrollFloatingButton() {
   };
   return (
     <Wrap onClick={goScrollDown}>
-      <Image src="/assets/floating_down.svg" width={50} height={50} />
+      <Image src={floatingDown} />
     </Wrap>
   );
 }
@@ -20,11 +21,11 @@ const Wrap = styled.div`
   bottom: 20px;
   z-index: 99;
   @media screen and (max-width: 450px) {
-    right: 10px;
+    right: 20px;
     margin-left: 0px;
   }
   @media screen and (min-width: 450px) {
     left: 50%;
-    margin-left: 165px;
+    margin-left: 155px;
   }
 `;
