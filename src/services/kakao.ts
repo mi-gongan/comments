@@ -41,8 +41,7 @@ export const sendShare = (
     content: {
       title: `${name}님의 코맨션 적으러 가기`,
       description: getMessage(relation),
-      imageUrl:
-        "https://firebasestorage.googleapis.com/v0/b/comments-efbc8.appspot.com/o/share_img_peer.svg?alt=media&token=793b2570-067d-4d5f-9963-6d724ea6eefc",
+      imageUrl: "/asset/peer.png",
       link: {
         mobileWebUrl: link,
         webUrl: link,
