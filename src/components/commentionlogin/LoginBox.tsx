@@ -18,7 +18,7 @@ function LoginBox({ peerName, handleLogin }: LoginBoxPropsType) {
         저장이 완료되었습니다!
       </div>
       <div className="comment-text">
-        로그인으로 <span>조수민</span>님께
+        로그인으로 <span>{peerName}</span>님께
         <br />
         소개글을 보내주세요!
       </div>
