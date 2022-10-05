@@ -21,7 +21,10 @@ function Form() {
         <meta property="og:title" content={`코맨션 적으러 가기`} />
         <meta property="og:description" content={getMessage(relation)} />
         <meta property="og:url" content={linkFormat} />
-        <meta property="og:image" content={getImg(relation)} />
+        <meta
+          property="og:image"
+          content={process.env.NEXT_PUBLIC_BASEURL + getImg(relation)}
+        />
       </Head>
       <GrobalStyled />
       <Commention></Commention>
