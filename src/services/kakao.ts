@@ -33,7 +33,7 @@ export const setKaKaoToken = () => {
 export const sendShare = (
   name: string,
   relation: string,
-  link: string,
+  url: string,
   buttonTitle: string
 ) => {
   window.Kakao.Share.sendDefault({
@@ -43,16 +43,16 @@ export const sendShare = (
       description: getMessage(relation),
       imageUrl: "/asset/peer.png",
       link: {
-        mobileWebUrl: link,
-        webUrl: link,
+        mobileWebUrl: url,
+        webUrl: url,
       },
     },
     buttons: [
       {
         title: buttonTitle,
         link: {
-          mobileWebUrl: link,
-          webUrl: link,
+          mobileWebUrl: url,
+          webUrl: url,
         },
       },
     ],
