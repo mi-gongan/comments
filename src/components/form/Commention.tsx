@@ -6,6 +6,7 @@ import { fetchUserData } from "../../firebase/firebase";
 import { useSetRecoilState } from "recoil";
 import { formAtom } from "../../recoil/form";
 import { matchType } from "../../services/translate";
+import FloatingButton from "../common/FloatingButton";
 
 function Commention() {
   const router = useRouter();
@@ -78,9 +79,10 @@ function Commention() {
             onInput={handleResizeHeight}
             placeholder={`안녕하세요 코멘션입니다.\n이 노션에 남길 메세지를 작성해주세요\n업로드 버튼을 클릭하기 전에는\n노션주인이 볼 수 없습니다\n이 텍스트를 클릭하면 작성 가능합니다`}
           />
-          <div className="button-area" onClick={sendComment}>
+          <FloatingButton handleClick={sendComment}>보내기</FloatingButton>
+          {/* <div className="button-area" onClick={sendComment}>
             보내기
-          </div>
+          </div> */}
         </Wrap>
       )}
     </>

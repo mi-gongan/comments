@@ -13,5 +13,5 @@ const Wrap = styled.div`
   font-weight: 400;
   font-size: 16px;
   line-height: 13px;
-  margin: 30px 30px;
+  padding: 30px 30px;
 `;
