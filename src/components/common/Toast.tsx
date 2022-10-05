@@ -25,9 +25,11 @@ export default Toast;
 const fadeIn = keyframes`
   0% {
     opacity: 0;
+    transform: translate(-50%,100%);
   }
   100% {
     opacity: 1;
+    transform: translate(-50%,0%);
   }
 `;
 
@@ -39,10 +41,8 @@ const Wrap = styled.div`
   top: 0;
   bottom: 0;
   .back {
-    opacity: 0.1;
     width: 100%;
     height: 100%;
-    background-color: black;
   }
   .alert {
     position: absolute;
@@ -60,7 +60,7 @@ const Wrap = styled.div`
     display: flex;
     justify-content: center;
     animation-name: ${fadeIn};
-    animation-duration: 1s;
+    animation-duration: 1.5s;
   }
   .icon {
     position: absolute;

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useRouter } from "next/router";
+import { Router, useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import styled from "styled-components";
@@ -29,6 +29,7 @@ function Card({ _from, name, text, id, view, canEdit }: CardPropsType) {
   const [show, setShow] = useState(false);
   const [erase, setErase] = useState("");
   const [iconShow, setIconShow] = useState({ mypage: "show", notion: "" });
+  const router = useRouter();
 
   useEffect(() => {
     name && setShow(view);
@@ -58,10 +59,20 @@ function Card({ _from, name, text, id, view, canEdit }: CardPropsType) {
     });
   };
 
+  const goDetailPage = () => {
+    if (!canEdit && !router.pathname.includes("form")) {
+      router.push("");
+    }
+  };
+
   return (
     <Wrap>
       {!erase && (
-        <CardBox className="card" id={show ? "" : "true"}>
+        <CardBox
+          className="card"
+          id={show ? "" : "true"}
+          onClick={goDetailPage}
+        >
           <CardText>{text}</CardText>
           <Introduce from={_from} name={name} />
           <CardIcon

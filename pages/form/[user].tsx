@@ -5,8 +5,7 @@ import { useRecoilValue } from "recoil";
 import styled, { createGlobalStyle } from "styled-components";
 import Commention from "../../src/components/form/Commention";
 import { emailAtom } from "../../src/recoil/user";
-import { getMessage } from "../../src/services/kakao";
-import { getImg } from "../../src/services/translate";
+import { getImg, getMessage } from "../../src/services/translate";
 
 function Form() {
   const router = useRouter();
@@ -22,10 +21,7 @@ function Form() {
         <meta property="og:title" content={`코맨션 적으러 가기`} />
         <meta property="og:description" content={getMessage(relation)} />
         <meta property="og:url" content={linkFormat} />
-        <meta
-          property="og:image"
-          content="https://firebasestorage.googleapis.com/v0/b/comments-efbc8.appspot.com/o/share_img_peer.svg?alt=media&token=793b2570-067d-4d5f-9963-6d724ea6eefc"
-        />
+        <meta property="og:image" content={getImg(relation)} />
       </Head>
       <GrobalStyled />
       <Commention></Commention>
