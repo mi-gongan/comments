@@ -129,6 +129,12 @@ export const fetchRecentCommentsData = async (from: string, to: string) => {
   return array;
 };
 
+export const getComment = async (email: string, id: number) => {
+  const commentDoc = doc(db, "comments", email + "&" + String(id));
+  const commentSnap = await getDoc(commentDoc);
+  return commentSnap.data();
+};
+
 export const setComment = async (form: commentType) => {
   await setDoc(doc(db, "comments", form._to + "&" + String(form.id)), form);
 };

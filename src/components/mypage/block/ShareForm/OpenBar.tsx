@@ -5,14 +5,13 @@ import { FoldingBarPropsType } from "./FoldingBar";
 
 function OpenBar({ handleFold }: FoldingBarPropsType) {
   return (
-    <Wrap>
+    <Wrap onClick={handleFold}>
       <div className="text">소개를 요청해보세요</div>
       <Image
         src="/assets/open_icon.svg"
         alt="folde_icon"
         width={17}
         height={13}
-        onClick={handleFold}
       />
     </Wrap>
   );

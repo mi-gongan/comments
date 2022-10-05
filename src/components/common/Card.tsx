@@ -61,7 +61,7 @@ function Card({ _from, name, text, id, view, canEdit }: CardPropsType) {
 
   const goDetailPage = () => {
     if (!canEdit && !router.pathname.includes("form")) {
-      router.push("");
+      router.push(`/detail/${email}?id=${id}`);
     }
   };
 
