@@ -23,7 +23,7 @@ function ShareForm({ profile, email, handleToast }: ShareFormPropsType) {
   const [fold, setFold] = useState("");
   const linkFormat =
     process.env.NEXT_PUBLIC_BASEURL +
-    `/form/${encodeURIComponent(email)}?relation=${matchType(relation)}`;
+    `/formvv/${encodeURIComponent(email)}?relation=${matchType(relation)}`;
 
   const linkCopy = (e: any) => {
     e.preventDefault();
