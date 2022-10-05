@@ -116,21 +116,4 @@ const Wrap = styled.div`
   flex-direction: column;
   color: white;
   justify-content: center;
-  .comment-text {
-    text-align: center;
-    font-weight: 500;
-    line-height: 34.87px;
-    font-size: 22px;
-    span {
-      font-weight: 600;
-      text-emphasis-style: dot;
-      text-emphasis-position: over left;
-      -webkit-text-emphasis-style: dot;
-      -webkit-text-emphasis-position: over;
-    }
-  }
-  .login {
-    margin-top: 30%;
-    text-align: center;
-  }
 `;
