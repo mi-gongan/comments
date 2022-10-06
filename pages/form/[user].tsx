@@ -13,7 +13,7 @@ function Form() {
   const email = useRecoilValue(emailAtom);
   const linkFormat =
     process.env.NEXT_PUBLIC_BASEURL +
-    `/formvv/${encodeURIComponent(email)}?relation=${relation}`;
+    `/form/${encodeURIComponent(email)}?relation=${relation}`;
 
   return (
     <Wrap>
