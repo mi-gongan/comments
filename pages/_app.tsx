@@ -32,11 +32,11 @@ function MyApp({ Component, pageProps: { pageProps } }: AppProps) {
     <RecoilRoot>
       <Head>
         <title>commention</title>
-        <link rel="icon" href="/assets/commention-logo.svg" />
+        <link rel="icon" href="/assets/logo.png" />
         <meta property="og:title" content="commention" />
         <meta property="og:description" content="서로 코멘션을 남겨봐요" />
         <meta property="og:url" content={process.env.NEXT_PUBLIC_BASEURL} />
-        <meta property="og:image" content="/assets/commention-logo.svg" />
+        <meta property="og:image" content="/assets/logo.svg" />
       </Head>
       <Component {...pageProps} />
     </RecoilRoot>
