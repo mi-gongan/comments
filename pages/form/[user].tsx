@@ -4,9 +4,9 @@ import { useRouter } from "next/router";
 import React from "react";
 import { useRecoilValue } from "recoil";
 import styled, { createGlobalStyle } from "styled-components";
-import Commention from "../../../src/components/form/Commention";
-import { emailAtom } from "../../../src/recoil/user";
-import { getImg, getMessage } from "../../../src/services/translate";
+import Commention from "../../src/components/form/Commention";
+import { emailAtom } from "../../src/recoil/user";
+import { getImg, getMessage } from "../../src/services/translate";
 
 interface FormPropsType {
   user: string | string[] | undefined;
