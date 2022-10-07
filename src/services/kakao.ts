@@ -41,7 +41,7 @@ export const sendShare = (
     content: {
       title: `${name}님의 코맨션 적으러 가기`,
       description: getMessage(relation),
-      imageUrl: process.env.NEXT_PUBLIC_BASEURL + getImg(relation),
+      imageUrl: process.env.NEXT_PUBLIC_BASEURL + getImg(relation) + "&v=2",
       link: {
         mobileWebUrl: link,
         webUrl: link,

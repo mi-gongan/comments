@@ -16,15 +16,15 @@ export const matchType = (type: string) => {
 export const getImg = (relation: string) => {
   switch (relation) {
     case "동료":
-      return "/peer.svg&v=2";
+      return "/peer.svg";
     case "가족":
-      return "/family.svg&v=2";
+      return "/family.svg";
     case "친구":
-      return "/friend.svg&v=2";
+      return "/friend.svg";
     case "연인":
-      return "/couple.svg&v=2";
+      return "/couple.svg";
     default:
-      return "/etc.svg&v=2";
+      return "/etc.svg";
   }
 };
 
