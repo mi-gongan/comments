@@ -36,7 +36,10 @@ function MyApp({ Component, pageProps: { pageProps } }: AppProps) {
         <meta property="og:title" content="commention" />
         <meta property="og:description" content="서로 코멘션을 남겨봐요" />
         <meta property="og:url" content={process.env.NEXT_PUBLIC_BASEURL} />
-        <meta property="og:image" content="/assets/logo.svg" />
+        <meta
+          property="og:image"
+          content={process.env.NEXT_PUBLIC_BASEURL + "/assets/logo.png"}
+        />
       </Head>
       <Component {...pageProps} />
     </RecoilRoot>

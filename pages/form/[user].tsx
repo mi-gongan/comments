@@ -9,11 +9,14 @@ import { emailAtom } from "../../src/recoil/user";
 import { getImg, getMessage } from "../../src/services/translate";
 
 interface FromPropsType {
-  relation: string | string[] | undefined;
+  // relation: string | string[] | undefined;
+  user: any;
 }
 
-function Form({ relation }: FromPropsType) {
+function Form({ user }: FromPropsType) {
   const email = useRecoilValue(emailAtom);
+  console.log(user);
+  const relation = "peer";
   const linkFormat =
     process.env.NEXT_PUBLIC_BASEURL +
     `/form/${encodeURIComponent(email)}?relation=${relation}`;
@@ -27,7 +30,10 @@ function Form({ relation }: FromPropsType) {
           content={getMessage(String(relation))}
         />
         <meta property="og:url" content={linkFormat} />
-        <meta property="og:image" content={getImg(String(relation))} />
+        <meta
+          property="og:image"
+          content={process.env.NEXT_PUBLIC_BASEURL + getImg(String(relation))}
+        />
       </Head>
       <GrobalStyled />
       <Commention></Commention>
@@ -46,10 +52,9 @@ const GrobalStyled = createGlobalStyle`
     background-color: white;
   }
 `;
-
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const relation = context.query.relation;
+  const user = context.params;
   return {
-    props: { relation },
+    props: { user },
   };
 }
