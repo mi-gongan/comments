@@ -13,18 +13,18 @@ export const matchType = (type: string) => {
   }
 };
 
-export const getImg = (relation: string) => {
+export const getImg = (relation: string, type: string) => {
   switch (relation) {
     case "동료":
-      return "/peer.svg";
+      return "/assets/peer." + type;
     case "가족":
-      return "/family.svg";
+      return "/assets/family." + type;
     case "친구":
-      return "/friend.svg";
+      return "/assets/friend." + type;
     case "연인":
-      return "/couple.svg";
+      return "/assets/couple." + type;
     default:
-      return "/etc.svg";
+      return "/assets/etc." + type;
   }
 };
 

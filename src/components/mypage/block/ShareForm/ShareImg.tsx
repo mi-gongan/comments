@@ -10,7 +10,7 @@ interface ShareImgPropsType {
 function ShareImg({ relation }: ShareImgPropsType) {
   return (
     <Wrap>
-      <Image src={getImg(relation)} width={272} height={143} />
+      <Image src={getImg(relation, "svg")} width={272} height={143} />
     </Wrap>
   );
 }
