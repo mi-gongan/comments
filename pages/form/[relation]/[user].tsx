@@ -1,25 +1,22 @@
-import { GetServerSidePropsContext } from "next";
+import { NextPage, NextPageContext } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import React from "react";
 import { useRecoilValue } from "recoil";
 import styled, { createGlobalStyle } from "styled-components";
-import Commention from "../../src/components/form/Commention";
-import { emailAtom } from "../../src/recoil/user";
-import { getImg, getMessage } from "../../src/services/translate";
+import Commention from "../../../src/components/form/Commention";
+import { emailAtom } from "../../../src/recoil/user";
+import { getImg, getMessage } from "../../../src/services/translate";
 
-interface FromPropsType {
-  // relation: string | string[] | undefined;
-  user: any;
+interface FormPropsType {
+  user: string | string[] | undefined;
+  relation: string | string[] | undefined;
 }
 
-function Form({ user }: FromPropsType) {
-  const email = useRecoilValue(emailAtom);
-  console.log(user);
-  const relation = "peer";
+const Form: NextPage<FormPropsType> = ({ user, relation }: FormPropsType) => {
   const linkFormat =
     process.env.NEXT_PUBLIC_BASEURL +
-    `/form/${encodeURIComponent(email)}?relation=${relation}`;
+    `/form/${encodeURIComponent(String(user))}?relation=${relation}`;
 
   return (
     <Wrap>
@@ -39,7 +36,16 @@ function Form({ user }: FromPropsType) {
       <Commention></Commention>
     </Wrap>
   );
-}
+};
+
+Form.getInitialProps = async (
+  context: NextPageContext
+): Promise<FormPropsType> => {
+  const query = context.query;
+  const relation = query.relation;
+  const user = query.user;
+  return { relation, user };
+};
 
 export default Form;
 
@@ -52,9 +58,3 @@ const GrobalStyled = createGlobalStyle`
     background-color: white;
   }
 `;
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const user = context.params;
-  return {
-    props: { user },
-  };
-}
