@@ -21,6 +21,9 @@ const Form: NextPage<FormPropsType> = ({ user, relation }: FormPropsType) => {
   return (
     <Wrap>
       <Head>
+        <title>commention</title>
+        <link rel="icon" href="/assets/logo.png" />
+        <meta property="og:title" content="commention" />
         <meta property="og:title" content="코맨션 적으러 가기" />
         <meta
           property="og:description"
@@ -29,7 +32,9 @@ const Form: NextPage<FormPropsType> = ({ user, relation }: FormPropsType) => {
         <meta property="og:url" content={linkFormat} />
         <meta
           property="og:image"
-          content={process.env.NEXT_PUBLIC_BASEURL + getImg(String(relation))}
+          content={
+            process.env.NEXT_PUBLIC_BASEURL + getImg(String(relation), "png")
+          }
         />
       </Head>
       <GrobalStyled />
