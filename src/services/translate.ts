@@ -16,15 +16,15 @@ export const matchType = (type: string) => {
 export const getImg = (relation: string, type: string) => {
   switch (relation) {
     case "동료":
-      return "assets/peer." + type;
+      return "/assets/peer." + type;
     case "가족":
-      return "assets/family." + type;
+      return "/assets/family." + type;
     case "친구":
-      return "assets/friend." + type;
+      return "/assets/friend." + type;
     case "연인":
-      return "assets/couple." + type;
+      return "/assets/couple." + type;
     default:
-      return "assets/etc." + type;
+      return "/assets/etc." + type;
   }
 };
 
