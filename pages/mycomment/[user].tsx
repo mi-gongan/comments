@@ -1,9 +1,27 @@
+import { GetServerSidePropsContext } from "next";
 import Head from "next/head";
-import React from "react";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import Carousel from "../../src/components/mycomment/Carousel";
+import {
+  commentType,
+  fetchReceiveCommentsData,
+} from "../../src/firebase/firebase";
 
 function mycommention() {
+  const { user } = useRouter().query;
+  const [comments, setComments] = useState<commentType[]>([]);
+
+  useEffect(() => {
+    user &&
+      fetchReceiveCommentsData(String(user)).then((res) => {
+        const data = res.filter((comment) => comment.view === true);
+        console.log(data);
+        setComments(data);
+      });
+  }, [user]);
+
   return (
     <>
       <GrobalStyle />
@@ -19,13 +37,21 @@ function mycommention() {
             content={process.env.NEXT_PUBLIC_BASEURL + "/assets/logo.png"}
           />
         </Head>
-        <Carousel />
+        <Carousel comments={comments} />
       </Wrap>
     </>
   );
 }
 
 export default mycommention;
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const { user } = context.query;
+  console.log(user);
+  return {
+    props: { user }, // will be passed to the page component as props
+  };
+}
 
 const Wrap = styled.div``;
 

@@ -44,6 +44,12 @@ export const assignUser = async (email: string, name: string, img: string) => {
   });
 };
 
+export const getUserCount = async () => {
+  const countDoc = doc(db, "users", "user_info");
+  const countSnap = await getDoc(countDoc);
+  return countSnap.data();
+};
+
 export const notionLinkSave = async (email: string, link: string) => {
   const userDoc = doc(db, "users", email);
   await setDoc(
@@ -167,6 +173,22 @@ export const setCommentView = async (
   });
 };
 
+export const setCommentStar = async (
+  id: number,
+  email: string,
+  star: boolean
+) => {
+  const commentQuery = query(
+    commentCollection,
+    where("_to", "==", email),
+    where("id", "==", id)
+  );
+  const querySnap = await getDocs(commentQuery);
+  querySnap.forEach(async (item: any) => {
+    await updateDoc(doc(db, "comments", item.id), { star });
+  });
+};
+
 export const getFinalIndex = async (email: string) => {
   let array: commentType[] = [];
   const commentQuery = query(
@@ -194,4 +216,5 @@ export type commentType = {
   name: string;
   text: string;
   view: boolean;
+  star: boolean;
 };
