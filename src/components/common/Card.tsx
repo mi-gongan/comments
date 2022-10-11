@@ -1,11 +1,10 @@
-import Image from "next/image";
-import { Router, useRouter } from "next/router";
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
 import {
-  deleteRecieveComment,
   fetchUserData,
+  setCommentStar,
   setCommentView,
 } from "../../firebase/firebase";
 import { commentCountAtom } from "../../recoil/comment";
@@ -21,18 +20,19 @@ interface CardPropsType {
   id: number;
   view: boolean;
   canEdit?: boolean;
+  star: boolean;
 }
 
-function Card({ _from, name, text, id, view, canEdit }: CardPropsType) {
+function Card({ _from, name, text, id, view, star, canEdit }: CardPropsType) {
   const [commentCount, setCommentCount] = useRecoilState(commentCountAtom);
   const email = useRecoilValue(emailAtom);
-  const [show, setShow] = useState(false);
+  const [cardState, setCardState] = useState({ show: false, star: false });
   const [erase, setErase] = useState("");
   const [iconShow, setIconShow] = useState({ mypage: "show", notion: "" });
   const router = useRouter();
 
   useEffect(() => {
-    name && setShow(view);
+    name && setCardState({ ...cardState, show: view, star });
   }, [name]);
 
   useEffect(() => {
@@ -44,20 +44,31 @@ function Card({ _from, name, text, id, view, canEdit }: CardPropsType) {
   }, [email]);
 
   const handleHideComment = () => {
-    if (show === true) {
+    if (cardState.show === true) {
       setCommentView(id, email, false);
-      setShow(false);
+      setCardState({ ...cardState, show: false });
     } else {
       setCommentView(id, email, true);
-      setShow(true);
+      setCardState({ ...cardState, show: true });
     }
   };
-  const deleteComment = () => {
-    deleteRecieveComment(id, email).then(() => {
-      setErase("ok");
-      setCommentCount(commentCount - 1);
-    });
+
+  const handleStarComment = () => {
+    if (cardState.star === true) {
+      setCommentStar(id, email, false);
+      setCardState({ ...cardState, star: false });
+    } else {
+      setCommentStar(id, email, true);
+      setCardState({ ...cardState, star: true });
+    }
   };
+
+  // const deleteComment = () => {
+  //   deleteRecieveComment(id, email).then(() => {
+  //     setErase("ok");
+  //     setCommentCount(commentCount - 1);
+  //   });
+  // };
 
   const goDetailPage = () => {
     if (!canEdit && !router.pathname.includes("form")) {
@@ -70,15 +81,17 @@ function Card({ _from, name, text, id, view, canEdit }: CardPropsType) {
       {!erase && (
         <CardBox
           className="card"
-          id={show ? "" : "true"}
+          id={cardState.show ? "" : "true"}
           onClick={goDetailPage}
         >
           <CardText>{text}</CardText>
           <Introduce from={_from} name={name} />
           <CardIcon
             canEdit={canEdit}
-            show={show}
+            show={cardState.show}
             handleHideComment={handleHideComment}
+            star={cardState.star}
+            handleStarComment={handleStarComment}
           />
         </CardBox>
       )}

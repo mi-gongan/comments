@@ -12,13 +12,16 @@ import {
 function mycommention() {
   const { user } = useRouter().query;
   const [comments, setComments] = useState<commentType[]>([]);
+  const [starComments, setStarComments] = useState<commentType[]>([]);
 
   useEffect(() => {
     user &&
       fetchReceiveCommentsData(String(user)).then((res) => {
         const data = res.filter((comment) => comment.view === true);
-        console.log(data);
-        setComments(data);
+        const starData = data.filter((comment) => comment.star == true);
+        const notStarData = data.filter((comment) => comment.star == false);
+        setComments(notStarData);
+        setStarComments(starData);
       });
   }, [user]);
 
@@ -37,7 +40,7 @@ function mycommention() {
             content={process.env.NEXT_PUBLIC_BASEURL + "/assets/logo.png"}
           />
         </Head>
-        <Carousel comments={comments} />
+        <Carousel startComments={starComments} comments={comments} />
       </Wrap>
     </>
   );

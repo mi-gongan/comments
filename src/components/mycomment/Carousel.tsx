@@ -8,12 +8,26 @@ import { commentType } from "../../firebase/firebase";
 
 interface CarouselPropsType {
   comments: commentType[];
+  startComments: commentType[];
 }
 
-function Carousel({ comments }: CarouselPropsType) {
+function Carousel({ comments, startComments }: CarouselPropsType) {
   return (
     <Wrap>
       <StyleSlider {...settings}>
+        {startComments.map((comment) => {
+          return (
+            <Card
+              _from={comment._from}
+              key={comment.id}
+              name={comment.name}
+              text={comment.text}
+              id={comment.id}
+              view={comment.view}
+              star={comment.star}
+            ></Card>
+          );
+        })}
         {comments.map((comment) => {
           return (
             <Card
@@ -23,6 +37,7 @@ function Carousel({ comments }: CarouselPropsType) {
               text={comment.text}
               id={comment.id}
               view={comment.view}
+              star={comment.star}
             ></Card>
           );
         })}
