@@ -18,6 +18,7 @@ const Home: NextPage = () => {
 
   const handleLogin = () => {
     try {
+      window.dataLayer.push({ event: "login" });
       setKaKaoToken().then((res) => {
         console.log(res);
         router.push("/login");

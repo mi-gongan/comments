@@ -26,6 +26,7 @@ function ShareForm({ profile, email, handleToast }: ShareFormPropsType) {
     `/form/${encodeURIComponent(email)}?relation=${matchType(relation)}`;
 
   const linkCopy = (e: any) => {
+    window.dataLayer.push({ event: "copy-link" });
     e.preventDefault();
     window.navigator.clipboard.writeText(e.target.textContent);
     setLinkSave("ok");
@@ -35,6 +36,7 @@ function ShareForm({ profile, email, handleToast }: ShareFormPropsType) {
     }, 1500);
   };
   const shareKakao = (e: any) => {
+    window.dataLayer.push({ event: "kakao-share" });
     e.preventDefault();
     sendShare(profile.name, relation, linkFormat, "코멘션 적으러 가기");
   };
@@ -44,6 +46,7 @@ function ShareForm({ profile, email, handleToast }: ShareFormPropsType) {
   };
 
   const handleFold = () => {
+    window.dataLayer.push({ event: "fold" });
     if (fold) {
       setFold("");
     } else {
