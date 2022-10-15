@@ -41,7 +41,6 @@ function Logout() {
 export default Logout;
 
 const Wrap = styled.div`
-  background-color: white;
   display: flex;
   justify-content: center;
   div {
