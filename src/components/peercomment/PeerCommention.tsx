@@ -8,12 +8,17 @@ function PeerCommention() {
   const router = useRouter();
   const { user }: any = router.query;
   const name = user && user.split("@")[0];
-  const [comments, setComments] = useState<Array<commentType>>([]);
+  const [comments, setComments] = useState<commentType[]>([]);
+  const [starComments, setStarComments] = useState<commentType[]>([]);
 
   useEffect(() => {
     if (user) {
       fetchReceiveCommentsData(user).then((res) => {
-        setComments(res);
+        const data = res.filter((comment) => comment.view === true);
+        const starData = data.filter((comment) => comment.star == true);
+        const notStarData = data.filter((comment) => comment.star == false);
+        setComments(notStarData);
+        setStarComments(starData);
       });
     }
   }, [user]);
@@ -34,8 +39,7 @@ function PeerCommention() {
         </div>
       </div>
       <div className="commention">
-        {comments.map((comment) => {
-          if (!comment.view) return;
+        {starComments.map((comment) => {
           return (
             <Card
               _from={comment._from}
@@ -44,6 +48,20 @@ function PeerCommention() {
               text={comment.text}
               name={comment.name}
               view={comment.view}
+              star={comment.star}
+            ></Card>
+          );
+        })}
+        {comments.map((comment) => {
+          return (
+            <Card
+              _from={comment._from}
+              key={comment.id}
+              id={comment.id}
+              text={comment.text}
+              name={comment.name}
+              view={comment.view}
+              star={comment.star}
             ></Card>
           );
         })}

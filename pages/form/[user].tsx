@@ -1,11 +1,8 @@
 import { NextPage, NextPageContext } from "next";
 import Head from "next/head";
-import { useRouter } from "next/router";
 import React from "react";
-import { useRecoilValue } from "recoil";
 import styled, { createGlobalStyle } from "styled-components";
 import Commention from "../../src/components/form/Commention";
-import { emailAtom } from "../../src/recoil/user";
 import { getImg, getMessage } from "../../src/services/translate";
 
 interface FormPropsType {
@@ -23,7 +20,6 @@ const Form: NextPage<FormPropsType> = ({ user, relation }: FormPropsType) => {
       <Head>
         <title>commention</title>
         <link rel="icon" href="/assets/logo.png" />
-        <meta property="og:title" content="commention" />
         <meta property="og:title" content="코맨션 적으러 가기" />
         <meta
           property="og:description"

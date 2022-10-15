@@ -1,78 +1,48 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import Slider from "react-slick";
 import "../../../node_modules/slick-carousel/slick/slick.css";
 import "../../../node_modules/slick-carousel/slick/slick-theme.css";
 import styled from "styled-components";
 import Card from "../common/Card";
-import { commentType, fetchReceiveCommentsData } from "../../firebase/firebase";
-import { useRouter } from "next/router";
+import { commentType } from "../../firebase/firebase";
 
-function Carousel() {
-  const router = useRouter();
-  const { user }: any = router.query;
-  const [render, setRender] = useState("");
-  const [comments, setComments] = useState<Array<commentType>>([]);
-  const [firstComment, setFirstComment] = useState({
-    _from: "",
-    name: "",
-    text: "",
-    id: 0,
-    view: false,
-  });
-  const [firstIndex, setFirstIndex] = useState<number>(0);
+interface CarouselPropsType {
+  comments: commentType[];
+  startComments: commentType[];
+}
 
-  const commentFetch = async () => {
-    fetchReceiveCommentsData(decodeURIComponent(user)).then((comments) => {
-      setComments(comments);
-      if (comments.length > 0) {
-        for (let i = 0; i < comments.length; i++) {
-          if (comments[i].view === true) {
-            setFirstIndex(i);
-            setFirstComment(comments[i]);
-            break;
-          }
-        }
-      }
-    });
-  };
-
-  useEffect(() => {
-    setRender("ok");
-  }, []);
-
-  useEffect(() => {
-    user && commentFetch();
-  }, [user]);
-
+function Carousel({ comments, startComments }: CarouselPropsType) {
   return (
-    <>
-      {render && (
-        <Wrap>
-          <StyleSlider {...settings}>
+    <Wrap>
+      <StyleSlider {...settings}>
+        {startComments.map((comment) => {
+          return (
             <Card
-              _from={firstComment._from}
-              name={firstComment.name}
-              text={firstComment.text}
-              id={firstComment.id}
-              view={firstComment.view}
+              _from={comment._from}
+              key={comment.id}
+              name={comment.name}
+              text={comment.text}
+              id={comment.id}
+              view={comment.view}
+              star={comment.star}
             ></Card>
-            {comments.map((comment, idx) => {
-              if (idx === firstIndex || comment.view !== true) return;
-              return (
-                <Card
-                  _from={firstComment._from}
-                  key={comment.id}
-                  name={comment.name}
-                  text={comment.text}
-                  id={comment.id}
-                  view={comment.view}
-                ></Card>
-              );
-            })}
-          </StyleSlider>
-        </Wrap>
-      )}
-    </>
+          );
+        })}
+        {comments.map((comment) => {
+          return (
+            <Card
+              _from={comment._from}
+              key={comment.id}
+              name={comment.name}
+              text={comment.text}
+              id={comment.id}
+              view={comment.view}
+              star={comment.star}
+            ></Card>
+          );
+        })}
+      </StyleSlider>
+    </Wrap>
   );
 }
 

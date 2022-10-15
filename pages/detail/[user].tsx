@@ -15,17 +15,17 @@ function Detail() {
     _to: "",
     id: 0,
     name: "",
-    view: false,
     text: "",
+    view: false,
+    star: false,
   });
   const linkFormat =
     process.env.NEXT_PUBLIC_BASEURL +
-    `/formvv/${encodeURIComponent(comment._from)}`;
+    `/form/${encodeURIComponent(comment._from)}`;
 
   useEffect(() => {
     user &&
       getComment(user, id).then((res: any) => {
-        console.log(res);
         setComment(res);
       });
   }, [user]);

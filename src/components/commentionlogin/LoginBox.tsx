@@ -4,7 +4,7 @@ import styled from "styled-components";
 import letter from "../../../public/assets/letter.svg";
 
 interface LoginBoxPropsType {
-  handleLogin: () => void;
+  handleLogin?: () => void;
   peerName: string;
 }
 

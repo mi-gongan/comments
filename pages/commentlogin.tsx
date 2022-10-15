@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { formAtom } from "../src/recoil/form";
 import {
@@ -17,8 +17,7 @@ import Head from "next/head";
 function commentlogin() {
   const router = useRouter();
   const [form, setForm] = useRecoilState(formAtom);
-  const setRecoilEmail = useSetRecoilState(emailAtom);
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useRecoilState(emailAtom);
   const [upload, setUpload] = useState("");
   const [peerName, setPeerName] = useState<string>(form._to.split("@")[0]);
   const [login, setLogin] = useState("");
@@ -37,28 +36,7 @@ function commentlogin() {
     setRender("ok");
   }, []);
 
-  const handleLogin = () => {
-    setKaKaoToken().then((res) => {
-      console.log(res);
-      setLogin("ok");
-    });
-  };
-
-  useEffect(() => {
-    if (login === "ok") {
-      kakaoLogin().then((res: any) => {
-        assignUser(
-          res.kakao_account.email,
-          res.properties.nickname,
-          res.properties.profile_image
-        ).then(() => {
-          setEmail(res.kakao_account.email);
-          setRecoilEmail(res.kakao_account.email);
-        });
-      });
-    }
-  }, [login]);
-
+  //email 있는 경우
   useEffect(() => {
     if (email) {
       fetchUserData(email).then((res: any) => {
@@ -82,6 +60,7 @@ function commentlogin() {
     }
   }, [email]);
 
+  // uplaod되면 page 이동
   useEffect(() => {
     if (upload) {
       setComment(form);
@@ -95,9 +74,32 @@ function commentlogin() {
         name: "",
         text: "",
         view: false,
+        star: false,
       });
     }
   }, [upload]);
+
+  // email 없는 경우 login
+  const handleLogin = () => {
+    setKaKaoToken().then((res) => {
+      console.log(res);
+      setLogin("ok");
+    });
+  };
+
+  useEffect(() => {
+    if (login === "ok") {
+      kakaoLogin().then((res: any) => {
+        assignUser(
+          res.kakao_account.email,
+          res.properties.nickname,
+          res.properties.profile_image
+        ).then(() => {
+          setEmail(res.kakao_account.email);
+        });
+      });
+    }
+  }, [login]);
 
   return (
     <Wrap>
@@ -112,7 +114,12 @@ function commentlogin() {
           content={process.env.NEXT_PUBLIC_BASEURL + "/assets/logo.png"}
         />
       </Head>
-      {render && <LoginBox peerName={peerName} handleLogin={handleLogin} />}
+      {render && (
+        <LoginBox
+          peerName={peerName}
+          handleLogin={!email ? handleLogin : undefined}
+        />
+      )}
     </Wrap>
   );
 }

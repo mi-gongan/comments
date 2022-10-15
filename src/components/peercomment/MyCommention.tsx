@@ -16,10 +16,8 @@ function MyCommention() {
 
   useEffect(() => {
     if (user) {
-      console.log(email);
       fetchRecentCommentsData(email, user).then((res) => {
         setRecentComment(res);
-        // console.log(res);
       });
     }
   }, [user]);
@@ -45,6 +43,7 @@ function MyCommention() {
             view={true}
             text={recentComment[0]?.text}
             id={recentComment[0]?.id}
+            star={recentComment[0]?.star}
           ></Card>
         </Wrap>
       )}

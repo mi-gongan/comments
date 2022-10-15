@@ -19,6 +19,7 @@ function CommentionBox({ comments, canEdit }: CommentionBoxPropsType) {
           name={comment.name}
           view={comment.view}
           canEdit={canEdit}
+          star={comment.star}
         ></Card>
       ))}
     </>

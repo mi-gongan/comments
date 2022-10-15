@@ -6,9 +6,17 @@ interface CardIconPropsType {
   canEdit?: boolean;
   show: boolean;
   handleHideComment: () => void;
+  star: boolean;
+  handleStarComment: () => void;
 }
 
-function CardIcon({ canEdit, handleHideComment, show }: CardIconPropsType) {
+function CardIcon({
+  canEdit,
+  handleHideComment,
+  show,
+  star,
+  handleStarComment,
+}: CardIconPropsType) {
   return (
     <Wrap>
       {canEdit && (
@@ -21,14 +29,14 @@ function CardIcon({ canEdit, handleHideComment, show }: CardIconPropsType) {
               height="30"
             />
           </div>
-          {/* <div className="hide-icon" onClick={handleHideComment}>
+          <div className="start-icon" onClick={handleStarComment}>
             <Image
               alt="search"
-              src={`/assets/hide-${show ? "off" : "on"}.svg`}
+              src={`/assets/star-${star ? "on" : "off"}.svg`}
               width="30"
               height="30"
             />
-          </div> */}
+          </div>
         </>
       )}
     </Wrap>
