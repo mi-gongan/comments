@@ -64,11 +64,9 @@ function Mypage() {
             email={email}
             handleToast={setToastOpen}
           />
-          <CommentionArea>
-            <ReceiveForm email={email} profile={profile} />
-            <NotionEmbed profile={profile} email={email} />
-            <Logout />
-          </CommentionArea>
+          <ReceiveForm email={email} profile={profile} />
+          <NotionEmbed profile={profile} email={email} />
+          <Logout />
           <ScrollFloatingButton />
         </Wrap>
       )}
@@ -80,9 +78,5 @@ export default Mypage;
 
 const Wrap = styled.div`
   position: relative;
-`;
-
-const CommentionArea = styled.div`
-  padding-top: 10px;
-  background-color: #f0f0f0;
+  background-color: white;
 `;

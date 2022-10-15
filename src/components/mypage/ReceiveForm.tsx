@@ -66,9 +66,10 @@ function ReceiveForm({ email, profile }: ReceiveFormPropsType) {
 export default ReceiveForm;
 
 const Wrap = styled.div`
-  padding-top: 42px;
+  padding-top: 52px;
   padding-bottom: 20px;
   position: relative;
+  background-color: #f0f0f0;
   z-index: 1;
 `;
 
