@@ -6,33 +6,33 @@
 
 ### login : 카카오톡 로그인 기능
 
-: 보다 쉬운 접근과 카카오톡의 공유 같은 서비스를 사용하기 위해 카카오톡 로그인을 통해서 접근할 수 있도록 했습니다.
+- 보다 쉬운 접근과 카카오톡의 공유 같은 서비스를 사용하기 위해 카카오톡 로그인을 통해서 접근할 수 있도록 했습니다.
 
 <img width="360" alt="login" src="https://user-images.githubusercontent.com/97350083/205439332-3b06387e-e588-444e-bb18-e6ee147e111f.png">
 
 ### commention 요청 보내기
 
-: 카테고리에 따라 다른 형태의 소개글, openGraph를 담아 공유합니다.
-: 링크를 통해 공유할 수도 있고 카카오 공유로도 할 수 있습니다.
+- 카테고리에 따라 다른 형태의 소개글, openGraph를 담아 공유합니다.
+- 링크를 통해 공유할 수도 있고 카카오 공유로도 할 수 있습니다.
 
 <img width="360" alt="request" src="https://user-images.githubusercontent.com/97350083/205439351-321a492d-40ec-486f-8cd3-70c105d23f5b.png">
 
 ### 받은 commention 관리
 
-: 남들한테 받은 코멘션을 관리할 수 있는 기능입니다. 숨기기, 앞으로 배치 등이 가능합니다.
+- 남들한테 받은 코멘션을 관리할 수 있는 기능입니다. 숨기기, 앞으로 배치 등이 가능합니다.
 
 <img width="360" alt="receive1" src="https://user-images.githubusercontent.com/97350083/205439781-0286c89d-fe90-4b3e-8e2d-1ce167d8b3f2.png">
 <img width="360" alt="receive2" src="https://user-images.githubusercontent.com/97350083/205439903-0675607c-d24e-42d3-aac7-c094d3a24664.png">
 
 ### 노션에 임베드
 
-: 자신의 노션 링크를 저장하면 자신이 받은 commention을 노션에 임베드할 수 있는 링크를 받을 수 있습니다.
+- 자신의 노션 링크를 저장하면 자신이 받은 commention을 노션에 임베드할 수 있는 링크를 받을 수 있습니다.
 
 <img width="360" alt="embed" src="https://user-images.githubusercontent.com/97350083/205439372-cdfba3f6-1b6d-4529-b106-6d911a555e08.png">
 
 ### form
 
-: 다른 사람이 요청보냈을 때 받은 폼 작성지입니다.
+- 다른 사람이 요청보냈을 때 받은 폼 작성지입니다.
 
 <img width="360" alt="form1" src="https://user-images.githubusercontent.com/97350083/205439387-beb0c24f-bf79-4c31-a4e7-9da46e110e34.png">
 <img width="360" alt="form2" src="https://user-images.githubusercontent.com/97350083/205440159-a04d3f70-4e40-468a-82ee-31430492afd5.png">
@@ -40,7 +40,7 @@
 
 ### notion embed test
 
-:notion에 실제로 임베드한 모습입니다. 두가지 형태의 크기에서 가능합니다.
+- notion에 실제로 임베드한 모습입니다. 두가지 형태의 크기에서 가능합니다.
 
 <img width="360" alt="notion1" src="https://user-images.githubusercontent.com/97350083/205440414-81d8b120-f1a5-4cf1-9d0f-c61b4f494c29.png">
 <img width="360" alt="notion2" src="https://user-images.githubusercontent.com/97350083/205440436-e1bcfb7d-fb7c-4ee6-b560-2f180ca75ff0.png">
