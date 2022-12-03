@@ -20,9 +20,7 @@ const Form: NextPage<FormPropsType> = ({ user, relation }: FormPropsType) => {
   );
 };
 
-Form.getInitialProps = async (
-  context: NextPageContext
-): Promise<FormPropsType> => {
+Form.getInitialProps = (context) => {
   const query = context.query;
   const relation = String(query.relation);
   const user = String(query.user);
