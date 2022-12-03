@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
-import DefaultHead from "../src/components/seo/defaultHead";
+import DefaultHead from "../src/components/seo/DefaultHead";
 import { assignUser } from "../src/firebase/firebase";
 import { emailAtom } from "../src/recoil/user";
 import { kakaoLogin } from "../src/services/kakao";

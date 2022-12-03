@@ -9,7 +9,7 @@ import NotionEmbed from "../src/components/mypage/NotionEmbed";
 import ReceiveForm from "../src/components/mypage/ReceiveForm";
 import ScrollFloatingButton from "../src/components/mypage/ScrollFloatingButton";
 import ShareForm from "../src/components/mypage/ShareForm";
-import DefaultHead from "../src/components/seo/defaultHead";
+import DefaultHead from "../src/components/seo/DefaultHead";
 import { fetchUserData } from "../src/firebase/firebase";
 import { emailAtom } from "../src/recoil/user";
 

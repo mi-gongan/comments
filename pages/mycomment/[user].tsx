@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import Carousel from "../../src/components/mycomment/Carousel";
-import DefaultHead from "../../src/components/seo/defaultHead";
+import DefaultHead from "../../src/components/seo/DefaultHead";
 import {
   commentType,
   fetchReceiveCommentsData,

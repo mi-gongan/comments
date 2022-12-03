@@ -5,7 +5,7 @@ import styled from "styled-components";
 import FloatingButton from "../../src/components/common/FloatingButton";
 import MyCommention from "../../src/components/peercomment/MyCommention";
 import PeerCommention from "../../src/components/peercomment/PeerCommention";
-import DefaultHead from "../../src/components/seo/defaultHead";
+import DefaultHead from "../../src/components/seo/DefaultHead";
 
 function peercomment() {
   const router = useRouter();

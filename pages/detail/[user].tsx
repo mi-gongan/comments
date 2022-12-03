@@ -5,7 +5,7 @@ import styled from "styled-components";
 import FloatingButton from "../../src/components/common/FloatingButton";
 import DetailBody from "../../src/components/detail/DetailBody";
 import DetailHeader from "../../src/components/detail/DetailHeader";
-import DefaultHead from "../../src/components/seo/defaultHead";
+import DefaultHead from "../../src/components/seo/DefaultHead";
 import { commentType, getComment } from "../../src/firebase/firebase";
 
 function Detail() {

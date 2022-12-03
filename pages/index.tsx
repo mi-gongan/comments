@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import LoginBox from "../src/components/index/LoginBox";
 import { setKaKaoToken } from "../src/services/kakao";
 import Head from "next/head";
-import DefaultHead from "../src/components/seo/defaultHead";
+import DefaultHead from "../src/components/seo/DefaultHead";
 
 const Home: NextPage = () => {
   const email = useRecoilValue(emailAtom);
