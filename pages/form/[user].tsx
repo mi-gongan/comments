@@ -3,36 +3,17 @@ import Head from "next/head";
 import React from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import Commention from "../../src/components/form/Commention";
-import { getImg, getMessage } from "../../src/services/translate";
+import FormHead from "../../src/components/seo/formHead";
 
 interface FormPropsType {
-  user: string | string[] | undefined;
-  relation: string | string[] | undefined;
+  user: string;
+  relation: string;
 }
 
 const Form: NextPage<FormPropsType> = ({ user, relation }: FormPropsType) => {
-  const linkFormat =
-    process.env.NEXT_PUBLIC_BASEURL +
-    `/form/${encodeURIComponent(String(user))}?relation=${relation}`;
-
   return (
     <Wrap>
-      <Head>
-        <title>commention</title>
-        <link rel="icon" href="/assets/logo.png" />
-        <meta property="og:title" content="코맨션 적으러 가기" />
-        <meta
-          property="og:description"
-          content={getMessage(String(relation))}
-        />
-        <meta property="og:url" content={linkFormat} />
-        <meta
-          property="og:image"
-          content={
-            process.env.NEXT_PUBLIC_BASEURL + getImg(String(relation), "png")
-          }
-        />
-      </Head>
+      <FormHead relation={relation} user={user} />
       <GrobalStyled />
       <Commention></Commention>
     </Wrap>
@@ -43,8 +24,8 @@ Form.getInitialProps = async (
   context: NextPageContext
 ): Promise<FormPropsType> => {
   const query = context.query;
-  const relation = query.relation;
-  const user = query.user;
+  const relation = String(query.relation);
+  const user = String(query.user);
   return { relation, user };
 };
 

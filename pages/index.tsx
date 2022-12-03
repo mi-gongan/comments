@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import LoginBox from "../src/components/index/LoginBox";
 import { setKaKaoToken } from "../src/services/kakao";
 import Head from "next/head";
+import DefaultHead from "../src/components/seo/defaultHead";
 
 const Home: NextPage = () => {
   const email = useRecoilValue(emailAtom);
@@ -30,17 +31,7 @@ const Home: NextPage = () => {
 
   return (
     <Wrap>
-      <Head>
-        <title>commention</title>
-        <link rel="icon" href="/assets/logo.png" />
-        <meta property="og:title" content="commention" />
-        <meta property="og:description" content="서로 코멘션을 남겨봐요" />
-        <meta property="og:url" content={process.env.NEXT_PUBLIC_BASEURL} />
-        <meta
-          property="og:image"
-          content={process.env.NEXT_PUBLIC_BASEURL + "/assets/logo.png"}
-        />
-      </Head>
+      <DefaultHead />
       <LoginBox handleLogin={handleLogin} />
     </Wrap>
   );

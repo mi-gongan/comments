@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import Carousel from "../../src/components/mycomment/Carousel";
+import DefaultHead from "../../src/components/seo/defaultHead";
 import {
   commentType,
   fetchReceiveCommentsData,
@@ -29,17 +30,7 @@ function mycommention() {
     <>
       <GrobalStyle />
       <Wrap>
-        <Head>
-          <title>commention</title>
-          <link rel="icon" href="/assets/logo.png" />
-          <meta property="og:title" content="commention" />
-          <meta property="og:description" content="서로 코멘션을 남겨봐요" />
-          <meta property="og:url" content={process.env.NEXT_PUBLIC_BASEURL} />
-          <meta
-            property="og:image"
-            content={process.env.NEXT_PUBLIC_BASEURL + "/assets/logo.png"}
-          />
-        </Head>
+        <DefaultHead />
         <Carousel startComments={starComments} comments={comments} />
       </Wrap>
     </>
