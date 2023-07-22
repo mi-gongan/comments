@@ -4,3 +4,5 @@ describe("Navigation", () => {
     cy.get("div.login").click();
   });
 });
+
+export {};
