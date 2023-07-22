@@ -12,12 +12,14 @@ function LoginBox({ handleLogin }: LoginBoxPropsType) {
 
   return (
     <Wrap>
-      <div className="title">
+      <div className="title" role="title">
         나를 소개하는 새로운 방법,
         <br />
         코멘션
       </div>
-      <div className="text">지금 바로 받아보세요!</div>
+      <div className="subtitle" role="subtitle">
+        지금 바로 받아보세요!
+      </div>
       <div className="login" onClick={handleLogin}>
         <Image
           alt="kakao-login"

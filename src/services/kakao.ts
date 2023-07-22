@@ -36,6 +36,7 @@ export const sendShare = (
   link: string,
   buttonTitle: string
 ) => {
+  console.log(name, relation);
   window.Kakao.Share.sendDefault({
     objectType: "feed",
     content: {
@@ -56,5 +57,9 @@ export const sendShare = (
         },
       },
     ],
+    serverCallbackArgs: {
+      name: name,
+      relation: relation,
+    },
   });
 };
