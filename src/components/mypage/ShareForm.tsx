@@ -19,7 +19,6 @@ interface ShareFormPropsType {
 }
 
 function ShareForm({ profile, email, handleToast }: ShareFormPropsType) {
-  const [linkSave, setLinkSave] = useState("");
   const [relation, setRelation] = useState<RelationType>(RelationType.동료);
   const [fold, setFold] = useState("");
   const linkFormat =
@@ -30,7 +29,6 @@ function ShareForm({ profile, email, handleToast }: ShareFormPropsType) {
     window.dataLayer.push({ event: "copy-link" });
     e.preventDefault();
     window.navigator.clipboard.writeText(e.target.textContent);
-    setLinkSave("ok");
     handleToast(true);
     setTimeout(() => {
       handleToast(false);
@@ -60,11 +58,7 @@ function ShareForm({ profile, email, handleToast }: ShareFormPropsType) {
       <ShareTextBox />
       <CheckBox setRelation={setRelation} choosedRelation={relation} />
       <ShareImg relation={relation} />
-      <CopyBox
-        linkCopy={linkCopy}
-        linkFormat={linkFormat}
-        linkSave={linkSave}
-      />
+      <CopyBox linkCopy={linkCopy} linkFormat={linkFormat} />
       <ShareKakao shareKakao={shareKakao} />
       <FoldingBar handleFold={handleFold} />
     </Wrap>
