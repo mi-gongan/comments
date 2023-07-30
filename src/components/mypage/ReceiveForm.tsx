@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { commentType, fetchReceiveCommentsData } from "../../services/firebase";
+import { commentType } from "../../services/firebase";
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
 import { commentCountAtom } from "../../recoil/comment";
@@ -11,6 +11,7 @@ import CommentionBox from "./block/ReceiveForm/CommentionBox";
 import TabBar from "./block/ReceiveForm/TabBar";
 import Description from "./block/ReceiveForm/Description";
 import FloatingButton from "../common/FloatingButton";
+import { Service } from "../../services";
 
 interface ReceiveFormPropsType {
   email: string;
@@ -24,7 +25,9 @@ function ReceiveForm({ email, profile }: ReceiveFormPropsType) {
 
   useEffect(() => {
     email &&
-      fetchReceiveCommentsData(email).then((res: any) => setComments(res));
+      Service.firebase
+        .fetchReceiveCommentsData(email)
+        .then((res: any) => setComments(res));
   }, [email]);
 
   useEffect(() => {

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { profileType } from "../../../pages/mypage";
-import { sendShare } from "../../services/kakao";
 import { matchType } from "../../utils/translate";
 import CheckBox from "./block/ShareForm/CheckBox";
 import CopyBox from "./block/ShareForm/CopyBox";
@@ -11,6 +10,7 @@ import ShareImg from "./block/ShareForm/ShareImg";
 import ShareKakao from "./block/ShareForm/ShareKakao";
 import ShareTextBox from "./block/ShareForm/ShareTextBox";
 import { RelationType } from "../../types/relation";
+import { Kakao, KakaoService } from "../../services/kakao";
 
 interface ShareFormPropsType {
   profile: profileType;
@@ -37,7 +37,7 @@ function ShareForm({ profile, email, handleToast }: ShareFormPropsType) {
   const shareKakao = (e: any) => {
     window.dataLayer.push({ event: "kakao-share" });
     e.preventDefault();
-    sendShare(profile.name, relation, linkFormat, "코멘션 적으러 가기");
+    Kakao.sendShare(profile.name, relation, linkFormat, "코멘션 적으러 가기");
   };
 
   const handleFold = () => {

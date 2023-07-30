@@ -6,7 +6,8 @@ import FloatingButton from "../../src/components/common/FloatingButton";
 import DetailBody from "../../src/components/detail/DetailBody";
 import DetailHeader from "../../src/components/detail/DetailHeader";
 import DefaultHead from "../../src/components/seo/DefaultHead";
-import { commentType, getComment } from "../../src/services/firebase";
+import { commentType } from "../../src/services/firebase";
+import { Service } from "../../src/services";
 
 function Detail() {
   const router = useRouter();
@@ -26,7 +27,7 @@ function Detail() {
 
   useEffect(() => {
     user &&
-      getComment(user, id).then((res: any) => {
+      Service.firebase.getComment(user, id).then((res: any) => {
         setComment(res);
       });
   }, [user]);

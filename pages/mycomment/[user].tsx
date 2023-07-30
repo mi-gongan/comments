@@ -5,10 +5,8 @@ import React, { useEffect, useState } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import Carousel from "../../src/components/mycomment/Carousel";
 import DefaultHead from "../../src/components/seo/DefaultHead";
-import {
-  commentType,
-  fetchReceiveCommentsData,
-} from "../../src/services/firebase";
+import { commentType } from "../../src/services/firebase";
+import { Service } from "../../src/services";
 
 function mycommention() {
   const { user } = useRouter().query;
@@ -17,7 +15,7 @@ function mycommention() {
 
   useEffect(() => {
     user &&
-      fetchReceiveCommentsData(String(user)).then((res) => {
+      Service.firebase.fetchReceiveCommentsData(String(user)).then((res) => {
         const data = res.filter((comment) => comment.view === true);
         const starData = data.filter((comment) => comment.star == true);
         const notStarData = data.filter((comment) => comment.star == false);

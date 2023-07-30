@@ -8,32 +8,14 @@ function Logout() {
   const router = useRouter();
   const setEmail = useSetRecoilState(emailAtom);
 
-  const handleLogout = () => {
-    try {
-      kakaoExit();
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const kakaoExit = () => {
-    window.Kakao.API.request({
-      url: "/v1/user/unlink",
-      success: function (res: any) {
-        console.log(res);
-        setEmail("");
-        router.push("/");
-      },
-      fail: function (error: any) {
-        console.log(error);
-        setEmail("");
-        router.push("/");
-      },
-    });
+  const kakaoLogout = () => {
+    window.Kakao.Auth.logout();
+    setEmail("");
+    router.push("/");
   };
   return (
     <Wrap>
-      <div onClick={handleLogout}>로그아웃</div>
+      <div onClick={kakaoLogout}>로그아웃</div>
     </Wrap>
   );
 }

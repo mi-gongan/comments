@@ -10,8 +10,8 @@ import ReceiveForm from "../src/components/mypage/ReceiveForm";
 import ScrollFloatingButton from "../src/components/mypage/ScrollFloatingButton";
 import ShareForm from "../src/components/mypage/ShareForm";
 import DefaultHead from "../src/components/seo/DefaultHead";
-import { fetchUserData } from "../src/services/firebase";
 import { emailAtom } from "../src/recoil/user";
+import { Service } from "../src/services";
 
 export type profileType = {
   name: string;
@@ -22,7 +22,7 @@ export type profileType = {
 function Mypage() {
   const router = useRouter();
   const email = useRecoilValue(emailAtom);
-  const [render, setRender] = useState("");
+  const [render, setRender] = useState(false);
   const [toastOpen, setToastOpen] = useState(false);
   const [profile, setProfile] = useState<profileType>({
     name: "",
@@ -32,7 +32,7 @@ function Mypage() {
 
   useEffect(() => {
     if (email) {
-      setRender("ok");
+      setRender(true);
     } else {
       router.push("/");
     }
@@ -40,7 +40,7 @@ function Mypage() {
 
   useEffect(() => {
     if (email) {
-      fetchUserData(email).then((res: any) => setProfile(res));
+      Service.firebase.fetchUserData(email).then((res: any) => setProfile(res));
     }
   }, [email]);
 

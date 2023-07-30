@@ -3,10 +3,11 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
-import { commentType, fetchRecentCommentsData } from "../../services/firebase";
+import { commentType } from "../../services/firebase";
 import { emailAtom } from "../../recoil/user";
 import Card from "../common/Card";
 import { theme } from "../../../styles/theme";
+import { Service } from "../../services";
 
 function MyCommention() {
   const router = useRouter();
@@ -17,7 +18,7 @@ function MyCommention() {
 
   useEffect(() => {
     if (user) {
-      fetchRecentCommentsData(email, user).then((res) => {
+      Service.firebase.fetchRecentCommentsData(email, user).then((res) => {
         setRecentComment(res);
       });
     }
