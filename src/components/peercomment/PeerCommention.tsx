@@ -1,8 +1,9 @@
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { commentType, fetchReceiveCommentsData } from "../../firebase/firebase";
+import { commentType, fetchReceiveCommentsData } from "../../services/firebase";
 import Card from "../common/Card";
+import { theme } from "../../../styles/theme";
 
 function PeerCommention() {
   const router = useRouter();
@@ -89,7 +90,7 @@ const Wrap = styled.div`
       font-weight: 600;
       line-height: 33.5px;
       span {
-        color: var(--primary-color);
+        color: ${theme.color.primary};
       }
     }
     .go-write-commetion {
@@ -103,7 +104,7 @@ const Wrap = styled.div`
       text-decoration: underline;
       cursor: pointer;
       :hover {
-        color: var(--primary-color);
+        color: ${theme.color.primary};
       }
     }
   }

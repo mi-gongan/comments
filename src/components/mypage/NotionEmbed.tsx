@@ -2,7 +2,8 @@ import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { profileType } from "../../../pages/mypage";
-import { notionLinkSave } from "../../firebase/firebase";
+import { notionLinkSave } from "../../services/firebase";
+import { theme } from "../../../styles/theme";
 
 interface NotionEmbedPropsType {
   profile: profileType;
@@ -148,7 +149,7 @@ const Wrap = styled.div`
     }
   }
   .link-save {
-    background-color: var(--primary-color);
+    background-color: ${theme.color.primary};
     border-radius: 7px;
     color: white;
   }

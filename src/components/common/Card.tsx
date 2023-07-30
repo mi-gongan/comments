@@ -6,7 +6,7 @@ import {
   fetchUserData,
   setCommentStar,
   setCommentView,
-} from "../../firebase/firebase";
+} from "../../services/firebase";
 import { commentCountAtom } from "../../recoil/comment";
 import { emailAtom } from "../../recoil/user";
 import CardIcon from "./block/CardIcon";

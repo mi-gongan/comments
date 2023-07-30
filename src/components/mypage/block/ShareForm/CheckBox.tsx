@@ -1,20 +1,27 @@
 import React from "react";
 import styled from "styled-components";
-import CheckButton, { CheckPropsType } from "../../atom/CheckBox/CheckButton";
+import CheckButton from "../../atom/CheckBox/CheckButton";
+import { relationArray } from "../../../../utils/relation";
+import { RelationType } from "../../../../types/relation";
 
-function CheckBox({ relation, assginRelation }: CheckPropsType) {
-  const relationArray = ["동료", "가족", "친구", "연인", "기타"];
+interface CheckBoxProps {
+  choosedRelation: RelationType;
+  setRelation: React.Dispatch<React.SetStateAction<RelationType>>;
+}
+
+function CheckBox({ choosedRelation, setRelation }: CheckBoxProps) {
   return (
     <Wrap>
       <RelationBox>
-        {relationArray.map((res: string, index: number) => (
+        {relationArray.map((relation: RelationType, index: number) => (
           <CheckButton
             key={index}
-            relation={relation}
-            assginRelation={assginRelation}
-          >
-            {res}
-          </CheckButton>
+            text={relation}
+            checked={choosedRelation === relation}
+            handleClick={() => {
+              setRelation(relation);
+            }}
+          />
         ))}
       </RelationBox>
     </Wrap>
@@ -32,6 +39,7 @@ const RelationBox = styled.div`
   display: flex;
   width: 300px;
   flex-wrap: wrap;
+  gap: 10px;
   justify-content: center;
   margin-bottom: 19px;
 `;

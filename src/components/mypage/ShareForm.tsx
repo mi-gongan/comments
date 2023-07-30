@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { profileType } from "../../../pages/mypage";
 import { sendShare } from "../../services/kakao";
-import { matchType } from "../../services/translate";
+import { matchType } from "../../utils/translate";
 import CheckBox from "./block/ShareForm/CheckBox";
 import CopyBox from "./block/ShareForm/CopyBox";
 import FoldingBar from "./block/ShareForm/FoldingBar";
@@ -10,6 +10,7 @@ import OpenBar from "./block/ShareForm/OpenBar";
 import ShareImg from "./block/ShareForm/ShareImg";
 import ShareKakao from "./block/ShareForm/ShareKakao";
 import ShareTextBox from "./block/ShareForm/ShareTextBox";
+import { RelationType } from "../../types/relation";
 
 interface ShareFormPropsType {
   profile: profileType;
@@ -19,7 +20,7 @@ interface ShareFormPropsType {
 
 function ShareForm({ profile, email, handleToast }: ShareFormPropsType) {
   const [linkSave, setLinkSave] = useState("");
-  const [relation, setRelation] = useState("동료");
+  const [relation, setRelation] = useState<RelationType>(RelationType.동료);
   const [fold, setFold] = useState("");
   const linkFormat =
     process.env.NEXT_PUBLIC_BASEURL +
@@ -41,10 +42,6 @@ function ShareForm({ profile, email, handleToast }: ShareFormPropsType) {
     sendShare(profile.name, relation, linkFormat, "코멘션 적으러 가기");
   };
 
-  const assginRelation = (e: any) => {
-    setRelation(e.target.textContent);
-  };
-
   const handleFold = () => {
     window.dataLayer.push({ event: "fold" });
     if (fold) {
@@ -61,7 +58,7 @@ function ShareForm({ profile, email, handleToast }: ShareFormPropsType) {
   return (
     <Wrap>
       <ShareTextBox />
-      <CheckBox relation={relation} assginRelation={assginRelation} />
+      <CheckBox setRelation={setRelation} choosedRelation={relation} />
       <ShareImg relation={relation} />
       <CopyBox
         linkCopy={linkCopy}

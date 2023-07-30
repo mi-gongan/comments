@@ -2,11 +2,12 @@ import React, { useEffect, useState, useCallback, useRef } from "react";
 import styled from "styled-components";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { fetchUserData } from "../../firebase/firebase";
+import { fetchUserData } from "../../services/firebase";
 import { useSetRecoilState } from "recoil";
 import { formAtom } from "../../recoil/form";
-import { matchType } from "../../services/translate";
+import { matchType } from "../../utils/translate";
 import FloatingButton from "../common/FloatingButton";
+import { theme } from "../../../styles/theme";
 
 function Commention() {
   const router = useRouter();
@@ -105,7 +106,7 @@ const Wrap = styled.div`
       font-weight: 600;
       line-height: 34px;
       span {
-        color: var(--primary-color);
+        color: ${theme.color.primary};
       }
     }
   }
@@ -133,7 +134,7 @@ const Wrap = styled.div`
     width: 60%;
     height: 55px;
     line-height: 55px;
-    background-color: var(--primary-color);
+    background-color: ${theme.color.primary};
     color: white;
     border-radius: 7px;
   }

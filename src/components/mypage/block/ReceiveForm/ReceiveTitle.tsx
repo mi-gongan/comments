@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { theme } from "../../../../../styles/theme";
 
 interface PropsType {
   name: string;
@@ -21,6 +22,6 @@ const Wrap = styled.div`
   font-weight: 550;
   font-size: 25px;
   line-height: 150%;
-  color: var(--primary-color);
+  color: ${theme.color.primary};
   margin: 0 10%;
 `;

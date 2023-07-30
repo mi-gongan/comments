@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { theme } from "../../../../../styles/theme";
 
 function Description() {
   return (
@@ -16,7 +17,7 @@ export default Description;
 const Wrap = styled.div`
   font-weight: 400;
   font-size: 13px;
-  color: var(--primary-color);
+  color: ${theme.color.primary};
   text-align: center;
   line-height: 150.5%;
   position: relative;

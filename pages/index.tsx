@@ -8,6 +8,7 @@ import LoginBox from "../src/components/index/LoginBox";
 import { setKaKaoToken } from "../src/services/kakao";
 import Head from "next/head";
 import DefaultHead from "../src/components/seo/DefaultHead";
+import { theme } from "../styles/theme";
 
 const Home: NextPage = () => {
   const email = useRecoilValue(emailAtom);
@@ -43,7 +44,7 @@ const Wrap = styled.div`
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  background-color: var(--primary-color);
+  background-color: ${theme.color.primary};
   display: flex;
   flex-direction: column;
   text-align: center;

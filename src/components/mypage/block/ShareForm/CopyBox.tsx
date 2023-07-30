@@ -1,6 +1,7 @@
 import Head from "next/head";
 import React, { useRef } from "react";
 import styled from "styled-components";
+import { theme } from "../../../../../styles/theme";
 
 interface CopyBoxPropsType {
   linkFormat: string;
@@ -62,6 +63,6 @@ const Wrap = styled.div`
     border-radius: 5px;
     border: none;
     color: white;
-    background-color: var(--primary-color);
+    background-color: ${theme.color.primary};
   }
 `;

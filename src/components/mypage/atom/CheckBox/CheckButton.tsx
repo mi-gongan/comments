@@ -1,59 +1,40 @@
-import React, { Children } from "react";
+import React, { Children, HtmlHTMLAttributes } from "react";
 import styled from "styled-components";
+import { theme } from "../../../../../styles/theme";
 
 export interface CheckPropsType {
-  relation: string;
-  assginRelation: (e: any) => void;
+  text: string;
+  checked: boolean;
+  handleClick: () => void;
 }
 
-interface ButtonPropsType {
-  children: React.ReactNode;
-}
-
-function CheckButton({
-  relation,
-  assginRelation,
-  children,
-}: CheckPropsType & ButtonPropsType) {
+function CheckButton({ text, checked, handleClick }: CheckPropsType) {
   return (
-    <Wrap>
-      <div
-        className={relation === children ? "relation-check" : "relation-type"}
-        onClick={assginRelation}
-      >
-        {children}
-      </div>
+    <Wrap checked={checked} onClick={handleClick}>
+      {text}
     </Wrap>
   );
 }
 
 export default CheckButton;
 
-const Wrap = styled.div`
+const Wrap = styled.div<{ checked: boolean }>`
+  margin-right: 5px;
   padding: 5px;
-  .relation-type {
-    width: 74px;
-    font-size: 14px;
-    font-weight: 500;
-    height: 29px;
-    text-align: center;
-    line-height: 29px;
-    border: 1px solid #d3d3d3;
-    border-radius: 5px;
-    margin-right: 5px;
-  }
-  .relation-check {
-    width: 74px;
-    font-size: 14px;
-    font-weight: 500;
-    height: 29px;
-    text-align: center;
-    line-height: 29px;
-    border: none;
-    border-radius: 5px;
-    margin-right: 5px;
-    color: white;
-    border: 1px solid var(--primary-color);
-    background-color: var(--primary-color);
-  }
+
+  width: 74px;
+  height: 29px;
+
+  background-color: ${(props) => (props.checked ? theme.color.primary : "")};
+  border-radius: 5px;
+  border: 1px solid
+    ${(props) => (props.checked ? theme.color.primary : "#d3d3d3")};
+
+  color: ${(props) => (props.checked ? "white" : "black")};
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  line-height: 29px;
+
+  cursor: pointer;
 `;

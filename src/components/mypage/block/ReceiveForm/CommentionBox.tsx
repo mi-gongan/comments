@@ -1,5 +1,5 @@
 import React from "react";
-import { commentType } from "../../../../firebase/firebase";
+import { commentType } from "../../../../services/firebase";
 import Card from "../../../common/Card";
 
 interface CommentionBoxPropsType {

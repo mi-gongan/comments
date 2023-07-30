@@ -3,9 +3,10 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
-import { commentType, fetchRecentCommentsData } from "../../firebase/firebase";
+import { commentType, fetchRecentCommentsData } from "../../services/firebase";
 import { emailAtom } from "../../recoil/user";
 import Card from "../common/Card";
+import { theme } from "../../../styles/theme";
 
 function MyCommention() {
   const router = useRouter();
@@ -70,7 +71,7 @@ const Wrap = styled.div`
     text-align: center;
     span {
       font-weight: 600;
-      color: var(--primary-color);
+      color: ${theme.color.primary};
     }
   }
 `;

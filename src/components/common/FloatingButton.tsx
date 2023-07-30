@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { theme } from "../../../styles/theme";
 
 interface FloatingButtonPropsType {
   handleClick: () => void;
@@ -21,7 +22,7 @@ const Wrap = styled.div`
   bottom: 30px;
   left: 50%;
   transform: translateX(-50%);
-  background-color: var(--primary-color);
+  background-color: ${theme.color.primary};
   height: 35px;
   box-shadow: 0px 5px 7px rgba(0, 0, 0, 0.25);
   text-align: center;

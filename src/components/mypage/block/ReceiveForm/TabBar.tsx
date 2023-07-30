@@ -1,6 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import styled from "styled-components";
+import { theme } from "../../../../../styles/theme";
 
 interface TabBarPropsType {
   commentCount: number;
@@ -36,7 +37,7 @@ const TextWrap = styled.div`
   position: relative;
   margin-top: 55px;
   display: flex;
-  color: var(--primary-color);
+  color: ${theme.color.primary};
 `;
 
 const Number = styled.div`
@@ -57,7 +58,7 @@ const ProfileImg = styled.div`
     width: 72px;
     height: 72px;
     border-radius: 100%;
-    border: 3px solid var(--primary-color);
+    border: 3px solid ${theme.color.primary};
   }
   Img {
     border-radius: 100%;

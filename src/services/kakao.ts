@@ -1,4 +1,4 @@
-import { getImg, getMessage } from "./translate";
+import { getImg, getMessage } from "../utils/translate";
 
 export const kakaoLogin = () => {
   return new Promise((resolve, reject) => {

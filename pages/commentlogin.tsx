@@ -8,11 +8,12 @@ import {
   fetchUserData,
   getFinalIndex,
   setComment,
-} from "../src/firebase/firebase";
+} from "../src/services/firebase";
 import { emailAtom } from "../src/recoil/user";
 import { kakaoLogin, setKaKaoToken } from "../src/services/kakao";
 import LoginBox from "../src/components/commentionlogin/LoginBox";
 import DefaultHead from "../src/components/seo/DefaultHead";
+import { theme } from "../styles/theme";
 
 function commentlogin() {
   const router = useRouter();
@@ -120,7 +121,7 @@ const Wrap = styled.div`
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  background-color: var(--primary-color);
+  background-color: ${theme.color.primary};
   display: flex;
   flex-direction: column;
   color: white;

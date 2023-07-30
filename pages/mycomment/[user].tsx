@@ -8,7 +8,7 @@ import DefaultHead from "../../src/components/seo/DefaultHead";
 import {
   commentType,
   fetchReceiveCommentsData,
-} from "../../src/firebase/firebase";
+} from "../../src/services/firebase";
 
 function mycommention() {
   const { user } = useRouter().query;

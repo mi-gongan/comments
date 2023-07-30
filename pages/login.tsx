@@ -4,9 +4,10 @@ import React, { useEffect, useState } from "react";
 import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import DefaultHead from "../src/components/seo/DefaultHead";
-import { assignUser } from "../src/firebase/firebase";
+import { assignUser } from "../src/services/firebase";
 import { emailAtom } from "../src/recoil/user";
 import { kakaoLogin } from "../src/services/kakao";
+import { theme } from "../styles/theme";
 
 function login() {
   const setEmail = useSetRecoilState(emailAtom);
@@ -43,7 +44,7 @@ const Wrap = styled.div`
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  background-color: var(--primary-color);
+  background-color: ${theme.color.primary};
   display: flex;
   flex-direction: column;
   text-align: center;

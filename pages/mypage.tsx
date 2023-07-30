@@ -10,7 +10,7 @@ import ReceiveForm from "../src/components/mypage/ReceiveForm";
 import ScrollFloatingButton from "../src/components/mypage/ScrollFloatingButton";
 import ShareForm from "../src/components/mypage/ShareForm";
 import DefaultHead from "../src/components/seo/DefaultHead";
-import { fetchUserData } from "../src/firebase/firebase";
+import { fetchUserData } from "../src/services/firebase";
 import { emailAtom } from "../src/recoil/user";
 
 export type profileType = {

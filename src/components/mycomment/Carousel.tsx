@@ -4,7 +4,8 @@ import "../../../node_modules/slick-carousel/slick/slick.css";
 import "../../../node_modules/slick-carousel/slick/slick-theme.css";
 import styled from "styled-components";
 import Card from "../common/Card";
-import { commentType } from "../../firebase/firebase";
+import { commentType } from "../../services/firebase";
+import { theme } from "../../../styles/theme";
 
 interface CarouselPropsType {
   comments: commentType[];
@@ -214,6 +215,6 @@ const StyleSlider = styled(Slider)`
   }
 
   .dots_custom li.slick-active button {
-    background-color: var(--primary-color);
+    background-color: ${theme.color.primary};
   }
 `;

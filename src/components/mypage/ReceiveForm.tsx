@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { commentType, fetchReceiveCommentsData } from "../../firebase/firebase";
+import { commentType, fetchReceiveCommentsData } from "../../services/firebase";
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
 import { commentCountAtom } from "../../recoil/comment";
