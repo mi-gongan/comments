@@ -8,8 +8,6 @@ interface LoginBoxPropsType {
 }
 
 function LoginBox({ handleLogin }: LoginBoxPropsType) {
-  const router = useRouter();
-
   return (
     <Wrap>
       <div className="title" role="title">

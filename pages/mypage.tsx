@@ -36,7 +36,7 @@ function Mypage() {
     } else {
       router.push("/");
     }
-  }, []);
+  }, [email, render]);
 
   useEffect(() => {
     if (email) {

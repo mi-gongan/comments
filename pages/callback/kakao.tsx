@@ -5,6 +5,7 @@ import { LoginResponseType } from "../api/user/login";
 import { useSetRecoilState } from "recoil";
 import { emailAtom } from "../../src/recoil/user";
 import { Service } from "../../src/services";
+import styled from "styled-components";
 
 function Kakao() {
   const router = useRouter();
@@ -56,7 +57,13 @@ function Kakao() {
       });
   }, [accessToken]);
 
-  return <div>Kakao login...</div>;
+  return <Wrap />;
 }
 
 export default Kakao;
+
+const Wrap = styled.div`
+  background-color: black;
+  width: 100vh;
+  height: 100%;
+`;
