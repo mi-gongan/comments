@@ -45,6 +45,10 @@
 <img width="360" alt="notion1" src="https://user-images.githubusercontent.com/97350083/205440414-81d8b120-f1a5-4cf1-9d0f-c61b4f494c29.png">
 <img width="360" alt="notion2" src="https://user-images.githubusercontent.com/97350083/205440436-e1bcfb7d-fb7c-4ee6-b560-2f180ca75ff0.png">
 
+# 스토리북
+
+링크 : https://64c63400a352d08484a00914-uduajotigp.chromatic.com/?path=/story/button-checkbutton--checked
+
 ## 그외 구현 사항
 
 - 환경변수

@@ -11,13 +11,13 @@ type Story = StoryObj<typeof CheckButton>;
 
 export const Checked: Story = {
   args: {
-    text: "버튼",
+    text: "체크",
     checked: true,
   },
 };
 
 export const NotChecked: Story = {
   args: {
-    text: "버튼",
+    text: "체크",
   },
 };

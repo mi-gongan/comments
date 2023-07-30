@@ -10,7 +10,8 @@
     "test": "jest --watch",
     "cypress": "cypress open",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "chromatic": "npx chromatic"
   },
   "dependencies": {
     "firebase": "^9.9.4",
@@ -52,5 +53,7 @@
     "jest-environment-jsdom": "^29.6.1",
     "storybook": "^7.1.0",
     "typescript": "4.8.2"
-  }
+  },
+  "readme": "ERROR: No README data found!",
+  "_id": "frontend@0.1.0"
 }
