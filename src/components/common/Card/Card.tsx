@@ -4,9 +4,9 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { commentCountAtom } from "@store/comment";
 import { emailAtom } from "@store/user";
-import CardIcon from "./components/CardIcon";
-import CardText from "./components/CardText";
-import Introduce from "./components/Introduce";
+import CardIcon from "./atoms/CardIcon";
+import CardText from "./atoms/CardText";
+import Introduce from "./atoms/Introduce";
 import { Firebase } from "@libs/firebase";
 
 interface CardPropsType {
