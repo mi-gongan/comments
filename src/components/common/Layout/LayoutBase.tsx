@@ -25,8 +25,8 @@ type BoxStyle = {
   mr?: number;
   mb?: number;
   ml?: number;
-  w?: string;
-  h?: string;
+  w?: number;
+  h?: number;
   rounded?: number;
   z?: number;
   outline?: string;
@@ -68,8 +68,8 @@ export const LayoutBase = styled.div<BgColor & Flex & BoxStyle & Border>`
   }) => css`
     padding: ${toMarginPaddingString(p, ph, pv, pt, pr, pb, pl)};
     margin: ${toMarginPaddingString(m, mh, mv, mt, mr, mb, ml)};
-    width: ${w};
-    height: ${h};
+    width: ${w}px;
+    height: ${h}px;
     flex: ${flex};
     border-radius: ${rounded}px;
     border-color: ${outline};
