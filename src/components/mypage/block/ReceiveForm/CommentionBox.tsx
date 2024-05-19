@@ -1,6 +1,6 @@
 import React from "react";
 import { CommentType } from "@libs/firebase";
-import Card from "../../../common/Card";
+import { Card } from "@common";
 
 interface CommentionBoxPropsType {
   comments: Array<CommentType>;

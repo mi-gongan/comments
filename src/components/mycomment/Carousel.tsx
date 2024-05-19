@@ -3,7 +3,7 @@ import Slider from "react-slick";
 import "../../../node_modules/slick-carousel/slick/slick.css";
 import "../../../node_modules/slick-carousel/slick/slick-theme.css";
 import styled from "styled-components";
-import Card from "../common/Card";
+import { Card } from "@common";
 import { theme } from "@styles/theme";
 import { CommentType } from "@libs/firebase";
 

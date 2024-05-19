@@ -25,7 +25,8 @@
       "@hooks/*": ["./src/hooks/*"],
       "@styles/*": ["./src/styles/*"],
       "@store/*": ["./src/store/*"],
-      "@types": ["./src/types/index"]
+      "@types": ["./src/types/index"],
+      "@common": ["./src/components/common/index"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

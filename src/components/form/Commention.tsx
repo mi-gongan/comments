@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useSetRecoilState } from "recoil";
 import { formAtom } from "@store/form";
-import FloatingButton from "../common/FloatingButton";
+import { FloatingButton } from "@common";
 import { theme } from "@styles/theme";
 import { Firebase } from "@libs/firebase";
 

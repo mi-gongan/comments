@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
-import Toast from "@components/common/Toast";
+import { Toast } from "@common";
 import Logout from "@components/mypage/Logout";
 import NotionEmbed from "@components/mypage/NotionEmbed";
 import ReceiveForm from "@components/mypage/ReceiveForm";

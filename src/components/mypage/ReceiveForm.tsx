@@ -8,7 +8,7 @@ import ReceiveTitle from "./block/ReceiveForm/ReceiveTitle";
 import CommentionBox from "./block/ReceiveForm/CommentionBox";
 import TabBar from "./block/ReceiveForm/TabBar";
 import Description from "./block/ReceiveForm/Description";
-import FloatingButton from "../common/FloatingButton";
+import { FloatingButton } from "@common";
 import { theme } from "@styles/theme";
 import { Firebase, CommentType } from "@libs/firebase";
 import { ProfileType } from "@types";

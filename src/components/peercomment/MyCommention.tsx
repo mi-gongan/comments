@@ -5,7 +5,7 @@ import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { Firebase, CommentType } from "@libs/firebase";
 import { emailAtom } from "@store/user";
-import Card from "../common/Card";
+import { Card } from "@common";
 import { theme } from "@styles/theme";
 
 function MyCommention() {

@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Firebase, CommentType } from "@libs/firebase";
-import Card from "../common/Card";
+import { Card } from "@common";
 import { theme } from "@styles/theme";
 
 function PeerCommention() {
