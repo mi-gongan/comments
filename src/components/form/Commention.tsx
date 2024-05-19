@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { useSetRecoilState } from "recoil";
 import { formAtom } from "../../recoil/form";
 import FloatingButton from "../common/FloatingButton";
-import { theme } from "../../../styles/theme";
+import { theme } from "../../styles/theme";
 import { Service } from "../../services";
 
 function Commention() {
@@ -112,7 +112,7 @@ const Wrap = styled.div`
     }
   }
   textarea {
-    background-color: #f6f6f6;
+    background-color: ${theme.bg.gray100};
     min-height: 200px;
     margin: 15px auto;
     width: 90%;

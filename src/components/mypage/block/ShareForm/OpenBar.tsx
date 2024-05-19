@@ -2,6 +2,7 @@ import Image from "next/image";
 import React from "react";
 import styled from "styled-components";
 import { FoldingBarPropsType } from "./FoldingBar";
+import { theme } from "../../../../styles/theme";
 
 function OpenBar({ handleFold }: FoldingBarPropsType) {
   return (
@@ -25,7 +26,7 @@ const Wrap = styled.div`
   font-weight: 500;
   font-size: 14px;
   align-items: center;
-  color: #9c9c9c;
+  color: ${theme.text.secondary};
   padding: 10px 30px;
   display: flex;
   justify-content: space-between;

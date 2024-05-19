@@ -5,7 +5,7 @@ import "../../../node_modules/slick-carousel/slick/slick-theme.css";
 import styled from "styled-components";
 import Card from "../common/Card";
 import { commentType } from "../../services/firebase";
-import { theme } from "../../../styles/theme";
+import { theme } from "../../styles/theme";
 
 interface CarouselPropsType {
   comments: commentType[];
@@ -147,7 +147,7 @@ const StyleSlider = styled(Slider)`
     line-height: 1;
 
     opacity: 0.75;
-    color: #c6c6c6;
+    color: ${theme.bg.gray400};
 
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -204,7 +204,7 @@ const StyleSlider = styled(Slider)`
 
   .dots_custom li button {
     border: none;
-    background: #d1d1d1;
+    background: ${theme.bg.gray200};
     color: transparent;
     cursor: pointer;
     display: block;

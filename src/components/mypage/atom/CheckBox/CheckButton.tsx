@@ -1,6 +1,6 @@
 import React, { Children, HtmlHTMLAttributes } from "react";
 import styled from "styled-components";
-import { theme } from "../../../../../styles/theme";
+import { theme } from "../../../../styles/theme";
 
 export interface CheckPropsType {
   text: string;
@@ -28,7 +28,7 @@ const Wrap = styled.div<{ checked: boolean }>`
   background-color: ${(props) => (props.checked ? theme.color.primary : "")};
   border-radius: 5px;
   border: 1px solid
-    ${(props) => (props.checked ? theme.color.primary : "#d3d3d3")};
+    ${(props) => (props.checked ? theme.color.primary : theme.bg.gray300)};
 
   color: ${(props) => (props.checked ? "white" : "black")};
   font-size: 14px;

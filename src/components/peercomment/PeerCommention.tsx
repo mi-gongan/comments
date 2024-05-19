@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { commentType } from "../../services/firebase";
 import Card from "../common/Card";
-import { theme } from "../../../styles/theme";
+import { theme } from "../../styles/theme";
 import { Service } from "../../services";
 
 function PeerCommention() {
@@ -84,7 +84,7 @@ const Wrap = styled.div`
       font-size: 14.62px;
       font-weight: 600;
       line-height: 23.18px;
-      color: #464646;
+      color: ${theme.text.primary};
     }
     div:nth-child(2) {
       font-size: 22.5px;

@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import styled from "styled-components";
-import { theme } from "../../../../../styles/theme";
+import { theme } from "../../../../styles/theme";
 
 interface CopyBoxPropsType {
   linkFormat: string;
@@ -33,7 +33,7 @@ const Wrap = styled.div`
 
   width: 75%;
   height: 40px;
-  border: 2px solid #d3d3d3;
+  border: 2px solid ${theme.bg.gray300};
   border-radius: 7px;
 
   display: flex;
@@ -44,7 +44,7 @@ const Wrap = styled.div`
     line-height: 40px;
     width: calc(100% - 90px);
     overflow: hidden;
-    color: #8c8c8c;
+    color: ${theme.text.secondary};
   }
   .copy-button {
     width: 65px;

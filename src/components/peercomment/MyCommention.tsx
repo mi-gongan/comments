@@ -6,7 +6,7 @@ import styled from "styled-components";
 import { commentType } from "../../services/firebase";
 import { emailAtom } from "../../recoil/user";
 import Card from "../common/Card";
-import { theme } from "../../../styles/theme";
+import { theme } from "../../styles/theme";
 import { Service } from "../../services";
 
 function MyCommention() {

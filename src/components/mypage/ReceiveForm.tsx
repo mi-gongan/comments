@@ -12,6 +12,7 @@ import TabBar from "./block/ReceiveForm/TabBar";
 import Description from "./block/ReceiveForm/Description";
 import FloatingButton from "../common/FloatingButton";
 import { Service } from "../../services";
+import { theme } from "../../styles/theme";
 
 interface ReceiveFormPropsType {
   email: string;
@@ -72,7 +73,7 @@ const Wrap = styled.div`
   padding-top: 52px;
   padding-bottom: 20px;
   position: relative;
-  background-color: #f0f0f0;
+  background-color: ${theme.bg.gray100};
   z-index: 1;
 `;
 

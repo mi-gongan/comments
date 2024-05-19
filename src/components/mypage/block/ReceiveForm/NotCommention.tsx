@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { theme } from "../../../../styles/theme";
 
 function NotCommention() {
   return (
@@ -18,5 +19,5 @@ const Wrap = styled.div`
   font-weight: 500;
   line-height: 26px;
   text-align: center;
-  color: #868686;
+  color: ${theme.text.secondary};
 `;

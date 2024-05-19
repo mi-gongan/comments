@@ -6,7 +6,7 @@ import { formAtom } from "../src/recoil/form";
 import { emailAtom } from "../src/recoil/user";
 import LoginBox from "../src/components/commentionlogin/LoginBox";
 import DefaultHead from "../src/components/seo/DefaultHead";
-import { theme } from "../styles/theme";
+import { theme } from "../src/styles/theme";
 import { Service } from "../src/services";
 
 function commentlogin() {

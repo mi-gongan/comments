@@ -6,7 +6,7 @@ import { emailAtom } from "../src/recoil/user";
 import { useEffect } from "react";
 import LoginBox from "../src/components/index/LoginBox";
 import DefaultHead from "../src/components/seo/DefaultHead";
-import { theme } from "../styles/theme";
+import { theme } from "../src/styles/theme";
 import { Service } from "../src/services";
 
 const Home: NextPage = () => {

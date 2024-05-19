@@ -8,6 +8,7 @@ import DetailHeader from "../../src/components/detail/DetailHeader";
 import DefaultHead from "../../src/components/seo/DefaultHead";
 import { commentType } from "../../src/services/firebase";
 import { Service } from "../../src/services";
+import { theme } from "../../src/styles/theme";
 
 function Detail() {
   const router = useRouter();
@@ -49,6 +50,6 @@ function Detail() {
 export default Detail;
 
 const Wrap = styled.div`
-  background-color: #f3f3f3;
+  background-color: ${theme.bg.gray200};
   min-height: 100vh;
 `;

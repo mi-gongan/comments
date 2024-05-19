@@ -1,3 +1,4 @@
+import { theme } from "../../../../styles/theme";
 import Image from "next/image";
 import React from "react";
 import styled from "styled-components";
@@ -27,7 +28,7 @@ const Wrap = styled.div`
   font-weight: 500;
   font-size: 14px;
   line-height: 130.5%;
-  color: #9c9c9c;
+  color: ${theme.text.secondary};
   margin: 20px;
   padding: 5px;
   display: flex;

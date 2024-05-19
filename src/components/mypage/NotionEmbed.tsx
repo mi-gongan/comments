@@ -2,7 +2,7 @@ import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { profileType } from "../../../pages/mypage";
-import { theme } from "../../../styles/theme";
+import { theme } from "../../styles/theme";
 import { Service } from "../../services";
 
 interface NotionEmbedPropsType {
@@ -112,7 +112,7 @@ const Wrap = styled.div`
     margin-left: 10%;
     width: 80%;
     height: 40px;
-    border: 2px solid #d3d3d3;
+    border: 2px solid ${theme.bg.gray300};
     border-radius: 7px;
     padding: 10px;
     display: flex;
@@ -144,7 +144,7 @@ const Wrap = styled.div`
     height: 55px;
     line-height: 55px;
     .link-not-save {
-      background: #d3d3d3;
+      background: ${theme.bg.gray300};
       border-radius: 7px;
     }
   }

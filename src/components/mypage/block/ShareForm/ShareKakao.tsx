@@ -1,3 +1,4 @@
+import { theme } from "../../../../styles/theme";
 import Image from "next/image";
 import React from "react";
 import styled from "styled-components";
@@ -29,7 +30,7 @@ export default ShareKakao;
 const Wrap = styled.div``;
 
 const KakaoShare = styled.div`
-  background-color: #ffd600;
+  background-color: ${theme.color.kakao};
   border-radius: 7px;
   height: 60px;
   margin: 30px 10% 0px 10%;
