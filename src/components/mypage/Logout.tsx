@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
-import { emailAtom } from "../../recoil/user";
+import { emailAtom } from "@store/user";
 
 function Logout() {
   const router = useRouter();

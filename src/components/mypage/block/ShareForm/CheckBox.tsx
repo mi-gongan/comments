@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import CheckButton from "../../atom/CheckBox/CheckButton";
-import { relationArray } from "../../../../utils/relation";
-import { RelationType } from "../../../../types/relation";
+import { relationArray } from "@utils/relation";
+import { RelationType } from "@types";
 
 interface CheckBoxProps {
   choosedRelation: RelationType;

@@ -78,7 +78,7 @@ export class FirebaseService {
   };
 
   fetchReceiveCommentsData = async (email: string) => {
-    let array: commentType[] = [];
+    let array: CommentType[] = [];
     const commentQuery = query(
       this.commentCollection,
       where("_to", "==", email),
@@ -93,8 +93,8 @@ export class FirebaseService {
 
   fetchUpdateCommentsData = async (
     email: string,
-    comments1: commentType,
-    comments2: commentType
+    comments1: CommentType,
+    comments2: CommentType
   ) => {
     const id1Ref = doc(db, "comments", email + "&" + String(comments1.id));
     const id2Ref = doc(db, "comments", email + "&" + String(comments2.id));
@@ -114,7 +114,7 @@ export class FirebaseService {
   };
 
   fetchWriteCommentsData = async (email: string) => {
-    let array: commentType[] = [];
+    let array: CommentType[] = [];
     const commentQuery = query(
       this.commentCollection,
       where("_from", "==", email),
@@ -128,7 +128,7 @@ export class FirebaseService {
   };
 
   fetchRecentCommentsData = async (from: string, to: string) => {
-    let array: commentType[] = [];
+    let array: CommentType[] = [];
     const commentQuery = query(
       this.commentCollection,
       where("_to", "==", to),
@@ -149,7 +149,7 @@ export class FirebaseService {
     return commentSnap.data();
   };
 
-  setComment = async (form: commentType) => {
+  setComment = async (form: CommentType) => {
     await setDoc(doc(db, "comments", form._to + "&" + String(form.id)), form);
   };
 
@@ -190,7 +190,7 @@ export class FirebaseService {
   };
 
   getFinalIndex = async (email: string) => {
-    let array: commentType[] = [];
+    let array: CommentType[] = [];
     const commentQuery = query(
       this.commentCollection,
       where("_to", "==", email),
@@ -210,7 +210,7 @@ export class FirebaseService {
   };
 }
 
-export type commentType = {
+export type CommentType = {
   _from: string;
   _to: string;
   id: number;
@@ -219,3 +219,5 @@ export type commentType = {
   view: boolean;
   star: boolean;
 };
+
+export const Firebase = new FirebaseService();

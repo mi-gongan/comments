@@ -3,19 +3,18 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import styled, { createGlobalStyle } from "styled-components";
-import Carousel from "../../src/components/mycomment/Carousel";
-import DefaultHead from "../../src/components/seo/DefaultHead";
-import { commentType } from "../../src/services/firebase";
-import { Service } from "../../src/services";
+import Carousel from "@components/mycomment/Carousel";
+import DefaultHead from "@components/seo/DefaultHead";
+import { CommentType, Firebase } from "@libs/firebase";
 
 function mycommention() {
   const { user } = useRouter().query;
-  const [comments, setComments] = useState<commentType[]>([]);
-  const [starComments, setStarComments] = useState<commentType[]>([]);
+  const [comments, setComments] = useState<CommentType[]>([]);
+  const [starComments, setStarComments] = useState<CommentType[]>([]);
 
   useEffect(() => {
     user &&
-      Service.firebase.fetchReceiveCommentsData(String(user)).then((res) => {
+      Firebase.fetchReceiveCommentsData(String(user)).then((res) => {
         const data = res.filter((comment) => comment.view === true);
         const starData = data.filter((comment) => comment.star == true);
         const notStarData = data.filter((comment) => comment.star == false);
@@ -39,7 +38,6 @@ export default mycommention;
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { user } = context.query;
-  console.log(user);
   return {
     props: { user }, // will be passed to the page component as props
   };

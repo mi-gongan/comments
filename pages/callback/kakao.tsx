@@ -3,11 +3,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { LoginResponseType } from "../api/user/login";
 import { useSetRecoilState } from "recoil";
-import { emailAtom } from "../../src/recoil/user";
-import { Service } from "../../src/services";
+import { emailAtom } from "@store/user";
 import styled from "styled-components";
+import { Firebase } from "@libs/firebase";
+import { Kakao } from "@libs/kakao";
 
-function Kakao() {
+function KakaoPage() {
   const router = useRouter();
   const { code: authCode } = router.query;
   const [accessToken, setAccessToken] = useState("");
@@ -20,7 +21,7 @@ function Kakao() {
         authCode,
       })
       .then((res: { data: LoginResponseType }) => {
-        Service.kakao.setAccessToken(res.data.access_token);
+        Kakao.setAccessToken(res.data.access_token);
         setAccessToken(res.data.access_token);
         setRefreshToken(res.data.refresh_token);
       });
@@ -33,24 +34,21 @@ function Kakao() {
 
   useEffect(() => {
     if (!accessToken) return;
-    Service.kakao
-      .login()
+    Kakao.login()
       .then(async (loginInfo: any) => {
         setEmail(loginInfo.kakao_account.email);
-        await Service.firebase.setToken(
+        await Firebase.setToken(
           loginInfo.kakao_account.email,
           accessToken,
           refreshToken
         );
-        Service.firebase
-          .assignUser(
-            loginInfo.kakao_account.email,
-            loginInfo.properties.nickname,
-            loginInfo.properties.profile_image
-          )
-          .then(() => {
-            router.push(`/mypage`);
-          });
+        Firebase.assignUser(
+          loginInfo.kakao_account.email,
+          loginInfo.properties.nickname,
+          loginInfo.properties.profile_image
+        ).then(() => {
+          router.push(`/mypage`);
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -60,7 +58,7 @@ function Kakao() {
   return <Wrap />;
 }
 
-export default Kakao;
+export default KakaoPage;
 
 const Wrap = styled.div`
   background-color: black;

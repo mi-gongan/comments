@@ -2,12 +2,12 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
-import { commentCountAtom } from "../../recoil/comment";
-import { emailAtom } from "../../recoil/user";
+import { commentCountAtom } from "@store/comment";
+import { emailAtom } from "@store/user";
 import CardIcon from "./block/CardIcon";
 import CardText from "./block/CardText";
 import Introduce from "./block/Introduce";
-import { Service } from "../../services";
+import { Firebase } from "@libs/firebase";
 
 interface CardPropsType {
   _from: string;
@@ -33,7 +33,7 @@ function Card({ _from, name, text, id, view, star, canEdit }: CardPropsType) {
 
   useEffect(() => {
     if (email) {
-      Service.firebase.fetchUserData(email).then((res: any) => {
+      Firebase.fetchUserData(email).then((res: any) => {
         res.notion && setIconShow({ ...iconShow, notion: res.notion });
       });
     }
@@ -41,20 +41,20 @@ function Card({ _from, name, text, id, view, star, canEdit }: CardPropsType) {
 
   const handleHideComment = () => {
     if (cardState.show === true) {
-      Service.firebase.setCommentView(id, email, false);
+      Firebase.setCommentView(id, email, false);
       setCardState({ ...cardState, show: false });
     } else {
-      Service.firebase.setCommentView(id, email, true);
+      Firebase.setCommentView(id, email, true);
       setCardState({ ...cardState, show: true });
     }
   };
 
   const handleStarComment = () => {
     if (cardState.star === true) {
-      Service.firebase.setCommentStar(id, email, false);
+      Firebase.setCommentStar(id, email, false);
       setCardState({ ...cardState, star: false });
     } else {
-      Service.firebase.setCommentStar(id, email, true);
+      Firebase.setCommentStar(id, email, true);
       setCardState({ ...cardState, star: true });
     }
   };

@@ -1,12 +1,12 @@
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { profileType } from "../../../pages/mypage";
-import { theme } from "../../styles/theme";
-import { Service } from "../../services";
+import { theme } from "@styles/theme";
+import { Firebase } from "@libs/firebase";
+import { ProfileType } from "@types";
 
 interface NotionEmbedPropsType {
-  profile: profileType;
+  profile: ProfileType;
   email: string;
 }
 
@@ -32,7 +32,7 @@ function NotionEmbed({ profile, email }: NotionEmbedPropsType) {
     e.preventDefault();
     if (notionLink.includes("notion")) {
       setCheckNotion("ok");
-      Service.firebase.notionLinkSave(email, notionLink);
+      Firebase.notionLinkSave(email, notionLink);
       setSaveCheck("ok");
       alert("저장되었습니다");
     } else {

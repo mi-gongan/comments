@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { profileType } from "../../../pages/mypage";
-import { matchType } from "../../utils/translate";
+import { matchType } from "@utils/translate";
 import CheckBox from "./block/ShareForm/CheckBox";
 import CopyBox from "./block/ShareForm/CopyBox";
 import FoldingBar from "./block/ShareForm/FoldingBar";
@@ -9,11 +8,11 @@ import OpenBar from "./block/ShareForm/OpenBar";
 import ShareImg from "./block/ShareForm/ShareImg";
 import ShareKakao from "./block/ShareForm/ShareKakao";
 import ShareTextBox from "./block/ShareForm/ShareTextBox";
-import { RelationType } from "../../types/relation";
-import { Kakao, KakaoService } from "../../services/kakao";
+import { Kakao } from "@libs/kakao";
+import { ProfileType, RelationType } from "@types";
 
 interface ShareFormPropsType {
-  profile: profileType;
+  profile: ProfileType;
   email: string;
   handleToast: React.Dispatch<React.SetStateAction<boolean>>;
 }

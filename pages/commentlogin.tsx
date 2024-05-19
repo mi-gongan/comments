@@ -2,12 +2,13 @@ import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
-import { formAtom } from "../src/recoil/form";
-import { emailAtom } from "../src/recoil/user";
-import LoginBox from "../src/components/commentionlogin/LoginBox";
-import DefaultHead from "../src/components/seo/DefaultHead";
-import { theme } from "../src/styles/theme";
-import { Service } from "../src/services";
+import { formAtom } from "@store/form";
+import { emailAtom } from "@store/user";
+import LoginBox from "@components/commentionlogin/LoginBox";
+import DefaultHead from "@components/seo/DefaultHead";
+import { theme } from "@styles/theme";
+import { Firebase } from "@libs/firebase";
+import { Kakao } from "@libs/kakao";
 
 function commentlogin() {
   const router = useRouter();
@@ -22,7 +23,7 @@ function commentlogin() {
       router.push("/");
       return;
     }
-    Service.firebase.fetchUserData(form._to).then((res: any) => {
+    Firebase.fetchUserData(form._to).then((res: any) => {
       if (res) {
         setPeerName(res.name);
       }
@@ -33,13 +34,13 @@ function commentlogin() {
   //email 있는 경우
   useEffect(() => {
     if (email) {
-      Service.firebase.fetchUserData(email).then((res: any) => {
+      Firebase.fetchUserData(email).then((res: any) => {
         if (email === form._to) {
           alert("본인에게는 코멘트를 작성할 수 없습니다");
           router.push("/");
           return;
         }
-        Service.firebase.getFinalIndex(form._to).then((finalIndex) => {
+        Firebase.getFinalIndex(form._to).then((finalIndex) => {
           setForm({
             _from: email,
             _to: form._to,
@@ -57,7 +58,7 @@ function commentlogin() {
   // uplaod되면 page 이동
   useEffect(() => {
     if (upload) {
-      Service.firebase.setComment(form);
+      Firebase.setComment(form);
       router.push(
         `/peercomment/${encodeURIComponent(form._to)}?formState=true`
       );
@@ -75,7 +76,7 @@ function commentlogin() {
 
   // email 없는 경우 login
   const handleLogin = async () => {
-    Service.kakao.authorize();
+    Kakao.authorize();
   };
 
   return (

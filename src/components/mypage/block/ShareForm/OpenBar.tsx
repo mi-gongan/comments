@@ -2,7 +2,7 @@ import Image from "next/image";
 import React from "react";
 import styled from "styled-components";
 import { FoldingBarPropsType } from "./FoldingBar";
-import { theme } from "../../../../styles/theme";
+import { theme } from "@styles/theme";
 
 function OpenBar({ handleFold }: FoldingBarPropsType) {
   return (

@@ -3,10 +3,10 @@ import styled from "styled-components";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useSetRecoilState } from "recoil";
-import { formAtom } from "../../recoil/form";
+import { formAtom } from "@store/form";
 import FloatingButton from "../common/FloatingButton";
-import { theme } from "../../styles/theme";
-import { Service } from "../../services";
+import { theme } from "@styles/theme";
+import { Firebase } from "@libs/firebase";
 
 function Commention() {
   const router = useRouter();
@@ -32,11 +32,9 @@ function Commention() {
   useEffect(() => {
     try {
       user &&
-        Service.firebase
-          .fetchUserData(user)
-          .then((res: any) =>
-            res ? setUserName(res.name) : setUserName(user.split("@")[0])
-          );
+        Firebase.fetchUserData(user).then((res: any) =>
+          res ? setUserName(res.name) : setUserName(user.split("@")[0])
+        );
     } catch (err) {
       console.log(err);
     }

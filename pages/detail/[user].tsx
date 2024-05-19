@@ -2,18 +2,17 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import FloatingButton from "../../src/components/common/FloatingButton";
-import DetailBody from "../../src/components/detail/DetailBody";
-import DetailHeader from "../../src/components/detail/DetailHeader";
-import DefaultHead from "../../src/components/seo/DefaultHead";
-import { commentType } from "../../src/services/firebase";
-import { Service } from "../../src/services";
-import { theme } from "../../src/styles/theme";
+import FloatingButton from "@components/common/FloatingButton";
+import DetailBody from "@components/detail/DetailBody";
+import DetailHeader from "@components/detail/DetailHeader";
+import DefaultHead from "@components/seo/DefaultHead";
+import { CommentType, Firebase } from "@libs/firebase";
+import { theme } from "@styles/theme";
 
 function Detail() {
   const router = useRouter();
   const { user, id }: any = router.query;
-  const [comment, setComment] = useState<commentType>({
+  const [comment, setComment] = useState<CommentType>({
     _from: "",
     _to: "",
     id: 0,
@@ -28,7 +27,7 @@ function Detail() {
 
   useEffect(() => {
     user &&
-      Service.firebase.getComment(user, id).then((res: any) => {
+      Firebase.getComment(user, id).then((res: any) => {
         setComment(res);
       });
   }, [user]);

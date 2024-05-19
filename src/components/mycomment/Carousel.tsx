@@ -4,12 +4,12 @@ import "../../../node_modules/slick-carousel/slick/slick.css";
 import "../../../node_modules/slick-carousel/slick/slick-theme.css";
 import styled from "styled-components";
 import Card from "../common/Card";
-import { commentType } from "../../services/firebase";
-import { theme } from "../../styles/theme";
+import { theme } from "@styles/theme";
+import { CommentType } from "@libs/firebase";
 
 interface CarouselPropsType {
-  comments: commentType[];
-  startComments: commentType[];
+  comments: CommentType[];
+  startComments: CommentType[];
 }
 
 function Carousel({ comments, startComments }: CarouselPropsType) {

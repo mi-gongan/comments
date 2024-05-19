@@ -1,21 +1,20 @@
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { commentType } from "../../services/firebase";
+import { Firebase, CommentType } from "@libs/firebase";
 import Card from "../common/Card";
-import { theme } from "../../styles/theme";
-import { Service } from "../../services";
+import { theme } from "@styles/theme";
 
 function PeerCommention() {
   const router = useRouter();
   const { user }: any = router.query;
   const name = user && user.split("@")[0];
-  const [comments, setComments] = useState<commentType[]>([]);
-  const [starComments, setStarComments] = useState<commentType[]>([]);
+  const [comments, setComments] = useState<CommentType[]>([]);
+  const [starComments, setStarComments] = useState<CommentType[]>([]);
 
   useEffect(() => {
     if (user) {
-      Service.firebase.fetchReceiveCommentsData(user).then((res) => {
+      Firebase.fetchReceiveCommentsData(user).then((res) => {
         const data = res.filter((comment) => comment.view === true);
         const starData = data.filter((comment) => comment.star == true);
         const notStarData = data.filter((comment) => comment.star == false);

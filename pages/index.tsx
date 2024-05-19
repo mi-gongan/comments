@@ -2,12 +2,12 @@ import type { NextPage } from "next";
 import styled from "styled-components";
 import { useRouter } from "next/router";
 import { useRecoilValue } from "recoil";
-import { emailAtom } from "../src/recoil/user";
+import { emailAtom } from "@store/user";
 import { useEffect } from "react";
-import LoginBox from "../src/components/index/LoginBox";
-import DefaultHead from "../src/components/seo/DefaultHead";
-import { theme } from "../src/styles/theme";
-import { Service } from "../src/services";
+import LoginBox from "@components/index/LoginBox";
+import DefaultHead from "@components/seo/DefaultHead";
+import { theme } from "@styles/theme";
+import { Kakao } from "@libs/kakao";
 
 const Home: NextPage = () => {
   const email = useRecoilValue(emailAtom);
@@ -20,7 +20,7 @@ const Home: NextPage = () => {
   const handleLogin = () => {
     try {
       window.dataLayer.push({ event: "login" });
-      Service.kakao.authorize();
+      Kakao.authorize();
     } catch (err) {
       console.log(err);
     }

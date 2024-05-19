@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import CopyBox from "../../components/mypage/block/ShareForm/CopyBox";
+import CopyBox from "@components/mypage/block/ShareForm/CopyBox";
 
 const meta: Meta<typeof CopyBox> = {
   title: "Ui/CopyBox",

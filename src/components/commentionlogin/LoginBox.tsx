@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import styled from "styled-components";
-import letter from "../../../public/assets/letter.svg";
+import letter from "@public/assets/letter.svg";
 
 interface LoginBoxPropsType {
   handleLogin?: () => void;

@@ -1,6 +1,6 @@
 import Head from "next/head";
 import React from "react";
-import { getImg, getMessage } from "../../utils/translate";
+import { getImg, getMessage } from "@utils/translate";
 
 interface FormHeadPropsType {
   relation: string;

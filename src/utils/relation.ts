@@ -1,4 +1,4 @@
-import { RelationType } from "../types/relation";
+import { RelationType } from "@types";
 
 export const relationArray: RelationType[] = [
   RelationType.동료,

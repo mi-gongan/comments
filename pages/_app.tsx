@@ -1,10 +1,8 @@
-import "../src/styles/globals.css";
+import "@styles/globals.css";
 import type { AppProps } from "next/app";
 import { useEffect } from "react";
 import { RecoilRoot } from "recoil";
-import Head from "next/head";
 import TagManager from "react-gtm-module";
-import Toast from "../src/components/common/Toast";
 
 declare global {
   interface Window {

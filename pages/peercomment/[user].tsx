@@ -1,11 +1,10 @@
-import Head from "next/head";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import FloatingButton from "../../src/components/common/FloatingButton";
-import MyCommention from "../../src/components/peercomment/MyCommention";
-import PeerCommention from "../../src/components/peercomment/PeerCommention";
-import DefaultHead from "../../src/components/seo/DefaultHead";
+import FloatingButton from "@components/common/FloatingButton";
+import MyCommention from "@components/peercomment/MyCommention";
+import PeerCommention from "@components/peercomment/PeerCommention";
+import DefaultHead from "@components/seo/DefaultHead";
 
 function peercomment() {
   const router = useRouter();

@@ -3,28 +3,23 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
-import Toast from "../src/components/common/Toast";
-import Logout from "../src/components/mypage/Logout";
-import NotionEmbed from "../src/components/mypage/NotionEmbed";
-import ReceiveForm from "../src/components/mypage/ReceiveForm";
-import ScrollFloatingButton from "../src/components/mypage/ScrollFloatingButton";
-import ShareForm from "../src/components/mypage/ShareForm";
-import DefaultHead from "../src/components/seo/DefaultHead";
-import { emailAtom } from "../src/recoil/user";
-import { Service } from "../src/services";
-
-export type profileType = {
-  name: string;
-  img: string;
-  link: string;
-};
+import Toast from "@components/common/Toast";
+import Logout from "@components/mypage/Logout";
+import NotionEmbed from "@components/mypage/NotionEmbed";
+import ReceiveForm from "@components/mypage/ReceiveForm";
+import ScrollFloatingButton from "@components/mypage/ScrollFloatingButton";
+import ShareForm from "@components/mypage/ShareForm";
+import DefaultHead from "@components/seo/DefaultHead";
+import { emailAtom } from "@store/user";
+import { ProfileType } from "@types";
+import { Firebase } from "@libs/firebase";
 
 function Mypage() {
   const router = useRouter();
   const email = useRecoilValue(emailAtom);
   const [render, setRender] = useState(false);
   const [toastOpen, setToastOpen] = useState(false);
-  const [profile, setProfile] = useState<profileType>({
+  const [profile, setProfile] = useState<ProfileType>({
     name: "",
     img: "",
     link: "",
@@ -40,7 +35,7 @@ function Mypage() {
 
   useEffect(() => {
     if (email) {
-      Service.firebase.fetchUserData(email).then((res: any) => setProfile(res));
+      Firebase.fetchUserData(email).then((res: any) => setProfile(res));
     }
   }, [email]);
 

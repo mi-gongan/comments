@@ -1,5 +1,5 @@
+import { Comment } from "@types";
 import api from ".";
-import { Comment } from "@/types/comment";
 
 const getComments = async () => api.get("/comments");
 

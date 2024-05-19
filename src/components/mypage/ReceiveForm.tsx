@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { commentType } from "../../services/firebase";
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
-import { commentCountAtom } from "../../recoil/comment";
-import { profileType } from "../../../pages/mypage";
+import { commentCountAtom } from "@store/comment";
 import Image from "next/image";
 import NotCommention from "./block/ReceiveForm/NotCommention";
 import ReceiveTitle from "./block/ReceiveForm/ReceiveTitle";
@@ -11,24 +9,25 @@ import CommentionBox from "./block/ReceiveForm/CommentionBox";
 import TabBar from "./block/ReceiveForm/TabBar";
 import Description from "./block/ReceiveForm/Description";
 import FloatingButton from "../common/FloatingButton";
-import { Service } from "../../services";
-import { theme } from "../../styles/theme";
+import { theme } from "@styles/theme";
+import { Firebase, CommentType } from "@libs/firebase";
+import { ProfileType } from "@types";
 
 interface ReceiveFormPropsType {
   email: string;
-  profile: profileType;
+  profile: ProfileType;
 }
 
 function ReceiveForm({ email, profile }: ReceiveFormPropsType) {
-  const [comments, setComments] = useState<Array<commentType>>([]);
+  const [comments, setComments] = useState<Array<CommentType>>([]);
   const [commentCount, setCommentCount] = useRecoilState(commentCountAtom);
   const [canEdit, setCanEdit] = useState(false);
 
   useEffect(() => {
     email &&
-      Service.firebase
-        .fetchReceiveCommentsData(email)
-        .then((res: any) => setComments(res));
+      Firebase.fetchReceiveCommentsData(email).then((res: any) =>
+        setComments(res)
+      );
   }, [email]);
 
   useEffect(() => {

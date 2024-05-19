@@ -1,9 +1,8 @@
-import { NextPage, NextPageContext } from "next";
-import Head from "next/head";
+import { NextPage } from "next";
 import React from "react";
 import styled, { createGlobalStyle } from "styled-components";
-import Commention from "../../src/components/form/Commention";
-import FormHead from "../../src/components/seo/FormHead";
+import Commention from "@components/form/Commention";
+import FormHead from "@components/seo/FormHead";
 
 interface FormPropsType {
   user: string;

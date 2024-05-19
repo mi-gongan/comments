@@ -1,6 +1,6 @@
 import axios from "axios";
 import { NextApiRequest, NextApiResponse } from "next";
-import { callbackUrl } from "../../../src/utils/kakao";
+import { callbackUrl } from "@utils/kakao";
 
 export interface LoginResponseType {
   access_token: string;

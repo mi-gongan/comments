@@ -1,7 +1,7 @@
-import { callbackUrl } from "../utils/kakao";
-import { getImg, getMessage } from "../utils/translate";
+import { callbackUrl } from "@utils/kakao";
+import { getImg, getMessage } from "@utils/translate";
 
-export class KakaoService {
+class KakaoService {
   login = () => {
     return new Promise((resolve, reject) => {
       window.Kakao.API &&
